@@ -1,11 +1,5 @@
-executable : main.o read_and_write.o 
-		gcc -o executable main.o read_and_write.o -lcurl
-	
-main.o : main.c
-		gcc -c $<
-
-read_and_write.o : read_and_write.c biblio.h
-		gcc -c $<
+test : main.c http-requests.c
+		gcc -o test main.c http-requests.c -lcurl -ljson-c
 
 clean :
-		rm  -rf *.o
+		rm -rf *.o test
