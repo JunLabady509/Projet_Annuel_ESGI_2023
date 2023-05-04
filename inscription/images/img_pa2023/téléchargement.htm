@@ -1,0 +1,1268 @@
+<!doctype html>
+<html class="no-js" lang="fr-FR">
+
+    <head><meta charset="utf-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",t=>{this.persisted=t.persisted}),window.addEventListener("DOMContentLoaded",()=>{this._preconnect3rdParties()}),this.delayedScripts={normal:[],async:[],defer:[]},this.trash=[],this.allJQueries=[]}_addUserInteractionListener(t){if(document.hidden){t._triggerListener();return}this.triggerEvents.forEach(e=>window.addEventListener(e,t.userEventHandler,{passive:!0})),window.addEventListener("touchstart",t.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",t.touchStartHandler),document.addEventListener("visibilitychange",t.userEventHandler)}_removeUserInteractionListener(){this.triggerEvents.forEach(t=>window.removeEventListener(t,this.userEventHandler,{passive:!0})),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(t){"HTML"!==t.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),t.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"onclick","rocket-onclick"),this._pendingClickStarted())}_onTouchMove(t){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),t.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"rocket-onclick","onclick"),this._pendingClickFinished()}_onTouchEnd(t){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(t){t.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"rocket-onclick","onclick"),this.interceptedClicks.push(t),t.preventDefault(),t.stopPropagation(),t.stopImmediatePropagation(),this._pendingClickFinished()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach(t=>{t.target.dispatchEvent(new MouseEvent("click",{view:t.view,bubbles:!0,cancelable:!0}))})}_waitForPendingClicks(){return new Promise(t=>{this._isClickPending?this._pendingClickFinished=t:t()})}_pendingClickStarted(){this._isClickPending=!0}_pendingClickFinished(){this._isClickPending=!1}_renameDOMAttribute(t,e,r){t.hasAttribute&&t.hasAttribute(e)&&(event.target.setAttribute(r,event.target.getAttribute(e)),event.target.removeAttribute(e))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let t=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(e=>{if(e.hasAttribute("src")){let r=new URL(e.src).origin;r!==location.origin&&t.push({src:r,crossOrigin:e.crossOrigin||"module"===e.getAttribute("data-rocket-type")})}}),t=[...new Map(t.map(t=>[JSON.stringify(t),t])).values()],this._batchInjectResourceHints(t,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(this),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(t){console.error(t)}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._waitForPendingClicks().then(()=>{this._replayClicks()}),this._emptyTrash()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(t=>{t.hasAttribute("data-rocket-src")?t.hasAttribute("async")&&!1!==t.async?this.delayedScripts.async.push(t):t.hasAttribute("defer")&&!1!==t.defer||"module"===t.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(t):this.delayedScripts.normal.push(t):this.delayedScripts.normal.push(t)})}async _transformScript(t){return new Promise((await this._littleBreath(),navigator.userAgent.indexOf("Firefox/")>0||""===navigator.vendor)?e=>{let r=document.createElement("script");[...t.attributes].forEach(t=>{let e=t.nodeName;"type"!==e&&("data-rocket-type"===e&&(e="type"),"data-rocket-src"===e&&(e="src"),r.setAttribute(e,t.nodeValue))}),t.text&&(r.text=t.text),r.hasAttribute("src")?(r.addEventListener("load",e),r.addEventListener("error",e)):(r.text=t.text,e());try{t.parentNode.replaceChild(r,t)}catch(i){e()}}:async e=>{function r(){t.setAttribute("data-rocket-status","failed"),e()}try{let i=t.getAttribute("data-rocket-type"),n=t.getAttribute("data-rocket-src");t.text,i?(t.type=i,t.removeAttribute("data-rocket-type")):t.removeAttribute("type"),t.addEventListener("load",function r(){t.setAttribute("data-rocket-status","executed"),e()}),t.addEventListener("error",r),n?(t.removeAttribute("data-rocket-src"),t.src=n):t.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(t.text)))}catch(s){r()}})}async _loadScriptsFromList(t){let e=t.shift();return e&&e.isConnected?(await this._transformScript(e),this._loadScriptsFromList(t)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(t,e){var r=document.createDocumentFragment();t.forEach(t=>{let i=t.getAttribute&&t.getAttribute("data-rocket-src")||t.src;if(i){let n=document.createElement("link");n.href=i,n.rel=e,"preconnect"!==e&&(n.as="script"),t.getAttribute&&"module"===t.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),t.crossOrigin&&(n.crossOrigin=t.crossOrigin),t.integrity&&(n.integrity=t.integrity),r.appendChild(n),this.trash.push(n)}}),document.head.appendChild(r)}_delayEventListeners(t){let e={};function r(t,r){!function t(r){!e[r]&&(e[r]={originalFunctions:{add:r.addEventListener,remove:r.removeEventListener},eventsToRewrite:[]},r.addEventListener=function(){arguments[0]=i(arguments[0]),e[r].originalFunctions.add.apply(r,arguments)},r.removeEventListener=function(){arguments[0]=i(arguments[0]),e[r].originalFunctions.remove.apply(r,arguments)});function i(t){return e[r].eventsToRewrite.indexOf(t)>=0?"rocket-"+t:t}}(t),e[t].eventsToRewrite.push(r)}function i(t,e){let r=t[e];Object.defineProperty(t,e,{get:()=>r||function(){},set(i){t["rocket"+e]=r=i}})}r(document,"DOMContentLoaded"),r(window,"DOMContentLoaded"),r(window,"load"),r(window,"pageshow"),r(document,"readystatechange"),i(document,"onreadystatechange"),i(window,"onload"),i(window,"onpageshow")}_delayJQueryReady(t){let e;function r(r){if(r&&r.fn&&!t.allJQueries.includes(r)){r.fn.ready=r.fn.init.prototype.ready=function(e){return t.domReadyFired?e.bind(document)(r):document.addEventListener("rocket-DOMContentLoaded",()=>e.bind(document)(r)),r([])};let i=r.fn.on;r.fn.on=r.fn.init.prototype.on=function(){if(this[0]===window){function t(t){return t.split(" ").map(t=>"load"===t||0===t.indexOf("load.")?"rocket-jquery-load":t).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=t(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(e=>{delete Object.assign(arguments[0],{[t(e)]:arguments[0][e]})[e]})}return i.apply(this,arguments),this},t.allJQueries.push(r)}e=r}r(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>e,set(t){r(t)}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach(t=>t(window).trigger("rocket-jquery-load")),await this._littleBreath();let t=new Event("rocket-pageshow");t.persisted=this.persisted,window.dispatchEvent(t),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){let t=new Map;document.write=document.writeln=function(e){let r=document.currentScript;r||console.error("WPRocket unable to document.write this: "+e);let i=document.createRange(),n=r.parentElement,s=t.get(r);void 0===s&&(s=r.nextSibling,t.set(r,s));let a=document.createDocumentFragment();i.setStart(a,0),a.appendChild(i.createContextualFragment(e)),n.insertBefore(a,s)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise(t=>setTimeout(t)):new Promise(t=>requestAnimationFrame(t))}_emptyTrash(){this.trash.forEach(t=>t.remove())}static run(){let t=new RocketLazyLoadScripts;t._addUserInteractionListener(t)}}RocketLazyLoadScripts.run();</script>
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Chefs français expatriés : French touch en cuisine partout dans le monde</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;700&#038;family=Lato:wght@400;700&#038;family=Roboto+Condensed:wght@400;700&#038;family=Tinos:ital,wght@0,400;0,700;1,400;1,700&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;700&#038;family=Lato:wght@400;700&#038;family=Roboto+Condensed:wght@400;700&#038;family=Tinos:ital,wght@0,400;0,700;1,400;1,700&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;700&#038;family=Lato:wght@400;700&#038;family=Roboto+Condensed:wght@400;700&#038;family=Tinos:ital,wght@0,400;0,700;1,400;1,700&#038;display=swap" /></noscript><link rel="stylesheet" href="https://thegoodlife.fr/wp-content/cache/min/2/f547f696f757c0c60bc50e5d3fbb6f2a.css" media="all" data-minify="1" />
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-title" content="The Good life" />
+        <meta name="application-name" content="The Good life">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <link rel="apple-touch-icon" sizes="57x57"
+            href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60"
+            href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72"
+            href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76"
+            href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114"
+            href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120"
+            href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144"
+            href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152"
+            href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/apple-touch-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180"
+            href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/apple-touch-icon-180x180.png">
+        <link rel="icon" type="image/png" href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/favicon-32x32.png"
+            sizes="32x32">
+        <link rel="icon" type="image/png" href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/favicon-194x194.png"
+            sizes="194x194">
+        <link rel="icon" type="image/png" href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/favicon-96x96.png"
+            sizes="96x96">
+        <link rel="icon" type="image/png"
+            href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/android-chrome-192x192.png" sizes="192x192">
+        <link rel="icon" type="image/png" href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/favicon-16x16.png"
+            sizes="16x16">
+        <link rel="manifest" href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/manifest.json">
+        <link rel="mask-icon" href="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/safari-pinned-tab.svg"
+            color="#d87797">
+        <link rel="shortcut icon" href="https://thegoodlife.fr/wp-content/themes/thegoodlife/favicon.ico">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage"
+            content="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/mstile-144x144.png">
+        <meta name="msapplication-config" content="https://thegoodlife.fr/wp-content/themes/thegoodlife/icons/browserconfig.xml">
+        <meta name="theme-color" content="#da532c">
+        <meta name="google-site-verification" content="ZqjcBxrypvCibKjISzdgZ0F4LLMPhzkCdyAq8mVerfs" />
+        <meta name="facebook-domain-verification" content="edppw52mixs0ytsb2farak7vocftyy" />
+
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        
+
+        <script type="rocketlazyloadscript">
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register(
+                    'https://thegoodlife.fr/wp-content/themes/thegoodlife/css/service-worker.js');
+            });
+        }
+        </script>
+
+        <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO Premium plugin v18.4 (Yoast SEO v18.7-RC2) - https://yoast.com/wordpress/plugins/seo/ -->
+	<meta name="description" content="Partis de France pour se libérer des codes de la gastronomie traditionnelle, ces chefs français font rêver leur pays d’adoption." />
+	<link rel="canonical" href="https://thegoodlife.fr/chefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef/" />
+	<meta property="og:locale" content="fr_FR" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Chefs français expatriés : La French touch en cuisine partout dans le monde, yes, chef !" />
+	<meta property="og:description" content="Partis de France pour se libérer des codes de la gastronomie traditionnelle, ces chefs français font rêver leur pays d’adoption." />
+	<meta property="og:url" content="https://thegoodlife.fr/chefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef/" />
+	<meta property="og:site_name" content="The Good Life" />
+	<meta property="article:publisher" content="https://www.facebook.com/TheGoodLifeMagazine" />
+	<meta property="article:published_time" content="2021-05-25T04:16:50+00:00" />
+	<meta property="article:modified_time" content="2021-05-19T15:41:52+00:00" />
+	<meta property="og:image" content="/wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-1-56-daniel-krieger-tt-width-1200-height-630-fill-0-crop-1-bgcolor-ffffff.jpg" />
+	<meta property="og:image:width" content="1872" />
+	<meta property="og:image:height" content="1200" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@TheGoodLife" />
+	<meta name="twitter:site" content="@TheGoodLife" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="jchassagne" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="6 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://thegoodlife.fr/#website","url":"https://thegoodlife.fr/","name":"The Good Life","description":"Business &amp; Lifestyle","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://thegoodlife.fr/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"fr-FR"},{"@type":"ImageObject","inLanguage":"fr-FR","@id":"https://thegoodlife.fr/chefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef/#primaryimage","url":"/wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-1-56-daniel-krieger-tt-width-1872-height-1200-fill-0-crop-0-bgcolor-eeeeee.jpg","contentUrl":"/wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-1-56-daniel-krieger-tt-width-1872-height-1200-fill-0-crop-0-bgcolor-eeeeee.jpg","width":1872,"height":1200,"caption":"chefs-francais-expatries-cuisine-francaise-etranger-1-56-daniel-krieger"},{"@type":"WebPage","@id":"https://thegoodlife.fr/chefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef/#webpage","url":"https://thegoodlife.fr/chefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef/","name":"Chefs français expatriés : French touch en cuisine partout dans le monde","isPartOf":{"@id":"https://thegoodlife.fr/#website"},"primaryImageOfPage":{"@id":"https://thegoodlife.fr/chefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef/#primaryimage"},"datePublished":"2021-05-25T04:16:50+00:00","dateModified":"2021-05-19T15:41:52+00:00","author":{"@id":"https://thegoodlife.fr/#/schema/person/d775670d682baf0d30035783a0e4a9df"},"description":"Partis de France pour se libérer des codes de la gastronomie traditionnelle, ces chefs français font rêver leur pays d’adoption.","breadcrumb":{"@id":"https://thegoodlife.fr/chefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef/#breadcrumb"},"inLanguage":"fr-FR","potentialAction":[{"@type":"ReadAction","target":["https://thegoodlife.fr/chefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef/"]}]},{"@type":"BreadcrumbList","@id":"https://thegoodlife.fr/chefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://thegoodlife.fr/"},{"@type":"ListItem","position":2,"name":"Chefs français expatriés : La French touch en cuisine partout dans le monde, yes, chef !"}]},{"@type":"Person","@id":"https://thegoodlife.fr/#/schema/person/d775670d682baf0d30035783a0e4a9df","name":"jchassagne"}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel='stylesheet' id='style-print-css'  href='https://thegoodlife.fr/wp-content/themes/thegoodlife/css/print.css' type='text/css' media='print' />
+
+
+
+
+
+
+
+
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<style id='rocket-lazyload-inline-css' type='text/css'>
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:url(https://thegoodlife.fr/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}
+</style>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/console.js?ver=1681133904' id='console-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/mobile.js?ver=1681133904' id='mobile-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/modernizr.js?ver=1681133904' id='modernizr-js' defer></script>
+<link rel="https://api.w.org/" href="https://thegoodlife.fr/wp-json/" /><link rel="alternate" type="application/json" href="https://thegoodlife.fr/wp-json/wp/v2/posts/49496" /><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript><script type="rocketlazyloadscript" data-minify="1" data-rocket-type="application/javascript" data-rocket-src="https://thegoodlife.fr/wp-content/cache/min/2/tag/1818/smart.js?ver=1681133905" async></script>
+<script type="rocketlazyloadscript" data-rocket-type="application/javascript">
+var sas = sas || {};
+sas.cmd = sas.cmd || [];
+sas.cmd.push(function() {
+    sas.setup({
+        networkid: 1818,
+        domain: "//www3.smartadserver.com",
+        async: true
+    });
+});
+sas.cmd.push(function() {
+    sas.call("onecall", {
+        siteId: 97422,
+        pageId: '732544',
+        formatId: '40786,40417,40553,40772,40554,40550,44066,40549,40422,40903,39935,40582,40579,40420,40773,40774,40581,40580,40421,40903,41988,41989,41990,54658,39768',
+        target: ''
+    });
+});
+</script>
+<script type="rocketlazyloadscript">
+dataLayer = [{
+    'env_template': 'Article_TGL',
+    'env_work': 'prod',
+    'env_channel': 'd',
+    'user_logged': 0,
+    'page_name': 'Chefs français expatriés : French touch en cuisine partout dans le monde',
+    'page_cat1': 'thegoodlife',
+    'page_cat2': '',
+    'page_cat3': '',
+    'page_cat4': '',
+    'page_cat5': '',
+    'page_channel': '',
+    'page_tag': 'France',
+    'page_url': 'https://thegoodlife.fr/chefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef/',
+    'folder': '',
+    'thema_deco': '',
+    'sponsor': '',
+    'search_keywords': '',
+    'search_results_number': '',
+    'content_source': 'print'
+}];
+</script>
+
+    </head>
+
+    <body class="post-template-default single single-post postid-49496 single-format-standard">
+
+        <!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGB5XG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script type="rocketlazyloadscript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TGB5XG');</script>
+<!-- End Google Tag Manager --><div id="sas_54658" class="ad-position-Video_Outstream_1x1(Top)"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("54658");
+});
+</script>
+
+        <div id="skipLinks" class="visuallyhidden">
+            <ul>
+                <li><a href="#top-nav">Aller au menu</a></li>
+                <li><a href="#main" accesskey="s">Aller au contenu</a></li>
+                <li><a href="#search" accesskey="4">Aller &agrave; la recherche</a></li>
+            </ul>
+        </div><!-- #skipLinks -->
+        <div class="header-mask"></div><!-- .header-mask -->
+        <header class="header clearfix" id="header" role="banner">
+
+            <div class="header-ad-banner">
+                <div id="sas_44066" class="ad-position-Banner_horizontal_P1_mobile(Top)"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("44066");
+});
+</script>
+<div id="sas_40550" class="ad-position-Banner_horizontal_P1(Top)"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("40550");
+});
+</script>
+            </div>
+
+            <div class="header-top hidden-xs">
+                <div class="container">
+                    <div class="header-top__hub">
+                        <ul class="unstyled">
+                            <li class="active"><a href="https://thegoodlife.fr">The Good Life</a></li>
+                            <li><a
+                                    href="https://thegoodconceptstore.thegoodhub.com/">The
+                                    Good Concept Store</a></li>
+                            <li><a
+                                    href="https://ideat.fr/">IDEAT</a>
+                            </li>
+                        </ul>
+                    </div><!-- .header-top__hub -->
+                    <div class="header_user">
+                                            </div><!-- .header_user -->
+                </div><!-- .container -->
+            </div><!-- .header-top -->
+            <div class="header-nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-2 col-xs-2">
+                            <a href="#" class="icon-menu" id="header-menu"><span
+                                    class="hidden-xs header-menu-text">Menu</span></a>
+                        </div><!-- .col-md-3 -->
+                        <div class="col-md-6 col-sm-6 col-xs-4">
+                            <div class="logo">
+                                <a href="/"><img src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/logo-the-good-life.svg"
+                                    width="229" height="29" alt="The Good Life" class="no-lazy" />
+
+                                <div class="logo__tagline">
+                                    Business <em>&amp;</em> Lifestyle in a hybrid world
+                                </div><!-- .logo__tagline -->
+                                </a>                            </div>
+                        </div><!-- .col-md-6 -->
+                        <div class="col-md-3 col-sm-4 hidden-xs">
+                            <div class="header-nav__links">
+                                <div class="header-nav__inner header-nav__inner--block header-nav__inner--search">
+                                    <a href="#" class="header-top-search">Rechercher</a>
+                                </div><!-- .header-nav__inner -->
+                            </div><!-- .header-nav__links -->
+                        </div><!-- .col-md-3 -->
+                        <div class="header-nav__right visible-xs">
+                            <div class="header_user">
+                                <ul class="unstyled">
+                                    <li><a href="#" class="header-top-search">Rechercher</a></li>
+                                                                    </ul>
+                            </div><!-- .header_user -->
+                        </div><!-- .header-nav__right -->
+                    </div><!-- .row -->
+                </div><!-- .container -->
+                <div id="progress-wrapper">
+                    <div id="progress-element"></div><!-- .progress-element -->
+                </div><!-- #progress-wrapper -->
+            </div><!-- .header-nav -->
+
+            <div class="header-main-menu">
+                <div class="container">
+                    <div class="main main--2cols">
+                        <div class="content">
+                            <div class="header-main-menu_content">
+                                <div class="menu-main-menu-container"><ul id="menu-main-menu" class="menu"><li id="menu-item-53222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-53222"><a href="https://thegoodlife.fr/category/business/the-good-business/">The Good Business</a></li>
+<li id="menu-item-53223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-53223"><a href="https://thegoodlife.fr/category/the-good-toys/">The Good Toys</a></li>
+<li id="menu-item-53224" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-53224"><a href="https://thegoodlife.fr/category/the-good-spots/">The Good Spots</a></li>
+<li id="menu-item-53225" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-53225"><a href="https://thegoodlife.fr/category/the-good-look/">The Good Look</a></li>
+<li id="menu-item-53226" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-53226"><a href="https://thegoodlife.fr/category/thegoodculture/">The Good Culture</a></li>
+<li id="menu-item-53368" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-53368"><a href="/video/">The Good Videos</a></li>
+</ul></div>                            </div>
+                        </div>
+                    </div>
+                    <aside class="sidebar">
+                        <div class="header-main-menu_links sidebar__row">
+                            <ul>
+                                <li>
+                                    <a class="yellow-button"
+                                        href="https://thegoodconceptstore.thegoodhub.com/222-the-good-life">Je
+                                        m'abonne</a>
+                                </li>
+                                <!--
+                            <li>
+                                <a class="" href="/contacts">Contacts</a>
+                            </li>
+                            -->
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+
+            <div class="header-search">
+                <div class="container">
+                    <form method="get" id="searchform" action="/" role="search" class="clearfix">
+                        <label class="visuallyhidden" for="s">Rechercher</label>
+                        <input type="search" value="" placeholder="Saisissez votre recherche" name="s" id="s"
+                            autocorrect="off" autocapitalize="off" spellcheck="false" />
+                        <button class="visuallyhidden" type="submit">Valider</button>
+                        <div class="bt-close bt-close-search"><span class="visuallyhidden">Fermer</span></div>
+                    </form>
+                </div><!-- .container -->
+            </div><!-- .header-search -->
+            <div class="sub__nav">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sub__nav__sidebar">
+                <div class="sub__nav__sidebar">
+                    <ul id="menu-main-menu-1" class="unstyled"><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-53222"><a href="https://thegoodlife.fr/category/business/the-good-business/">The Good Business</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-53223"><a href="https://thegoodlife.fr/category/the-good-toys/">The Good Toys</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-53224"><a href="https://thegoodlife.fr/category/the-good-spots/">The Good Spots</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-53225"><a href="https://thegoodlife.fr/category/the-good-look/">The Good Look</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-53226"><a href="https://thegoodlife.fr/category/thegoodculture/">The Good Culture</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-53368"><a href="/video/">The Good Videos</a></li>
+</ul>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sub__nav__sidebar col-sub__nav__sidebar_bis">
+                <div class="sub__nav__sidebar">
+                    <div id="subnav_links" class="menu-footerlinks-container"><ul id="menu-footerlinks" class="menu"><div class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children col-md-3"><h2>Les sites d&rsquo;IDEAT Editions</h2>
+<ul class="unstyled">
+	<li class="footer-links_ideat menu-item menu-item-type-custom menu-item-object-custom"><a href="https://ideat.fr">IDEAT</a></li>
+	<li class="footer-links_tgcs menu-item menu-item-type-custom menu-item-object-custom"><a href="https://thegoodconceptstore.thegoodhub.com">The Good Concept Store</a></li>
+	<li class="footer-links_dimdamdom menu-item menu-item-type-custom menu-item-object-custom"><a href="https://dimdamdom.thegoodhub.com/">Dim Dam Dom</a></li>
+</ul>
+
+</div><!-- .col-md-3 -->
+</ul></div>
+                </div>
+            </div>
+
+
+        </div><!-- .row -->
+    </div><!-- .col-md-8 -->
+</div><!-- .row -->
+        </header><!-- .header -->
+        <div class="tgl_wrapper">
+            <section class="section-block section-block--">
+    <article class="hentry" itemscope itemtype="http://schema.org/NewsArticle" role="main">
+
+                            <div class="container container--main-2cols">
+                        <div class="block__item block__item--business block__item--push">
+                            <div class="breadcrumb hidden-xs">
+                                <ul class="unstyled">
+                                    <li class="active"><a href="https://thegoodlife.fr">The Good Life</a></li>
+                                                                    </ul>
+                            </div><!-- .breadcrumb -->
+                            <div class="block-share">
+	<ul class="unstyled">
+				<li class="block-share__item block-share__item--facebook"><a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fthegoodlife.fr%2Fchefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef%2F&amp;t=Chefs+fran%C3%A7ais+expatri%C3%A9s+%3A+La+French+touch+en+cuisine+partout+dans+le+monde%2C+yes%2C+chef+%21" onclick="window.open(this.href,'tglfacebook','status=1,width=580,height=400,top='+($(window).height() - 400) / 2+',left='+($(window).width() - 580) / 2+',scrollbars=no');return false;" target="_blank"><span class="visuallyhidden">Partager sur facebook</span></a></li>
+		<li class="block-share__item block-share__item--twitter"><a href="https://twitter.com/share?url=https%3A%2F%2Fthegoodlife.fr%2Fchefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef%2F&amp;text=Chefs français expatriés : La French touch en cuisine partout dans le monde, yes, chef !&amp;via=TheGoodLife" onclick="window.open(this.href,'tgltwitter','status=1,width=580,height=400,top='+($(window).height() - 400) / 2+',left='+($(window).width() - 580) / 2+',scrollbars=no');return false;" target="_blank"><span class="visuallyhidden">Partager sur twitter</span></a></li>
+		<li class="block-share__item block-share__item--email"><a href="mailto:?subject=[The%20Good%20Life]%20-%20Chefs%20fran%C3%A7ais%20expatri%C3%A9s%20%3A%20La%20French%20touch%20en%20cuisine%20partout%20dans%20le%20monde%2C%20yes%2C%20chef%20%21&amp;body=Chefs%20fran%C3%A7ais%20expatri%C3%A9s%20%3A%20La%20French%20touch%20en%20cuisine%20partout%20dans%20le%20monde%2C%20yes%2C%20chef%20%21%0D%0Ahttps%3A%2F%2Fthegoodlife.fr%2Fchefs-francais-expatries-la-french-touch-en-cuisine-partout-dans-le-monde-yes-chef%2F">Partager par email</a></li>
+	</ul>
+</div><!-- .block-share -->                            <div class="block-image">
+                                <img  class="no-lazy head_image" itemprop="image" alt="" src="/wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-2-77-daniel-krieger-tt-width-980-height-796-crop-1-bgcolor-ffffff.jpg" srcset="/wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-2-77-daniel-krieger-tt-width-980-height-796-crop-1-bgcolor-ffffff.jpg 768w, /wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-2-77-daniel-krieger-tt-width-1120-height-400-crop-1-bgcolor-ffffff.jpg 991w" sizes="100vw" />                                <div class="block-credits">
+                                    daniel-krieger                                </div><!-- .block-credits -->
+                                <div class="block-title">
+                                                                        <h1 class="entry-title" itemprop="name">
+                                        <span>Chefs français expatriés : La French touch en cuisine partout dans le monde, yes, chef !</span>                                    </h1>
+                                </div><!-- .block-title -->
+                            </div><!-- .block-image -->
+                        </div><!-- .block__item -->
+                    </div><!-- .container -->
+                    <div class="container container--main-2cols container--main">
+                        <div class="main main--2cols">
+                            <div class="content">
+                                <div class="row">
+                                                                        <div class="entry-country">
+                                        <img  alt="" width="43" height="39" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2043%2039'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2016/03/drapeau-france2-tt-width-43-height-39-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="43" height="39" src="/wp-content/thumbnails/uploads/sites/2/2016/03/drapeau-france2-tt-width-43-height-39-crop-1-bgcolor-ffffff.jpg" /></noscript>                                    </div><!-- .entry-country -->
+                                                                        <div class="entry-meta">
+                                        			<div class="entry-meta__inner">
+			<em>Par</em>&nbsp;<div itemprop="author" class="entry-author author vcard"><span class="fn">Hélène Rocco</span></div>
+		</div><!-- .entry-meta__inner -->
+			<div class="entry-meta__inner">
+		<i>le</i> <time class="entry-date updated" datetime="2021-05-25" itemprop="dateCreated">25 mai 2021</time>	</div><!-- .entry-meta__inner -->
+	                                    </div><!-- .entry-meta -->
+                                                                        <div class="entry-intro" itemprop="description">
+                                        <h2>Partis de France pour se libérer des codes de la gastronomie traditionnelle, ces cuisiniers, ou pâtissiers, font rêver leur pays d’adoption. Alors que certains cultivent le fantasme français ainsi qu’un accent prononcé, d’autres s’adaptent au terroir d’adoption pour séduire. Portrait de ces chefs qui se sont expatriés avec succès.</h2>
+                                    </div><!-- .entry-intro -->
+                                </div><!-- .row -->
+                                                                <div class="ad">
+                                    <div id="sas_40903" class="ad-position-before_content"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("40903");
+});
+</script>
+                                </div>
+
+                                <div class="ad">
+                                    <div id="sas_41989" class="ad-position-before_content_bis"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("41989");
+});
+</script>
+                                </div>
+
+                                <div class="entry-content" itemprop="articleBody">
+
+                                    <p>Élevés au rang de stars à l’étranger, ils sont souvent méconnus en France. Qu’importe la région du monde où ils posent leur valise, les chefs français jouissent d’une véritable aura et les émissions de télé-réalité culinaires se félicitent d’ailleurs souvent de pouvoir compter dans leur jury un ambassadeur de notre gastronomie.</p>
+<p>Il faut dire que depuis le XIXe siècle la haute cuisine d’Auguste Escoffier s’est imposée comme une référence mondiale. Dans les années 80, nombreux sont les cuisiniers et pâtissiers formés en France à avoir tiré parti de cet engouement et fait carrière au-delà de nos frontières.</p>
+<p>Éric Ripert à New York, Claude Troisgros à Rio ou encore Jean-Paul Bondoux en Uruguay semblent avoir ouvert la voie d’une tendance au long cours. Outre la télévision, les restaurateurs, hôteliers ou particuliers des quatre coins du monde aiment, aujourd’hui encore, embaucher des chefs français. Pour Kate Emery, fondatrice de l’agence de recrutement Amandine International Chef Placement, c’est sans doute parce que la formation française est synonyme d’excellence. Ses clients lui demandent régulièrement de trouver des toques maîtrisant cette cuisine qui incarne le raffinement aux yeux du monde.</p>
+<p>« <em>D’autre part</em>, précise Kate Emery<em>, nous connaissons des centaines de chefs français prêts à tenter leur chance hors de France.</em> » Les raisons de cette motivation ? La France est un pays tellement porté sur la bonne chère qu’il cultive une grande exigence, voire le sens du sacrifice, au sein des brigades. D’autant que l’univers de la haute cuisine est très codifié : pas évident de sortir du lot quand tout le monde suit les mêmes règles.</p>
+<figure>
+    <a class="lightbox"
+        href="/wp-content/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-insert-01.jpg">
+        <img  itemprop="image" alt="Amaury Guichon Chef pâtissier, fondateur de l’école Pastry Academy, à Las Vegas." width="690" height="442" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20690%20442'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-insert-01-tt-width-690-height-442-crop-1-bgcolor-ffffff-except_gif-1.jpg" /><noscript><img  itemprop="image" alt="Amaury Guichon Chef pâtissier, fondateur de l’école Pastry Academy, à Las Vegas." width="690" height="442" src="/wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-insert-01-tt-width-690-height-442-crop-1-bgcolor-ffffff-except_gif-1.jpg" /></noscript>    </a>
+    <figcaption>
+        Amaury Guichon Chef pâtissier, fondateur de l’école Pastry Academy, à Las Vegas.        <em>DR</em>    </figcaption>
+</figure>
+
+<p>S’expatrier est alors un moyen de se libérer du carcan tout en gagnant en visibilité. Chez les jeunes, ce désir est particulièrement présent puisque leur carrière reste à construire. Qu’ils saisissent une occasion ou qu’ils partent de zéro, ces chefs se laissent séduire par des pays voisins comme l’Angleterre, mais s’aventurent aussi volontiers en Asie ou en Amérique du Nord.</p>
+<p>À l’étranger, être un chef français est avant tout un moyen de se démarquer, aussi bien en cuisine qu’en pâtisserie. De Thierry Marx à Pierre Gagnaire, les plus grands capitalisent, par exemple, sur l’enthousiasme que portent les Japonais à la gastronomie française. Ouvrir une licence à Tokyo est, pour beaucoup d’entre eux, un tremplin qui peut se révéler très lucratif. Installée à Florence et désormais multi étoilée, la cheffe Annie Féolde s’est ainsi fait remarquer en 1974 alors qu’elle servait de délicieuses quiches lorraines dans son bar à vin.</p>
+<p>Et c’est le moelleux au chocolat de l’Alsacien Jean-Georges Vongerichten qui a largement contribué à sa renommée. Le chef est aujourd’hui à la tête d’une trentaine d’établissements à New York, Chicago, Las Vegas, aux Bahamas ou encore à Dubaï.</p>
+<h3><strong>Les États-Unis comme eldorado des chefs français</strong></h3>
+<p>Dans l’esprit de beaucoup, le rêve américain est encore très présent. En 2020, les États-Unis continuent d’apparaître comme le pays de tous les possibles. Dans l’imaginaire collectif, on réussit de manière bien plus spectaculaire en Amérique qu’en Europe. Et l’épopée ne date pas d’hier : au début du XXe siècle, les bistrots français fleurissent déjà sur la côte Est.</p>
+<p>Pour Victoire Loup, journaliste et auteure culinaire installée à Los Angeles, cet engouement s’explique par le fantasme que nourrissent les Américains à l’égard de la France. <em>« Ils sont fascinés par les chefs français. Selon eux, notre cuisine a quelque chose de noble. Les clients sont prêts à payer beaucoup plus cher pour manger un steak au poivre servi sur fond d’accordéon que pour un plat vietnamien élaboré. »</em></p>
+<figure>
+    <a class="lightbox"
+        href="/wp-content/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-insert-02.jpg">
+        <img  itemprop="image" alt="Dominique Crenn Cheffe propriétaire de l’Atelier Crenn (3 étoiles Michelin), Petit Crenn et Bar Crenn, à San Francisco." width="690" height="442" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20690%20442'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-insert-02-tt-width-690-height-442-crop-1-bgcolor-ffffff-except_gif-1.jpg" /><noscript><img  itemprop="image" alt="Dominique Crenn Cheffe propriétaire de l’Atelier Crenn (3 étoiles Michelin), Petit Crenn et Bar Crenn, à San Francisco." width="690" height="442" src="/wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-insert-02-tt-width-690-height-442-crop-1-bgcolor-ffffff-except_gif-1.jpg" /></noscript>    </a>
+    <figcaption>
+        Dominique Crenn Cheffe propriétaire de <a href="https://www.ateliercrenn.com/" target="_blank" rel="noopener noreferrer">l’Atelier Crenn</a> (3 étoiles Michelin), Petit Crenn et Bar Crenn, à San Francisco.        <em>DR</em>    </figcaption>
+</figure>
+
+<p>Pour incarner « le » chef français par excellence, certains cuisiniers vont jusqu’à exagérer leur accent après des décennies passées dans le pays. Si les clichés font recette outre-Atlantique, c’est aussi parce que les Américains s’aventurent peu hors de leur pays. Le chef Ludovic Lefebvre, installé à Los Angeles, nuance : « <em>La plupart des clients aiment ma cuisine parce qu’elle évoque un souvenir de leur séjour en France ou parce qu’ils rêvent d’y mettre les pieds un jour. Notre gastronomie est tellement liée à notre culture qu’elle permet de voyager.</em> »</p>
+<p>Mais pour les expatriés français ayant le mal du pays, les adresses figées dans le temps ne sont pas forcément les plus appréciées, nous éclaire Victoire Loup. Un bar en zinc et un coq au vin seraient donc un aller-retour en Europe garanti… à condition de ne pas y avoir grandi. Peu importe : pour marcher, l’offre doit s’adapter à son public, et c’est d’ailleurs là où le bât blesse. À trop rêver d’Amérique, des célébrités comme Anne- Sophie Pic et Alain Ducasse, pourtant triplement étoilés, ont échoué à <a href="https://thegoodlife.fr/2019/10/18/chef-daniel-boulud-icone-de-lupper-east-side/" target="_blank" rel="noopener noreferrer">New York.</a></p>
+<p>Plaquer des recettes appréciées à Paris sur le menu d’un restaurant à l’autre bout du monde ne saurait suffire. Aux États-Unis comme ailleurs, la réussite est souvent au rendez-vous quand les chefs s’adaptent aux palais locaux. Grâce à son concept de Cronut – un hybride de croissant et de donut –, le pâtissier Dominique Ansel surfe sur le succès depuis plusieurs années.</p>
+<figure>
+    <a class="lightbox"
+        href="/wp-content/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-insert-03.jpg">
+        <img  itemprop="image" alt="Damien Foschiatti Chef pâtissier propriétaire des boutiques Fosch, à Stockholm." width="690" height="442" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20690%20442'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-insert-03-tt-width-690-height-442-crop-1-bgcolor-ffffff-except_gif-1.jpg" /><noscript><img  itemprop="image" alt="Damien Foschiatti Chef pâtissier propriétaire des boutiques Fosch, à Stockholm." width="690" height="442" src="/wp-content/thumbnails/uploads/sites/2/2021/05/chefs-francais-expatries-cuisine-francaise-etranger-insert-03-tt-width-690-height-442-crop-1-bgcolor-ffffff-except_gif-1.jpg" /></noscript>    </a>
+    <figcaption>
+        Damien Foschiatti Chef pâtissier propriétaire des boutiques <a href="https://www.fosch.se/" target="_blank" rel="noopener noreferrer">Fosch</a>, à Stockholm.        <em>Patrik Lindell</em>    </figcaption>
+</figure>
+
+<h3><strong>Prendre en compte les traditions locales</strong></h3>
+<p>La plupart des chefs expatriés en sont convaincus : il est important de se nourrir du terroir et des traditions de leur pays d’accueil. Puisque la cuisine contemporaine est riche de nombreuses influences, mêler son héritage à de nouvelles saveurs permet de continuer à plaire à sa clientèle.</p>
+<p>À Florence, Annie Féolde a, par exemple, étudié pendant des années les subtilités de la cuisine toscane avant de la maîtriser et d’obtenir trois étoiles au guide Michelin. Même constat pour Didier Corlou, à la tête de trois restaurants à Hanoï depuis les années 90. Il lui a fallu presque une décennie pour saisir la complexité de la gastronomie vietnamienne.</p>
+<p>Son établissement Madame Hien est aujourd’hui consacré à la cuisine traditionnelle du pays. En bon homme d’affaires, il s’est également lancé dans la commercialisation d’épices vietnamiennes dans le monde entier. À en croire ces différents parcours, les chefs qui réussissent à l’étranger sont finalement ceux qui osent rêver en grand.</p>
+<hr />
+</p>
+<div class="block-encart clearfix">
+	<h2>Lire aussi</h2>
+	<p><a class="mentionable" href="https://thegoodlife.fr/2019/10/18/chef-daniel-boulud-icone-de-lupper-east-side/" target="_self" data-mentionable="37507">Chef Daniel Boulud : icône de l’Upper East Side</a></p>
+</div><!-- .block-encart -->
+<p>
+
+
+                                </div><!-- .entry-content -->
+
+                                                                <div class="block-thematic">
+                                    <h2>Thématiques associées</h2>
+                                    <ul class="unstyled">
+                                                                                <li><a
+                                                href="https://thegoodlife.fr/tag/france/">#France</a>
+                                        </li>
+                                                                            </ul>
+                                </div><!-- .block-thematic -->
+                                
+                                <div class="ad">
+                                    <div id="sas_41988" class="ad-position-after_content"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("41988");
+});
+</script>
+                                </div>
+                                <div class="ad">
+                                    <div id="sas_41990" class="ad-position-after_content_bis"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("41990");
+});
+</script>
+                                </div>
+
+                                <div class="ad">
+                                    <div class="native-ad">
+                                        <div id="sas_40773" class="ad-position-Native_Ad"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("40773");
+});
+</script>
+                                    </div>
+                                </div>
+                                <div id="sas_39768" class="ad-position-preroll"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("39768");
+});
+</script>
+                                <div class="row">
+                                    <div class="block-spots">
+                                        <div class="block-spots__header block-border__top clearfix">
+                                            <h2>
+                                                The Good Spots
+                                                <span>Destination
+                                                    France</span>
+                                            </h2>
+                                            <div class="skin-select__container">
+                                                <label for="spots_filter" class="visuallyhidden">Filter les
+                                                    spots</label>
+                                                <select name="spots_filter" class="skin-select" id="spots_filter">
+                                                    <option value="">Tous</option>
+                                                                                                        <option value="a-faire">
+                                                        A faire</option>
+                                                                                                        <option value="a-voir">
+                                                        A voir</option>
+                                                                                                        <option value="bars-cafes">
+                                                        Bars &amp; Cafés</option>
+                                                                                                        <option value="boutiques">
+                                                        Boutiques</option>
+                                                                                                        <option value="cinema">
+                                                        Cinéma</option>
+                                                                                                        <option value="galerie">
+                                                        Galerie</option>
+                                                                                                        <option value="generique">
+                                                        Générique</option>
+                                                                                                        <option value="glacier">
+                                                        Glacier</option>
+                                                                                                        <option value="hotel">
+                                                        Hôtel</option>
+                                                                                                        <option value="mosquee">
+                                                        Mosquée</option>
+                                                                                                        <option value="musee">
+                                                        Musée</option>
+                                                                                                        <option value="palace">
+                                                        palace</option>
+                                                                                                        <option value="restaurant">
+                                                        Restaurant</option>
+                                                                                                        <option value="souk">
+                                                        Souk</option>
+                                                                                                    </select>
+                                            </div><!-- .skin-select -->
+                                        </div><!-- .block-spots__header -->
+                                        <div class="block-spots__content">
+                                            <div class="row row--spots">
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-hotel"
+                                                    data-cat="hotel">
+                                                    <a href="https://thegoodlife.fr/spot/jo-joe/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/07/jo_joe_vignette_3744x2400-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/07/jo_joe_vignette_3744x2400-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>Jo &amp; Joe</strong>
+                                                        <em>Hossegor</em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-hotel"
+                                                    data-cat="hotel">
+                                                    <a href="https://thegoodlife.fr/spot/la-reserve-2/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/07/la_reserve_vignette_3744x2400-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/07/la_reserve_vignette_3744x2400-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>La Réserve</strong>
+                                                        <em>Saint-jean-de-Luz</em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-hotel"
+                                                    data-cat="hotel">
+                                                    <a href="https://thegoodlife.fr/spot/hotel-du-palais/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/07/hotel_du_palais_vignette_3744x2400-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/07/hotel_du_palais_vignette_3744x2400-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>Hôtel du Palais</strong>
+                                                        <em>Biarritz</em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-restaurant"
+                                                    data-cat="restaurant">
+                                                    <a href="https://thegoodlife.fr/spot/le-san-francisco/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/07/tgl-p-029-a-077-c-02-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/07/tgl-p-029-a-077-c-02-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>Le San Francisco</strong>
+                                                        <em></em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                            </div>
+                                            <div class="row row--spots">
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-restaurant"
+                                                    data-cat="restaurant">
+                                                    <a href="https://thegoodlife.fr/spot/le-petit-hotel-du-grand-large/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/07/tgl-p-029-a-077-c-01-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/07/tgl-p-029-a-077-c-01-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>Le Petit Hôtel du grand large</strong>
+                                                        <em></em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-hotel"
+                                                    data-cat="hotel">
+                                                    <a href="https://thegoodlife.fr/spot/les-roches-rouges/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/06/tgl-p-029-m-076-c-01-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/06/tgl-p-029-m-076-c-01-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>Les Roches rouges</strong>
+                                                        <em>Saint-Raphaël</em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-hotel"
+                                                    data-cat="hotel">
+                                                    <a href="https://thegoodlife.fr/spot/byblos/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/06/tgl-p-029-076-c-03-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/06/tgl-p-029-076-c-03-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>Byblos</strong>
+                                                        <em>Saint-Tropez</em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-hotel"
+                                                    data-cat="hotel">
+                                                    <a href="https://thegoodlife.fr/spot/le-bailli-de-suffren/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/06/tgl-p-029-076-v-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/06/tgl-p-029-076-v-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>Le Bailli de Suffren</strong>
+                                                        <em>Le Rayol-Canadel-sur-Mer</em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                            </div>
+                                            <div class="row row--spots">
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-hotel"
+                                                    data-cat="hotel">
+                                                    <a href="https://thegoodlife.fr/spot/castelbrac-2/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/07/tgl-p-029-a-072-c-01-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/07/tgl-p-029-a-072-c-01-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>Castelbrac</strong>
+                                                        <em>Dinard</em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-hotel"
+                                                    data-cat="hotel">
+                                                    <a href="https://thegoodlife.fr/spot/castel-clara/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/07/castel-clara_2_vignette_3744x2400-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/07/castel-clara_2_vignette_3744x2400-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>Castel Clara</strong>
+                                                        <em></em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-hotel"
+                                                    data-cat="hotel">
+                                                    <a href="https://thegoodlife.fr/spot/saint-christophe/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/07/tgl-p-029-a-072-c-03-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/07/tgl-p-029-a-072-c-03-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>Saint-Christophe</strong>
+                                                        <em>La Baule</em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                                <div class="col-md-3 col-sm-3 col-xs-6 block-spot spot-cat-hotel"
+                                                    data-cat="hotel">
+                                                    <a href="https://thegoodlife.fr/spot/la-coorniche/" class="lightbox-ajax">
+                                                        <img  alt="" width="160" height="102" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20102'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2017/07/tgl-p-029-a-072-c-04-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="160" height="102" src="/wp-content/thumbnails/uploads/sites/2/2017/07/tgl-p-029-a-072-c-04-tt-width-160-height-102-crop-1-bgcolor-ffffff.jpg" /></noscript>                                                        <strong>La Co(o)rniche</strong>
+                                                        <em>Pyla-sur-mer</em>
+                                                        <span>France</span>
+                                                    </a>
+                                                </div><!-- .col-md-3 -->
+                                                                                            </div><!-- .row -->
+                                        </div><!-- .block-spots__content -->
+                                    </div><!-- .block-spots -->
+                                </div><!-- .row -->
+                                
+                                
+                                <div class="row">
+                                    <div class="block-related-articles">
+
+                                        <div class="block-related-articles__header clearfix">
+                                            <h2 class="headline">Sur le même sujet</h2>
+                                            <div class="block-related-articles__paging">
+                                                <a class="slick__prev">Précédent</a> <a class="slick__next">Suivant</a>
+                                            </div><!-- .block__good-products__paging -->
+                                        </div><!-- .block-related-articles__header -->
+
+                                        <script id="related-template" type="text/x-handlebars-template">
+                                            <div class="col-md-6 col-sm-6 col-lifestyle">
+									<div class="block__item" data-scroll-reveal data-text="{{title}}">
+										<div class="block-image bloc-image--over">
+											<a href="{{link}}">
+												<img src="{{thumbnail}}" />
+											</a>
+											{{#if type}}
+												<div class="category-icon category-icon--small icon--{{type}}"></div>
+											{{/if}}
+										</div>
+										<div class="block__item__inner">
+											<div class="block-category block-category--{{post_type}} block-category--{{main_cat}}">
+												<a href="{{category_link}}">{{category}}</a>
+											</div>
+											<div class="block-title">
+												<a href="{{link}}">
+													<p>
+														{{{title}}}
+														<small class="hidden-xs">{{{excerpt}}}</small>
+													</p>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</script>
+
+                                        <div class="block-related-articles__content">
+                                            <div class="row row--related-slider"></div><!-- .row -->
+                                        </div><!-- .block-related-articles__content -->
+
+                                    </div><!-- .block-related-articles -->
+                                </div><!-- .row -->
+
+                                	<div class="block-ideat">
+		<div class="block-ideat__header clearfix">
+			<h2>
+				<span>Et aussi chez <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20134%2036'%3E%3C/svg%3E" width="134" height="36" alt="ideat" data-lazy-src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/template/logo-ideat-2x.png" /><noscript><img src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/template/logo-ideat-2x.png" width="134" height="36" alt="ideat" /></noscript></span>
+			</h2>
+		</div><!-- .block-ideat__header -->
+		<div class="row row--grid row--grid--mobile-cols">
+							<div class="col-md-6 col-sm-6 col-xs-6 col-ideat">
+																	<div class="block__item" data-scroll-reveal data-text="La maison-atelier de deux stylistes mode à Anvers">
+						    <div class="block-image bloc-image--over">
+						        <a href="https://ideat.fr/la-maison-atelier-de-deux-stylistes-mode-a-anvers/">
+						            <img  alt="" width="900" height="576" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20900%20576'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/3/2023/04/home-anvers-1-scaled-tt-width-900-height-576-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="900" height="576" src="/wp-content/thumbnails/uploads/sites/3/2023/04/home-anvers-1-scaled-tt-width-900-height-576-crop-1-bgcolor-ffffff.jpg" /></noscript>						            <div class="category-icon icon--lifestyle"></div><!-- .category-icon -->
+						        </a>
+						    </div><!-- .block-image -->
+						    <div class="block__item__inner">
+						        <div class="block-category block-category--lifestyle">
+						            <a
+						                href="https://ideat.fr/ideat-category/lifestyle/">Lifestyle</a>
+						            						        </div><!-- .block-image -->
+						        <div class="block-title">
+						            <a href="https://ideat.fr/la-maison-atelier-de-deux-stylistes-mode-a-anvers/">
+						                <p>
+						                    La maison-atelier de deux stylistes mode à Anvers						                    <small>Minimalisme structurel, bois brut, mobilier du milieu du XXe, profusion de livres, de plantes, de souvenirs de...</small>
+						                </p>
+						            </a>
+						        </div><!-- .block-title -->
+						    </div><!-- .block__item__inner -->
+						</div><!-- .block__item -->				</div><!-- .col-md-6 -->
+								<div class="col-md-6 col-sm-6 col-xs-6 col-ideat">
+																	<div class="block__item" data-scroll-reveal data-text="IDEAT Hors-série Architecture n°25 est en kiosque">
+						    <div class="block-image bloc-image--over">
+						        <a href="https://ideat.fr/ideat-hors-serie-architecture-n25-est-en-kiosque/">
+						            <img  alt="" width="900" height="576" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20900%20576'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/3/2023/04/08502-03-scaled-tt-width-900-height-576-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="900" height="576" src="/wp-content/thumbnails/uploads/sites/3/2023/04/08502-03-scaled-tt-width-900-height-576-crop-1-bgcolor-ffffff.jpg" /></noscript>						            <div class="category-icon icon--"></div><!-- .category-icon -->
+						        </a>
+						    </div><!-- .block-image -->
+						    <div class="block__item__inner">
+						        <div class="block-category block-category--">
+						            <a
+						                href="https://ideat.fr/ideat-category/art-chitecture/">Art-chitecture</a>
+						            						        </div><!-- .block-image -->
+						        <div class="block-title">
+						            <a href="https://ideat.fr/ideat-hors-serie-architecture-n25-est-en-kiosque/">
+						                <p>
+						                    IDEAT Hors-série Architecture n°25 est en kiosque						                    <small>Au programme du hors-série architecture n°25, rencontre avec ceux qui construisent une nouvelle avant-garde architecturale.</small>
+						                </p>
+						            </a>
+						        </div><!-- .block-title -->
+						    </div><!-- .block__item__inner -->
+						</div><!-- .block__item -->				</div><!-- .col-md-6 -->
+						</div><!-- .row -->
+		<div class="row row--grid row--grid--mobile-cols">
+							<div class="col-md-4 col-sm-4 col-xs-6 col-ideat">
+																	<div class="block__item" data-scroll-reveal data-text="Le Tokyo de la photographe Mathilde de l’Ecotais">
+						    <div class="block-image bloc-image--over">
+						        <a href="https://ideat.fr/tokyo-de-photographe-mathilde-de-l-ecotais/">
+						            <img  alt="" width="900" height="576" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20900%20576'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/3/2016/11/id-p-hs-1-330-v-tt-width-900-height-576-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="900" height="576" src="/wp-content/thumbnails/uploads/sites/3/2016/11/id-p-hs-1-330-v-tt-width-900-height-576-crop-1-bgcolor-ffffff.jpg" /></noscript>						            <div class="category-icon icon--"></div><!-- .category-icon -->
+						        </a>
+						    </div><!-- .block-image -->
+						    <div class="block__item__inner">
+						        <div class="block-category block-category--">
+						            <a
+						                href="https://ideat.fr/ideat-category/tourisme/">Tourisme</a>
+						            						        </div><!-- .block-image -->
+						        <div class="block-title">
+						            <a href="https://ideat.fr/tokyo-de-photographe-mathilde-de-l-ecotais/">
+						                <p>
+						                    Le Tokyo de la photographe Mathilde de l’Écotais						                    <small>La photographe culinaire Mathilde de l’Écotais est une amoureuse inconditionnelle de Tokyo, nous l'avons rencontré pour qu'elle...</small>
+						                </p>
+						            </a>
+						        </div><!-- .block-title -->
+						    </div><!-- .block__item__inner -->
+						</div><!-- .block__item -->				</div><!-- .col-md-4 -->
+								<div class="col-md-4 col-sm-4 col-xs-6 col-ideat">
+																	<div class="block__item" data-scroll-reveal data-text="A Tokyo, l&rsquo;hommage à la végétation chez Nicolai Bergmann">
+						    <div class="block-image bloc-image--over">
+						        <a href="https://ideat.fr/a-tokyo-lhommage-a-vegetation-chez-nicolai-bergmann/">
+						            <img  alt="" width="900" height="576" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20900%20576'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/3/2017/05/id-p-hso-8-114-v-tt-width-900-height-576-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="900" height="576" src="/wp-content/thumbnails/uploads/sites/3/2017/05/id-p-hso-8-114-v-tt-width-900-height-576-crop-1-bgcolor-ffffff.jpg" /></noscript>						            <div class="category-icon icon--lifestyle"></div><!-- .category-icon -->
+						        </a>
+						    </div><!-- .block-image -->
+						    <div class="block__item__inner">
+						        <div class="block-category block-category--lifestyle">
+						            <a
+						                href="https://ideat.fr/ideat-category/lifestyle/">Lifestyle</a>
+						            						        </div><!-- .block-image -->
+						        <div class="block-title">
+						            <a href="https://ideat.fr/a-tokyo-lhommage-a-vegetation-chez-nicolai-bergmann/">
+						                <p>
+						                    A Tokyo, l'hommage à la végétation chez Nicolai Bergmann						                    <small>D’origine danoise, Nicolai Bergmann est installé depuis presque vingt ans au Japon, où il est devenu une...</small>
+						                </p>
+						            </a>
+						        </div><!-- .block-title -->
+						    </div><!-- .block__item__inner -->
+						</div><!-- .block__item -->				</div><!-- .col-md-4 -->
+								<div class="col-md-4 col-sm-4 col-xs-6 col-ideat hidden-xs">
+																	<div class="block__item" data-scroll-reveal data-text="Comment Marcel Wanders a conquis Majorque, Tokyo et Doha…">
+						    <div class="block-image bloc-image--over">
+						        <a href="https://ideat.fr/marcel-wanders-a-conquis-majorque-tokyo-doha/">
+						            <img  alt="" width="900" height="576" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20900%20576'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/3/2017/09/id-w-20170928-wanders-14-tt-width-900-height-576-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="900" height="576" src="/wp-content/thumbnails/uploads/sites/3/2017/09/id-w-20170928-wanders-14-tt-width-900-height-576-crop-1-bgcolor-ffffff.jpg" /></noscript>						            <div class="category-icon icon--"></div><!-- .category-icon -->
+						        </a>
+						    </div><!-- .block-image -->
+						    <div class="block__item__inner">
+						        <div class="block-category block-category--">
+						            <a
+						                href="https://ideat.fr/ideat-category/tourisme/">Tourisme</a>
+						            						        </div><!-- .block-image -->
+						        <div class="block-title">
+						            <a href="https://ideat.fr/marcel-wanders-a-conquis-majorque-tokyo-doha/">
+						                <p>
+						                    Comment Marcel Wanders a conquis Majorque, Tokyo et Doha…						                    <small>Plus de vingt ans après être apparu sur la scène internationale grâce à sa « Knotted Chair...</small>
+						                </p>
+						            </a>
+						        </div><!-- .block-title -->
+						    </div><!-- .block__item__inner -->
+						</div><!-- .block__item -->				</div><!-- .col-md-4 -->
+						</div><!-- .row -->
+	</div><!-- .block-ideat -->
+	                            </div><!-- .content -->
+                        </div><!-- .main -->
+
+                        			<aside class="sidebar hidden-xs" role="complementary">
+				<div class="sidebar__row">
+					<div class="sidebar-block ad" data-scroll-reveal>
+    <div id="sas_40417" class="ad-position-Banner_FrameDroit_P1(Top)"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("40417");
+});
+</script>
+</div><!-- .sidebar-block --><div class="sidebar-block sidebar-block--subscribe">
+    <p>
+        <em>Abonnez-vous à</em>
+    </p>
+    <p>
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/logo-the-good-life.svg" /><noscript><img src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/logo-the-good-life.svg" alt="" /></noscript>
+    </p>
+    <p>
+        <img  alt="" width="180" height="243" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20180%20243'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2023/03/tgl-couv57-scaled-tt-width-180-height-243-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="180" height="243" src="/wp-content/thumbnails/uploads/sites/2/2023/03/tgl-couv57-scaled-tt-width-180-height-243-crop-1-bgcolor-ffffff.jpg" /></noscript>    </p>
+    <p>
+        <strong>1 an = 36.90 €</strong>
+    </p>
+    <p class="bt-subscription">
+        <a href="https://thegoodconceptstore.thegoodhub.com/222-the-good-life" target="_blank">Je m'abonne</a>
+    </p>
+</div><!-- .sidebar-block -->
+<div class="sidebar-block ad"  id="sticky_block">
+    <div id="sas_40553" class="ad-position-Banner_FrameDroit_P2(Mid1)"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("40553");
+});
+</script>
+</div><!-- .sidebar-block -->
+	<div data-scroll-reveal class="sidebar-block sidebar-block--channels hidden-xs">
+		<div class="block-channels">
+			<div class="block-channels__list">
+				<div class="col-category__intro col-category__intro--channels">
+						<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-5">
+							<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/template/icon-channels.png" /><noscript><img src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/template/icon-channels.png" alt="" /></noscript>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-7">
+							<p>
+								The Good Channels
+							</p>
+						</div>
+					</div><!-- .row -->
+				</div><!-- .col-category__intro -->
+			</div><!-- .block-channels__list -->
+			<div class="block-channels__slider block-channels__slider--sidebar">
+				<ul class="unstyled">
+									<li>
+						<div class="block__item">
+							<div class="block-image">
+								<a href="https://thegoodlife.fr/video/the-good-test-lexus-passe-a-lelectrique-avec-le-rz-450e/">
+									<img  alt="" width="505" height="326" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20505%20326'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2023/03/lexus-rz-tt-width-505-height-326-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="505" height="326" src="/wp-content/thumbnails/uploads/sites/2/2023/03/lexus-rz-tt-width-505-height-326-crop-1-bgcolor-ffffff.jpg" /></noscript>									<div class="category-icon icon--video"></div><!-- .category-icon -->
+								</a>
+							</div><!-- .block-image -->
+							<div class="block-title">
+								<a href="https://thegoodlife.fr/video/the-good-test-lexus-passe-a-lelectrique-avec-le-rz-450e/">
+									<p>
+										The Good Test : Lexus passe à l&rsquo;électrique avec le RZ 450e									</p>
+								</a>
+							</div><!-- .block-title -->
+						</div><!-- .block__item -->
+					</li>
+										<li>
+						<div class="block__item">
+							<div class="block-image">
+								<a href="https://thegoodlife.fr/video/assemblage-de-lenceinte-phantom-chez-devialet/">
+									<img  alt="" width="505" height="326" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20505%20326'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2016/04/Vignette_phantom-tt-width-505-height-326-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="505" height="326" src="/wp-content/thumbnails/uploads/sites/2/2016/04/Vignette_phantom-tt-width-505-height-326-crop-1-bgcolor-ffffff.jpg" /></noscript>									<div class="category-icon icon--video"></div><!-- .category-icon -->
+								</a>
+							</div><!-- .block-image -->
+							<div class="block-title">
+								<a href="https://thegoodlife.fr/video/assemblage-de-lenceinte-phantom-chez-devialet/">
+									<p>
+										Assemblage de l’enceinte Phantom chez Devialet									</p>
+								</a>
+							</div><!-- .block-title -->
+						</div><!-- .block__item -->
+					</li>
+										<li>
+						<div class="block__item">
+							<div class="block-image">
+								<a href="https://thegoodlife.fr/video/video-the-good-waves-au-grand-pavois-de-la-rochelle-entretien-avec-christophe-vieux-1-4/">
+									<img  alt="" width="505" height="326" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20505%20326'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2019/09/vignette_grand_pavois_14-tt-width-505-height-326-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="505" height="326" src="/wp-content/thumbnails/uploads/sites/2/2019/09/vignette_grand_pavois_14-tt-width-505-height-326-crop-1-bgcolor-ffffff.jpg" /></noscript>									<div class="category-icon icon--video"></div><!-- .category-icon -->
+								</a>
+							</div><!-- .block-image -->
+							<div class="block-title">
+								<a href="https://thegoodlife.fr/video/video-the-good-waves-au-grand-pavois-de-la-rochelle-entretien-avec-christophe-vieux-1-4/">
+									<p>
+										VIDEO : The Good Waves au Grand Pavois de La Rochelle &#8211; Entretien avec Christophe Vieux (1/4)									</p>
+								</a>
+							</div><!-- .block-title -->
+						</div><!-- .block__item -->
+					</li>
+									</ul>
+				<p class="aligncenter">
+					<a href="/video/">Voir toutes les vidéos</a>
+				</p>
+			</div><!-- .block-channels__slider -->
+		</div><!-- .block-channels -->
+	</div><!-- .sidebar-block -->
+	
+<div data-scroll-reveal class="sidebar-block sidebar-block__top-read hidden-sm hidden-xs">
+	<div class="block__top-read">
+		<div class="block__top-read__header media">
+			<span><i>les</i> <strong>10</strong></span>
+			<div class="media">
+				articles <em>les plus lus</em>
+			</div>
+		</div>
+		<div class="top-read__slider">
+			<ul class="unstyled top-read__list">
+									<li class="top-read__item media">
+						<a href="https://thegoodlife.fr/video/video-48h-a-rotterdam/">
+							<img  alt="" width="100" height="65" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2065'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2019/10/rotterdam-central-2-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="100" height="65" src="/wp-content/thumbnails/uploads/sites/2/2019/10/rotterdam-central-2-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /></noscript>							<div class="top-read__content media">
+								<strong>1</strong>
+								<strong>VIDEO : 48h à Rotterdam</strong>
+								VIDEO : 48h à Rotterdam							</div><!-- .top-read__content -->
+						</a>
+					</li>
+										<li class="top-read__item media">
+						<a href="https://thegoodlife.fr/diaporama/provence-un-hotel-contemporain-au-coeur-des-vignes-par-humbert-poyet/">
+							<img  alt="" width="100" height="65" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2065'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2019/07/up-ultimate-provence-1-56-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="100" height="65" src="/wp-content/thumbnails/uploads/sites/2/2019/07/up-ultimate-provence-1-56-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /></noscript>							<div class="top-read__content media">
+								<strong>2</strong>
+								<strong>Provence : un hôtel contemporain au cœur des vignes par Humbert &amp; Poyet</strong>
+								Provence : un hôtel contemporain au cœur des vignes par Humbert &amp; Poyet 							</div><!-- .top-read__content -->
+						</a>
+					</li>
+										<li class="top-read__item media">
+						<a href="https://thegoodlife.fr/spot/mathis/">
+							<img  alt="" width="100" height="65" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2065'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2016/05/tgl-p-023-065-c-02-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="100" height="65" src="/wp-content/thumbnails/uploads/sites/2/2016/05/tgl-p-023-065-c-02-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /></noscript>							<div class="top-read__content media">
+								<strong>3</strong>
+								<strong>Mathis Hôtel, Restaurant et Bar</strong>
+								Mathis Hôtel, Restaurant et Bar							</div><!-- .top-read__content -->
+						</a>
+					</li>
+										<li class="top-read__item media">
+						<a href="https://thegoodlife.fr/diaporama/avion-concept-her0-des-helices-pour-sauver-laviation-commerciale/">
+							<img  alt="" width="100" height="65" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2065'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2020/01/concept-avion-her0-joe-doucet-architecture-aviation-electrique-1-56-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="100" height="65" src="/wp-content/thumbnails/uploads/sites/2/2020/01/concept-avion-her0-joe-doucet-architecture-aviation-electrique-1-56-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /></noscript>							<div class="top-read__content media">
+								<strong>4</strong>
+								<strong>Avion-concept HER0 : des hélices pour sauver l’aviation commerciale ?</strong>
+								Avion-concept HER0 : des hélices pour sauver l’aviation commerciale ? 							</div><!-- .top-read__content -->
+						</a>
+					</li>
+										<li class="top-read__item media">
+						<a href="https://thegoodlife.fr/renault-5-turbo-3-la-renaissance-dun-mythe-automobile/">
+							<img  alt="" width="100" height="65" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2065'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2021/07/renault-5-turbo-3-restomod-automobile-voiture-1-56-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="100" height="65" src="/wp-content/thumbnails/uploads/sites/2/2021/07/renault-5-turbo-3-restomod-automobile-voiture-1-56-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /></noscript>							<div class="top-read__content media">
+								<strong>5</strong>
+								<strong>Renault 5 Turbo 3, la renaissance d’un mythe automobile</strong>
+								Renault 5 Turbo 3, la renaissance d’un mythe automobile							</div><!-- .top-read__content -->
+						</a>
+					</li>
+										<li class="top-read__item media">
+						<a href="https://thegoodlife.fr/renault-5-turbo-3-la-renaissance-dun-mythe-automobile/">
+							<img  alt="" width="100" height="65" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2065'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2021/07/renault-5-turbo-3-restomod-automobile-voiture-1-56-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="100" height="65" src="/wp-content/thumbnails/uploads/sites/2/2021/07/renault-5-turbo-3-restomod-automobile-voiture-1-56-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /></noscript>							<div class="top-read__content media">
+								<strong>6</strong>
+								<strong>Renault 5 Turbo 3, la renaissance d’un mythe automobile</strong>
+								Renault 5 Turbo 3, la renaissance d’un mythe automobile							</div><!-- .top-read__content -->
+						</a>
+					</li>
+										<li class="top-read__item media">
+						<a href="https://thegoodlife.fr/seoul-le-nouveau-hub-artistique-de-lasie/">
+							<img  alt="" width="100" height="65" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2065'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2016/03/TGL-P-022-300-V-H-1-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="100" height="65" src="/wp-content/thumbnails/uploads/sites/2/2016/03/TGL-P-022-300-V-H-1-tt-width-100-height-65-crop-1-bgcolor-ffffff.jpg" /></noscript>							<div class="top-read__content media">
+								<strong>7</strong>
+								<strong>Séoul Le nouveau hub artistique de l&rsquo;Asie</strong>
+								Séoul<br />Le nouveau hub artistique de l'Asie							</div><!-- .top-read__content -->
+						</a>
+					</li>
+								</ul>
+
+		</div><!-- .top-read__slider -->
+	</div><!-- .block__top-read -->
+</div><!-- .sidebar-block -->
+<div class="sidebar-block ad"  id="sticky_ad">
+    <div id="sas_40554" class="ad-position-Banner_FrameDroit_P3(Low)"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("40554");
+});
+</script>
+</div><!-- .sidebar-block -->				</div><!-- .sidebar__row-->
+			</aside><!-- .sidebar -->
+
+                    </div><!-- .container -->
+                    <div class="section-buffer"></div>
+    </article>
+</section><!-- .section-block -->
+</div><!-- .tgl_wrapper -->
+
+<section class="section-block section-block--related">
+    <div class="container">
+        <h2 class="headline headline--block">Et aussi sur The Good Lifestyle</h2>
+        <div class="main main--2cols">
+            <div class="content">
+                <div class="row row--grid row--grid--mobile-cols">
+                                        <div class="col-md-4 col-sm-4 col-xs-6 col-lifestyle">
+                        <div class="block__item" data-scroll-reveal
+                            data-text="Audi: le recours collectif des chauffeurs contre...">
+                            <div class="block-image bloc-image--over">
+                                <a href="https://thegoodlife.fr/shopping-un-ete-a-la-plage/">
+                                    <img  alt="" width="385" height="247" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20385%20247'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2018/07/shopping-plage-aout-2018-1-56-tt-width-385-height-247-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="385" height="247" src="/wp-content/thumbnails/uploads/sites/2/2018/07/shopping-plage-aout-2018-1-56-tt-width-385-height-247-crop-1-bgcolor-ffffff.jpg" /></noscript>                                    <div class="category-icon icon--"></div>
+                                    <!-- .category-icon -->
+                                </a>
+                            </div><!-- .block-image -->
+                            <div class="block__item__inner">
+                                <div class="block-category block-category--">
+                                                                    </div><!-- .block-image -->
+                                <div class="block-title">
+                                    <a href="https://thegoodlife.fr/shopping-un-ete-a-la-plage/">
+                                        <p>
+                                            Shopping : un été à la plage&#8230;                                        </p>
+                                    </a>
+                                </div><!-- .block-title -->
+                            </div><!-- .block__item__inner -->
+                        </div><!-- .block__item -->
+                    </div><!-- .col-md-4 -->
+                                        <div class="col-md-4 col-sm-4 col-xs-6 col-lifestyle">
+                        <div class="block__item" data-scroll-reveal
+                            data-text="Audi: le recours collectif des chauffeurs contre...">
+                            <div class="block-image bloc-image--over">
+                                <a href="https://thegoodlife.fr/plages-urbaines-de-rio-art-de-vivre/">
+                                    <img  alt="" width="385" height="247" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20385%20247'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2016/06/tgl-p-hs-rio-168-v-tt-width-385-height-247-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="385" height="247" src="/wp-content/thumbnails/uploads/sites/2/2016/06/tgl-p-hs-rio-168-v-tt-width-385-height-247-crop-1-bgcolor-ffffff.jpg" /></noscript>                                    <div class="category-icon icon--"></div>
+                                    <!-- .category-icon -->
+                                </a>
+                            </div><!-- .block-image -->
+                            <div class="block__item__inner">
+                                <div class="block-category block-category--">
+                                                                    </div><!-- .block-image -->
+                                <div class="block-title">
+                                    <a href="https://thegoodlife.fr/plages-urbaines-de-rio-art-de-vivre/">
+                                        <p>
+                                            Les plages urbaines de Rio, un art de vivre                                        </p>
+                                    </a>
+                                </div><!-- .block-title -->
+                            </div><!-- .block__item__inner -->
+                        </div><!-- .block__item -->
+                    </div><!-- .col-md-4 -->
+                                        <div class="col-md-4 col-sm-4 col-xs-6 col-lifestyle hidden-xs">
+                        <div class="block__item" data-scroll-reveal
+                            data-text="Audi: le recours collectif des chauffeurs contre...">
+                            <div class="block-image bloc-image--over">
+                                <a href="https://thegoodlife.fr/cuisine-chefs-zero-viande-alcool-fruits-de-saison/">
+                                    <img  alt="" width="385" height="247" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20385%20247'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2023/03/thai_toutain_david_zero_alcool_vignette-tt-width-385-height-247-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="385" height="247" src="/wp-content/thumbnails/uploads/sites/2/2023/03/thai_toutain_david_zero_alcool_vignette-tt-width-385-height-247-crop-1-bgcolor-ffffff.jpg" /></noscript>                                    <div class="category-icon icon--"></div>
+                                    <!-- .category-icon -->
+                                </a>
+                            </div><!-- .block-image -->
+                            <div class="block__item__inner">
+                                <div class="block-category block-category--">
+                                                                    </div><!-- .block-image -->
+                                <div class="block-title">
+                                    <a href="https://thegoodlife.fr/cuisine-chefs-zero-viande-alcool-fruits-de-saison/">
+                                        <p>
+                                            En 2023, ces chefs font le pari du zéro                                        </p>
+                                    </a>
+                                </div><!-- .block-title -->
+                            </div><!-- .block__item__inner -->
+                        </div><!-- .block__item -->
+                    </div><!-- .col-md-4 -->
+                                    </div><!-- .row -->
+            </div><!-- .content -->
+        </div><!-- .main -->
+        <aside class="sidebar" role="complementary">
+            <div class="sidebar__row">
+                <div data-scroll-reveal class="sidebar-block sidebar-block__map">
+                                        <a href="/the-good-map/"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E"
+                            alt="" data-lazy-src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/template/the-good-map-large.png" /><noscript><img src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/template/the-good-map-large.png"
+                            alt="" /></noscript></a>
+                    
+                </div><!-- .sidebar-block -->
+
+            </div><!-- .sidebar__row-->
+        </aside><!-- .sidebar -->
+
+    </div><!-- .container -->
+</section>
+
+</div><!-- .tgl_wrapper -->
+<div class="section-buffer section-block--light"></div>
+<section class="section-block section-block--subscription section-block--light clearfix">
+    <div class="container">
+        <div class="block__subscription block__subscription--left">
+            <img  alt="" width="180" height="243" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20180%20243'%3E%3C/svg%3E" data-lazy-src="/wp-content/thumbnails/uploads/sites/2/2023/03/tgl-couv57-scaled-tt-width-180-height-243-crop-1-bgcolor-ffffff.jpg" /><noscript><img  alt="" width="180" height="243" src="/wp-content/thumbnails/uploads/sites/2/2023/03/tgl-couv57-scaled-tt-width-180-height-243-crop-1-bgcolor-ffffff.jpg" /></noscript>        </div><!-- .block__subscription-left -->
+        <div class="block__subscription block__subscription--center">
+            <img
+                src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20291%2061'%3E%3C/svg%3E"
+                width="291"
+                height="61"
+                alt="The Good Life"
+            data-lazy-src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/template/logo-the-good-life.png" /><noscript><img
+                src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/template/logo-the-good-life.png"
+                width="291"
+                height="61"
+                alt="The Good Life"
+            /></noscript>
+            <p>
+                <em>Découvrez nos offres d’abonnement</em>
+                <strong>1 an = 36,90 &euro;</strong>
+                6 numéros
+            </p>
+            <p class="bt-subscription">
+                <a href="/abonnement/">Je m'abonne</a>
+            </p>
+        </div><!-- .block__subscription-center -->
+        <div class="block__subscription block__subscription--right hidden-xs">
+            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/template/illustration-subscription-tgl.png" /><noscript><img src="https://thegoodlife.fr/wp-content/themes/thegoodlife/images/template/illustration-subscription-tgl.png" alt="" /></noscript>
+        </div><!-- .block__subscription-right -->
+    </div><!-- .container -->
+</section><!-- .section-block -->
+<footer class="footer clearfix" role="contentinfo" id="footer">
+    <div class="footer__links">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-cross-links">
+                    <ul class="unstyled"><li id="menu-item-2706" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2706"><a href="https://thegoodlife.fr/mentions-legales/">Mentions légales</a></li>
+<li id="menu-item-2833" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2833"><a href="https://thegoodlife.fr/cgu/">CGV/CGU</a></li>
+<li id="menu-item-2834" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2834"><a href="https://thegoodlife.fr/informations-cookies/">Infos cookies</a></li>
+<li id="menu-item-2705" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2705"><a href="https://thegoodlife.fr/publicite-the-good-life/">Publicité</a></li>
+<li id="menu-item-7835" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7835"><a href="https://thegoodlife.fr/sitemap/">Sitemap</a></li>
+<li id="menu-item-53369" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-53369"><a href="https://thegoodlife.fr/abonnement/">Abonnement</a></li>
+<li id="menu-item-53370" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-53370"><a href="https://thegoodlife.fr/contacts/">Contacts</a></li>
+</ul>                </div><!-- .col-md-9 -->
+                <div class="col-md-3 col-sm-3 col-xs-12 footer__links__social">
+                    <ul class="unstyled">
+                        <li class="footer__item footer__item--facebook"><a
+                                href="https://www.facebook.com/TheGoodLifeMagazine"
+                                target="_blank">facebook</a></li>
+                        <li class="footer__item footer__item--twitter"><a
+                                href="https://twitter.com/TheGoodLife" target="_blank">twitter</a>
+                        </li>
+                        <li class="footer__item footer__item--instagram"><a
+                                href="https://www.instagram.com/thegoodlife_mag"
+                                target="_blank">instagram</a></li>
+                        <li class="footer__item footer__item--spotify"><a
+                                href="https://open.spotify.com/user/thegoodlifemagazine" target="_blank">spotify</a>
+                        </li>
+                    </ul>
+                </div><!-- .col-md-3 -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .footer__links -->
+    <div class="footer__sitemap">
+        <div class="container">
+            <div class="row">
+                <div><div class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children col-md-3"><h2>Les sites d&rsquo;IDEAT Editions</h2>
+<ul class="unstyled">
+	<li class="footer-links_ideat menu-item menu-item-type-custom menu-item-object-custom"><a href="https://ideat.fr">IDEAT</a></li>
+	<li class="footer-links_tgcs menu-item menu-item-type-custom menu-item-object-custom"><a href="https://thegoodconceptstore.thegoodhub.com">The Good Concept Store</a></li>
+	<li class="footer-links_dimdamdom menu-item menu-item-type-custom menu-item-object-custom"><a href="https://dimdamdom.thegoodhub.com/">Dim Dam Dom</a></li>
+</ul>
+
+</div><!-- .col-md-3 -->
+</div>            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .footer__sitemap -->
+</footer>
+
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/picturefill.js?ver=1681133905' id='picturefill-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/themes/thegoodlife/js/vendor/jquery-1.12.4.min.js?ver=1544432934' id='jquery-core-js'></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/jquery-migrate-1.2.1.js?ver=1681133905' id='jquery-migrate-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/underscore.js?ver=1681133905' id='underscore-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/intention.js?ver=1681133905' id='intention-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/context.js?ver=1681133905' id='context-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/syze.js?ver=1681133905' id='syze-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/js.cookie.js?ver=1681133905' id='js-cookie-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/jquery.debouncedresize.js?ver=1681133905' id='jquery-debouncedresize-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/scrollReveal.js?ver=1681133905' id='scroll-reveal-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/socialpic.js?ver=1681133905' id='socialpic-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/jquery.magnific-popup.js?ver=1681133905' id='magnific-popup-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/slick.js?ver=1681133905' id='js-slick-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/jquery.ba-throttle-debounce.js?ver=1681133905' id='scroll-trottle-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/jquery.fitvids.js?ver=1681133906' id='fitvids-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/jquery.sticky-kit.js?ver=1681133906' id='sticky-kit-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/header.js?ver=1681133906' id='header-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/handlebars.js?ver=1681133906' id='handlebars-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/gallery.js?ver=1681133906' id='gallery-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/css/dist/gallery-fullscreen.js?ver=1681133906' id='gallery-with-fullscreen-js' defer></script>
+<script type='text/javascript' id='main-js-extra'>
+/* <![CDATA[ */
+var tgh_vars = {"is_local":"0","recaptcha_key":"6LeeOtUUAAAAAPLh-b_DX37TgwwLE2-id8gtNSTW","ajaxurl":"https:\/\/thegoodlife.fr\/wp-admin\/admin-ajax.php","tgcs_login":"https:\/\/thegoodconceptstore.thegoodhub.com\/connexion?content_only=1&source=TGL"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/main.js?ver=1681133906' id='main-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/hitcount.js?ver=1681133907' id='hitcount-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/spots.js?ver=1681133907' id='spots-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/vendor/hammer.js?ver=1681133907' id='hammer-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/diaporama.js?ver=1681133907' id='diaporama-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/video.js?ver=1681133906' id='video-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' data-rocket-src='https://thegoodlife.fr/wp-content/cache/min/2/wp-content/themes/thegoodlife/js/single.js?ver=1681133907' id='single-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type='text/javascript' id='rocket-preload-links-js-extra'>
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/feed\/|\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index\\.php\/)?(.*)wp\\-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/thegoodlife.fr","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://thegoodlife.fr/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script><script>function lazyLoadThumb(e){var t='<img data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>',a='<button class="play" aria-label="play Youtube video"></button>';return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?'':'&'+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var e,t,p,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)e=document.createElement("div"),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query", a[t].dataset.query),e.setAttribute("data-src", a[t].dataset.src),e.innerHTML=lazyLoadThumb(a[t].dataset.id),a[t].appendChild(e),p=e.querySelector('.play'),p.onclick=lazyLoadYoutubeIframe});</script><div class="block-ad">
+    <div id="sas_40582" class="ad-position-FloorAD"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("40582");
+});
+</script>
+<div id="sas_40579" class="ad-position-Habillage"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("40579");
+});
+</script>
+<div id="sas_40420" class="ad-position-Interstitiel"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("40420");
+});
+</script>
+<div id="sas_40581" class="ad-position-SideKick"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("40581");
+});
+</script>
+<div id="sas_40580" class="ad-position-Slider"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+sas.cmd.push(function() {
+    sas.render("40580");
+});
+</script>
+
+    <!-- Start Worldometers RTS Counters -->
+    <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+    var rts_configuration = {
+        RTS_key: 'thegoodhub',
+        RTS_keylen: 3,
+        format_defaults: {
+            decimalSeparator: ',',
+            thousandSeparator: ' '
+        }
+    };
+    </script>
+    <script type="rocketlazyloadscript" data-minify="1" data-rocket-src="https://thegoodlife.fr/wp-content/cache/min/2/rts/RTSp.js?ver=1681133907" data-rocket-type="text/javascript" defer></script>
+    <!-- End Worldometers RTS Counters -->
+</div>
+
+</body>
+
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1681468159 -->

@@ -1,0 +1,267 @@
+
+ *{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+ }
+ body {    font-family: 'Poppins';
+    overflow-x: hidden; 
+ }
+
+.rect{
+    position: absolute;
+    width: 100%;
+    height: 45px;
+    top: 0px;
+       background-color:white;
+   
+}
+.rect1{
+    position: absolute;
+width: 335.88px;
+height: 45px;
+left: 328.01px;
+top: 0px;
+
+background: #81A98E;
+}
+.rect .rect1 .reservation{
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:9px;
+    font-size:x-large;
+       text-decoration: none;
+    list-style: none;
+}
+.rect2{
+    position: absolute;
+    width: 335.88px;
+    height: 45px;
+    left: 663.89px;
+    top: 0px;
+
+background: #DBD9C8;
+}
+.rect .rect2 .reservation{
+    color:rgb(10, 9, 9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:9px;
+    font-size:x-large;
+       text-decoration: none;
+    list-style: none;
+}
+.rect .rect2 .icon_wha{
+    position: absolute;
+    width: 32.5px;
+    height: 33px;
+    left: 33px;
+    top: 7px;
+    
+}.rect3{
+    position: absolute;
+    width: 335.88px;
+    height: 45px;
+    left: 1000px;
+    top: 0px;
+
+background: #ffffff;
+}
+.rect .rect3 .reservation{
+    color:rgb(10, 9, 9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:9px;
+    font-size:x-large;
+     text-decoration: none;
+    list-style: none;
+}
+.rect .rect3 .icon_email{
+    position: absolute;
+    width: 32.5px;
+    height: 33px;
+    left: 15px;
+    top: 5px;
+}
+.rect .rect3 .icon_france{
+    position: absolute;
+    width: 32.5px;
+    height: 33px;
+    left: 290px;
+    top: 5px;
+    
+}
+.rectangle {
+    position: absolute;
+      width: 100%;
+   height: 70%;
+      left: 0px;
+      top: 1000px;
+      
+      background: #486B00;
+  }
+
+.rectangle .bienvenue{
+     width: 450px;
+}
+
+.text1 {
+   color:white;
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 300;
+   font-size: 20px;
+}
+.rect5{
+    position: absolute;
+width: 100%;
+height: 322px;
+left: 0px;
+top: 1550px;
+
+background: #7D4427;
+}
+.rect5 .camploc{
+   margin-top:30px;
+   width:300px;
+   margin-left: 50px;
+}
+.boutton{
+    box-sizing: border-box;
+
+position: absolute;
+width: 577px;
+height: 139px;
+left: 662px;
+top: 100px;
+
+background: #ad916352;
+
+border: 5px solid #7d4427a3;
+border-radius: 100px;
+}
+
+.bnt{
+   background:none;
+   border:none;
+   color:white;
+   margin-top: 40px;
+   margin-left:100px;
+  
+   
+}
+
+.sefaireplaisir{
+   width:100%;
+   height:100%;
+   margin-top:1150px;
+}
+.paris{
+   position: absolute;
+width: 426px;
+height: 887px;
+left: 60px;
+}
+.disneyland{
+   
+position: absolute;
+width: 457px;
+height: 887px;
+left: 560px;
+}
+.louvre{
+   position: absolute;
+width: 426px;
+height: 887px;
+left: 1060px;
+}
+
+.lavie{
+   position: absolute;
+width: 1478px;
+height: 812px;
+left: 0px;
+top: 4000px;
+}
+
+.plongeons{
+    width:100%;
+   height:100%;
+   margin-top:1300px;
+}
+.text2{
+   display:flex;
+   flex-direction:column;
+justify-content: center;
+   align-items:center;
+}
+.decouvreheb{
+   position: absolute;
+width: 844;
+height: 917px;
+left: 580px;
+}
+.unelocation{
+   position: absolute;
+width: 612px;
+height: 644px;
+left: 0px;
+}
+
+.emplacement{
+   position:absolute;
+   margin-top:900px;
+   margin-left:60px;
+}
+
+.nostarifs{
+  position:absolute;
+   margin-top:1630px;
+   margin-left:400px; 
+}
+.text3{
+   margin-top:2350px;
+margin-left:100px; 
+} 
+
+.rectangle1{
+    position: absolute;
+width: 100%;
+height: 80%;
+
+background: #2E4600;
+}
+
+
+.belle{
+     width: 500px;
+     margin-left: 40px;
+     margin-top: -100px;
+}
+.text4{
+       color:white;
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 300;
+   font-size: 20px;
+}
+
+.datereserv{
+    box-sizing: border-box;
+
+position: absolute;
+width: 1348px;
+height: 209px;
+left: 90px;
+margin-top: 22px;
+
+background: rgba(217, 217, 217, 0.56);
+opacity: 0.5;
+border: 4px solid rgba(0, 0, 0, 0.43);
+border-radius: 100px;
+}
