@@ -127,4 +127,7 @@ text-align:center;
       margin-bottom: 10px;
     }
   }
- 
+  .text img {
+    width:80%;
+   margin-left:10%;
+    }

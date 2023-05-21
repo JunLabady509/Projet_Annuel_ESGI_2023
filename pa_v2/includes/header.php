@@ -12,6 +12,7 @@
             echo ' <li class="reservation"><a href="reservation.php">Reservation</a></li>';
             echo ' <li class="catalogue"><a href="catalogue.php">Catalogue</a></li>';
             echo '<li class="profile"><a href="profile.php">Profile</a></li>';
+            echo '<li class="boutique"><a href="boutique.php">Boutique</a></li>';
             echo '<li class="log_out"><a href="deconnexion.php">Déconnexion</a>';
         }else{
          

@@ -36,21 +36,21 @@ $title= 'Accueil'?>
     <img src="images\img_pa2023\image1.webp" alt="Produit 1">
     <h2>NOS ESPACES </h2>
     <p>Description du produit 1.</p>
-    <button>Acheter</button>
+    <button>Decouvir</button>
   </div>
 
   <div class="product">
     <img src="images\img_pa2023\TOO_restaurant.webp" alt="Produit 2">
     <h2>NOS PRESTATIONS</h2>
     <p>Description du produit 2.</p>
-    <button>Acheter</button>
+    <button>Decouvrir</button>
   </div>
 
   <div class="product">
     <img src="images\img_pa2023\show_detail.jpg" alt="Produit 3">
     <h2>NOS EVENEMENT</h2>
     <p>Description du produit 3.</p>
-    <button>Acheter</button>
+    <button>Decouvrir</button>
   </div>
 
   <!-- Ajoutez d'autres éléments de catalogue selon vos besoins -->

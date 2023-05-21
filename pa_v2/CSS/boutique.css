@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+#catalogue {
+    float: left;
+    width: 50%;
+}
+
+#panier {
+    float: right;
+    width: 50%;
+}
+
+#liste-articles li, #liste-panier li {
+    margin-bottom: 10px;
+}
+
+#btn-acheter {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#btn-acheter:hover {
+    background-color: #555;
+}

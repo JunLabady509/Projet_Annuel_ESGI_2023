@@ -63,8 +63,26 @@
   </button>
 </div>
 </div>
+<div class="text">
+ <h1>Nos Formations</h1>
+ <img src="images\img_pa2023\image3.png"  alt="image">
+</div>
+<div class="text">
+ <h1>GastroGuru</h1>
+ <div class="ligne"></div>
+  <p>Nos chefs ont pris engagements de vous accompager dans une <br> bienveillance inégalable afin que vous deveniez des chefs <br>cuisinier de profession, et vous transmettre la passion de la cuisine<br> et benedifier d’un diplôme reconnue par l’état français</p>
+  <img src="images\img_pa2023\diplome.jpg" alt="image">
+  <p>Nos chefs viennent du monde entier: Europe, Asie, Afrique.<br>
+Profiter dès maintenant des conseils <br>
+de nos chefs afin de partahger des bonne pratique qui vous seront très bénéfiques </p>
+  <img src="images\img_pa2023\imh.jpg"  alt="image">
+
+</div>
+<div class="text">
+ <h1>les Avis</h1>
+ <div class="ligne"></div>
   <footer>
-    <p>&copy; 2023 Mon Site Web. Tous droits réservés.</p>
+    <p>&copy; 2023 GastroGuru. Tous droits réservés.</p>
   </footer>
 
   <script>
