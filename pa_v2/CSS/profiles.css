@@ -1,0 +1,235 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+.ee{
+  position: relative;
+display: inline-block;
+  height: 100vh;
+  width: 100vw;
+ background-size: cover;
+  overflow: hidden;
+ background-image: url('https://virtualbackgrounds.site/wp-content/uploads/2020/08/classy-restaurant.jpg');
+text-align: center;
+ font-style:italic;
+}
+.ee h1{
+color:white;
+position: absolute;
+bottom: 0;
+left: 0;
+font-family: Times New Roman;
+font-size: 40px;
+font-style: italic;
+font-weight: 400;
+line-height: 46px;
+letter-spacing: 0em;
+text-align: left;
+
+font-family: Cagliostro;
+font-size: 96px;
+font-weight: 400;
+line-height: 130px;
+letter-spacing: 0em;
+text-align: left;
+
+
+}
+.ee p{
+color:#ffffff;
+
+position: absolute;
+bottom: 0;
+left: 0;
+margin:3px
+
+}
+
+.text h1{
+color:black;
+
+bottom: 0;
+left: 0;
+font-family: Times New Roman;
+font-size: 40px;
+font-style: italic;
+
+font-family: Cagliostro;
+font-size: 96px;
+font-weight: 400;
+line-height: 130px;
+letter-spacing: 0em;
+text-align:center;
+
+}
+.text p{
+color:black;
+
+font-family: Times New Roman;
+
+font-style: italic;
+
+font-family: Cagliostro;
+
+text-align:center
+ 
+}
+.ligne {
+  border-bottom: 3px solid #C6AA73; /* Couleur et style de la ligne */
+  margin: 10px 200px; /* Marge supÃ©rieure et infÃ©rieure de la ligne (facultatif) */
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.burger-menu {
+  display: none;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Media query pour rendre le header et le footer responsive */
+@media screen and (max-width: 768px) {
+  .navbar {
+    display: none;
+  }
+
+  .burger-menu {
+    display: block;
+  }
+
+  .navbar.responsive {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px;
+  }
+
+  .navbar.responsive li {
+    margin-bottom: 10px;
+  }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  
+  
+  .container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  
+  .card {
+    width: 600px;
+    height: 300px;
+    background-color: rgb(255, 255, 255)!important;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding-top: 25px;
+    cursor: pointer;
+    justify-content: space-between;
+    padding-bottom: 15px;
+  }
+  
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .avatar {
+    width: 50px;
+    height: 50px;
+    position: relative;
+  }
+  
+  .user-online-indicator {
+    width: 15px;
+    height: 15px;
+    background-color: #53f45a;
+    position: absolute;
+    bottom: 10px;
+    right: 8px;
+    border-radius: 50%;
+    z-index: 4;
+  }
+  
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  
+  .email h3 {
+    color: #6d6d6d;
+  }
+  
+  .card-footer {
+    width: 85%;
+    height: 90px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
+  .bouton {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   margin-bottom: 90px;
+  
+  
+  }
+  .bouton button{
+    background-color: #C29774;
+       color: #fff;
+       padding: 10px 20px;
+       margin-top:10px;
+       margin-bottom:10px;
+       border: none;
+       border-radius: 4px;
+       cursor: pointer;
+     }
+     a.aa:hover{
+      color:wheat;
+       }
+  
+       a.aa{
+         color:white;
+         text-decoration:none;
+       }
+     
