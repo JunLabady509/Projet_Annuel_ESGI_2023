@@ -1,0 +1,41 @@
+Voici un schéma conceptuel de la base de données relationnelle pour le projet Cook Master, en tenant compte de tous les éléments mentionnés dans la description du projet :
+
+    Clients (ID_Client, Nom, Prénom, Adresse, Email, Téléphone, ID_Abonnement, ID_Fidélité)
+    Abonnements (ID_Abonnement, Type, Tarif, Durée)
+    Fidélité (ID_Fidélité, Points, Avantages)
+    Factures (ID_Facture, ID_Client, Date, Montant, Statut, PDF)
+    Devis (ID_Devis, ID_Client, Date, Montant, Statut, PDF)
+    Evenements (ID_Evenement, Type, Date, Heure, ID_Salle, ID_Prestataire)
+    Réservations (ID_Réservation, ID_Client, ID_Evenement, Date, Statut)
+    Salles (ID_Salle, Nom, Capacité, Equipements, Localisation, Tarif)
+    Matériels (ID_Matériel, Nom, Type, Quantité, Tarif)
+    Prestataires (ID_Prestataire, Nom, Prénom, Type, Disponibilité, Tarif)
+    Services (ID_Service, Nom, Description, ID_Prestataire)
+    Stocks (ID_Stock, ID_Matériel, Quantité, Localisation_Entrepôt)
+    Cours_Web (ID_Cours, Titre, Description, ID_Prestataire, Date, Heure)
+    Cours_Domicile (ID_Cours_Domicile, ID_Client, ID_Prestataire, Adresse, Date, Heure)
+    Commandes_Repas (ID_Commande, ID_Client, Adresse_Livraison, Date, Heure, Statut)
+    Messages (ID_Message, ID_Client, ID_Prestataire, Contenu, Date, Heure)
+    Avis (ID_Avis, ID_Client, Note, Commentaire, Date)
+    Photos (ID_Photo, ID_Client, URL, Date)
+
+Relations:
+    Clients.ID_Abonnement <-> Abonnements.ID_Abonnement
+    Clients.ID_Fidélité <-> Fidélité.ID_Fidélité
+    Factures.ID_Client <-> Clients.ID_Client
+    Devis.ID_Client <-> Clients.ID_Client
+    Réservations.ID_Client <-> Clients.ID_Client
+    Réservations.ID_Evenement <-> Evenements.ID_Evenement
+    Evenements.ID_Salle <-> Salles.ID_Salle
+    Evenements.ID_Prestataire <-> Prestataires.ID_Prestataire
+    Services.ID_Prestataire <-> Prestataires.ID_Prestataire
+    Stocks.ID_Matériel <-> Matériels.ID_Matériel
+    Cours_Web.ID_Prestataire <-> Prestataires.ID_Prestataire
+    Cours_Domicile.ID_Client <-> Clients.ID_Client
+    Cours_Domicile.ID_Prestataire <-> Prestataires.ID_Prestataire
+    Commandes_Repas.ID_Client <-> Clients.ID_Client
+    Messages.ID_Client <-> Clients.ID_Client
+    Messages.ID_Prestataire <-> Prestataires.ID_Prestataire
+    Avis.ID_Client <-> Clients.ID_Client
+    Photos.ID_Client <-> Clients.ID_Client
+
