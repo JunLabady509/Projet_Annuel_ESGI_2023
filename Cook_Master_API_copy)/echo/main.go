@@ -1,18 +1,20 @@
 package main
 
 import (
+	"database/sql"
+	"fmt"
 	"gastroguru/cache"
 	"gastroguru/user"
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"strings"
 	"syscall"
 
 	"github.com/asdine/storm"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"gopkg.in/mgo.v2/bson"
 )
 
 type jsonResponse map[string]interface{}
@@ -57,10 +59,10 @@ func usersPostOne(ctx echo.Context) error {
 	u := new(user.User)
 	err := ctx.Bind(u)
 	if err != nil {
+		fmt.Println("Error Binding :", err)
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
-	u.ID = bson.NewObjectId()
 	err = u.Save()
 
 	if err != nil {
@@ -71,7 +73,7 @@ func usersPostOne(ctx echo.Context) error {
 	}
 
 	cache.Drop("/users")
-	ctx.Response().Header().Set("Location", "/users/"+u.ID.Hex())
+	ctx.Response().Header().Set("Location", "/users/"+strconv.Itoa(u.ID))
 	return ctx.NoContent(http.StatusCreated)
 }
 
@@ -81,10 +83,7 @@ func usersGetOne(ctx echo.Context) error {
 		return nil
 	}
 
-	if !bson.IsObjectIdHex(ctx.Param("id")) {
-		return echo.NewHTTPError(http.StatusNotFound)
-	}
-	id := bson.ObjectIdHex(ctx.Param("id"))
+	id := ctx.Param("id")
 
 	u, err := user.One(id)
 	if err != nil {
@@ -108,12 +107,6 @@ func usersPutOne(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
-	if !bson.IsObjectIdHex(ctx.Param("id")) {
-		return echo.NewHTTPError(http.StatusNotFound)
-	}
-	id := bson.ObjectIdHex(ctx.Param("id"))
-
-	u.ID = id
 	err = u.Save()
 
 	if err != nil {
@@ -129,10 +122,7 @@ func usersPutOne(ctx echo.Context) error {
 
 func usersPatchOne(ctx echo.Context) error {
 
-	if !bson.IsObjectIdHex(ctx.Param("id")) {
-		return echo.NewHTTPError(http.StatusNotFound)
-	}
-	id := bson.ObjectIdHex(ctx.Param("id"))
+	id := ctx.Param("id")
 
 	u, err := user.One(id)
 	if err != nil {
@@ -149,7 +139,8 @@ func usersPatchOne(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
-	u.ID = id
+	u.ID, _ = strconv.Atoi(id)
+
 	err = u.Save()
 
 	if err != nil {
@@ -165,10 +156,7 @@ func usersPatchOne(ctx echo.Context) error {
 
 func usersDeleteOne(ctx echo.Context) error {
 
-	if !bson.IsObjectIdHex(ctx.Param("id")) {
-		return echo.NewHTTPError(http.StatusNotFound)
-	}
-	id := bson.ObjectIdHex(ctx.Param("id"))
+	id := ctx.Param("id")
 
 	err := user.Delete(id)
 	if err != nil {
@@ -203,6 +191,8 @@ func root(ctx echo.Context) error {
 }
 
 func main() {
+
+	var db *sql.DB
 	e := echo.New()
 
 	e.Pre(middleware.RemoveTrailingSlash())
@@ -220,7 +210,7 @@ func main() {
 	u.OPTIONS("", usersOptions)
 	u.HEAD("", usersGetAll, serveCache)
 	u.GET("", usersGetAll, serveCache, cacheResponse)
-	u.POST("", usersPostOne, middleware.BasicAuth(auth))
+	u.POST("", usersPostOne) //, middleware.BasicAuth(auth))
 
 	uid := u.Group("/:id")
 
