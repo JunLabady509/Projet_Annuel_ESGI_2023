@@ -7,9 +7,10 @@ import (
 	"gastroguru/user"
 	"io"
 	"net/http"
+	"strconv"
 
 	"github.com/asdine/storm"
-	"gopkg.in/mgo.v2/bson"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func bodyToUser(r *http.Request, u *user.User) error {
@@ -40,7 +41,6 @@ func usersPostOne(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	u.ID = bson.NewObjectId()
 	err = u.Save()
 
 	if err != nil {
@@ -53,7 +53,7 @@ func usersPostOne(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cache.Drop("/users")
-	w.Header().Set("Location", "/users/"+u.ID.Hex())
+	w.Header().Set("Location", "/users/"+strconv.Itoa(u.ID))
 	w.WriteHeader(http.StatusCreated)
 
 }
@@ -79,13 +79,13 @@ func usersGetAll(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func usersGetOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
+func usersGetOne(w http.ResponseWriter, r *http.Request, id int) {
 
 	if cache.Serve(w, r) {
 		return
 	}
 
-	u, err := user.One(id)
+	u, err := user.One(strconv.Itoa(id))
 	if err != nil {
 		switch err {
 		case storm.ErrNotFound:
@@ -104,7 +104,7 @@ func usersGetOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	postBodyResponse(cacheWriter, http.StatusOK, jsonResponse{"user": u})
 }
 
-func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
+func usersPutOne(w http.ResponseWriter, r *http.Request, id int) {
 	u := new(user.User)
 	err := bodyToUser(r, u)
 	if err != nil {
@@ -112,7 +112,6 @@ func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 		return
 	}
 
-	u.ID = id
 	err = u.Save()
 
 	if err != nil {
@@ -129,8 +128,8 @@ func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 
 }
 
-func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
-	u, err := user.One(id)
+func usersPatchOne(w http.ResponseWriter, r *http.Request, id int) {
+	u, err := user.One(strconv.Itoa(id))
 	if err != nil {
 		switch err {
 		case storm.ErrNotFound:
@@ -165,8 +164,8 @@ func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 
 }
 
-func usersDeleteOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
-	err := user.Delete(id)
+func usersDeleteOne(w http.ResponseWriter, r *http.Request, id int) {
+	err := user.Delete(strconv.Itoa(int(id)))
 	if err != nil {
 		switch err {
 		case storm.ErrNotFound:

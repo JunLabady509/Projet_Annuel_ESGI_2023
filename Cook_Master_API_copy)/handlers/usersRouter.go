@@ -3,9 +3,8 @@ package handlers
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
-
-	"gopkg.in/mgo.v2/bson"
 )
 
 func UsersRouter(w http.ResponseWriter, r *http.Request) {
@@ -35,12 +34,12 @@ func UsersRouter(w http.ResponseWriter, r *http.Request) {
 	}
 
 	path = strings.TrimPrefix(path, "/users/")
-	if !bson.IsObjectIdHex(path) {
+
+	id, err := strconv.Atoi(path)
+	if err != nil {
 		postError(w, http.StatusNotFound)
 		return
 	}
-
-	id := bson.ObjectIdHex(path)
 
 	switch r.Method {
 	case http.MethodGet: // GET

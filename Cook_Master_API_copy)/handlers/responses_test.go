@@ -56,7 +56,6 @@ func prepDB(n int) error {
 	os.Remove(dbPath)
 	for i := 0; i < n; i++ {
 		u := &user.User{
-			ID:            bson.NewObjectId(),
 			FirstName:     "JJ",
 			Name:          "Abrams" + strconv.Itoa(i),
 			Email:         "abrams@gmail.com",

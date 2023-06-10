@@ -5,11 +5,13 @@ import (
 	"errors"
 	"fmt"
 	"log"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 // Les utilisateurs sont stockés dans une base de données MySQL
 type User struct {
-	ID            int64  `json:"id"`
+	ID            int    `json:"id"`
 	Name          string `json:"name"`
 	Role          string `json:"role"`
 	FirstName     string `json:"first_name"`
@@ -23,8 +25,8 @@ type User struct {
 const (
 	DBDriver   = "mysql"
 	DBName     = "gastroguru"
-	DBUser     = "admin"
-	DBPassword = "admin"
+	DBUser     = "junior"
+	DBPassword = "junior"
 	dbPath     = "users.db"
 )
 
@@ -102,7 +104,7 @@ func (u *User) Save() error {
 		log.Fatal(err)
 	}
 
-	u.ID = id
+	u.ID = int(id)
 
 	return nil
 }
