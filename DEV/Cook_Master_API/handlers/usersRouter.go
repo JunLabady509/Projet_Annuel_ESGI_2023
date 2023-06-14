@@ -7,7 +7,7 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
-func InitRouter(e *echo.Echo) {
+func InitUsersRouter(e *echo.Echo) {
 
 	e.GET("/", root)
 
@@ -16,7 +16,7 @@ func InitRouter(e *echo.Echo) {
 	u.OPTIONS("", usersOptions)
 	u.HEAD("", usersGetAll, cache.ServeCache)
 	u.GET("", usersGetAll, cache.ServeCache, cache.CacheResponse)
-	u.POST("", usersPostOne) //, middleware.BasicAuth(auth))
+	u.POST("", usersPostOne)
 
 	uid := u.Group("/:id")
 
@@ -26,7 +26,5 @@ func InitRouter(e *echo.Echo) {
 	uid.PUT("", usersPutOne, middleware.BasicAuth(auth), cache.CacheResponse)
 	uid.PATCH("", usersPatchOne, middleware.BasicAuth(auth), cache.CacheResponse)
 	uid.DELETE("", usersDeleteOne, middleware.BasicAuth(auth))
-
-	e.Logger.Fatal(e.Start(":44446"))
 
 }
