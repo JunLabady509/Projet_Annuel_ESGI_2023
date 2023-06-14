@@ -6,13 +6,13 @@ import (
 	"errors"
 	"fmt"
 	"gastroguru/cache"
+	"gastroguru/database"
 	"gastroguru/user"
 	"io"
 	"net/http"
 	"strconv"
 	"strings"
 
-	"github.com/asdine/storm"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo"
 )
@@ -48,7 +48,7 @@ func usersPostOne(ctx echo.Context) error {
 	err = u.Save()
 
 	if err != nil {
-		if err == user.ErrRecordInvalid {
+		if err == database.ErrRecordInvalid {
 			return echo.NewHTTPError(http.StatusBadRequest)
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)
@@ -83,7 +83,7 @@ func usersGetOne(ctx echo.Context) error {
 	u, err := user.One(id)
 	if err != nil {
 		switch err {
-		case storm.ErrNotFound:
+		case sql.ErrNoRows:
 			return echo.NewHTTPError(http.StatusNotFound)
 		default:
 			return echo.NewHTTPError(http.StatusInternalServerError)
@@ -105,7 +105,7 @@ func usersPutOne(ctx echo.Context) error {
 	err = u.Save()
 
 	if err != nil {
-		if err == user.ErrRecordInvalid {
+		if err == database.ErrRecordInvalid {
 			return echo.NewHTTPError(http.StatusBadRequest)
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)
@@ -139,7 +139,7 @@ func usersPatchOne(ctx echo.Context) error {
 	err = u.Save()
 
 	if err != nil {
-		if err == user.ErrRecordInvalid {
+		if err == database.ErrRecordInvalid {
 			return echo.NewHTTPError(http.StatusBadRequest)
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)

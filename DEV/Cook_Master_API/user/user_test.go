@@ -2,6 +2,7 @@ package user
 
 import (
 	"database/sql"
+	"gastroguru/database"
 	"os"
 	"reflect"
 	"strconv"
@@ -13,12 +14,12 @@ import (
 
 func TestMain(m *testing.M) {
 	m.Run()
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 
 }
 
 func cleanDB(b *testing.B) {
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
@@ -42,7 +43,7 @@ func cleanDB(b *testing.B) {
 }
 
 func BenchmarkRead(b *testing.B) {
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
@@ -72,7 +73,7 @@ func BenchmarkRead(b *testing.B) {
 }
 
 func BenchmarkUpdate(b *testing.B) {
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
@@ -101,7 +102,7 @@ func BenchmarkUpdate(b *testing.B) {
 }
 
 func BenchmarkDelete(b *testing.B) {
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
@@ -129,7 +130,7 @@ func BenchmarkDelete(b *testing.B) {
 
 func BenchmarkCreate(b *testing.B) {
 	cleanDB(b)
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
@@ -167,7 +168,7 @@ func BenchmarkCreate(b *testing.B) {
 }
 
 func BenchmarkCRUD(b *testing.B) {
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		u := &User{
@@ -207,12 +208,12 @@ func BenchmarkCRUD(b *testing.B) {
 }
 
 func TestCRUD(t *testing.T) {
-	err := cleanDatabase(db)
+	err := cleanDatabase(database.Db)
 	if err != nil {
 		t.Fatalf("Error cleaning the database: %s", err)
 	}
 
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	t.Log("Create")
 	u := &User{
 		// ID:            bson.NewObjectId(),
@@ -291,7 +292,7 @@ func TestCRUD(t *testing.T) {
 		t.Errorf("Expected 3 records, got %d", len(users))
 	}
 
-	err = cleanDatabase(db)
+	err = cleanDatabase(database.Db)
 	if err != nil {
 		t.Fatalf("Error cleaning the database: %s", err)
 	}

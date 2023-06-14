@@ -1,19 +1,18 @@
 package main
 
 import (
-	"database/sql"
+	"gastroguru/database"
 	"gastroguru/handlers"
-	"os"
-	"os/signal"
-	"syscall"
+
+	// database "gastroguru/db"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
 
 func main() {
+	database.InitDB()
 	e := echo.New()
-	var db *sql.DB
 
 	e.Pre(middleware.RemoveTrailingSlash())
 
@@ -23,14 +22,9 @@ func main() {
 		Format: "${method} ${uri} ${status} ${latency_human} \n",
 	}))
 
-	handlers.InitRouter(e)
+	handlers.InitUsersRouter(e)
+	handlers.InitCoursesRouter(e)
 
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
-	go func() {
-		<-c
-		db.Close()
-		os.Exit(1)
-	}()
+	e.Logger.Fatal(e.Start(":44446"))
 
 }

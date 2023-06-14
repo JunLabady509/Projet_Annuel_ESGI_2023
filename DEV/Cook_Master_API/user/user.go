@@ -1,10 +1,9 @@
 package user
 
 import (
-	"database/sql"
-	"errors"
-	"fmt"
 	"log"
+
+	db "gastroguru/database"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -17,42 +16,17 @@ type User struct {
 	FirstName     string `json:"first_name"`
 	Address       string `json:"address"`
 	Email         string `json:"email"`
+	Password      string `json:"password"`
 	Phone         string `json:"phone"`
 	Subscribed_ID int    `json:"subscribed_id"`
 	Loyality_ID   int    `json:"loyality_id"`
 }
 
-const (
-	DBDriver   = "mysql"
-	DBName     = "gastroguru"
-	DBUser     = "junior"
-	DBPassword = "junior"
-	dbPath     = "users.db"
-)
-
-var (
-	ErrRecordInvalid = errors.New("record is invalid")
-	db               *sql.DB
-)
-
-func init() {
-	var err error
-	dataSourceName := fmt.Sprintf("%s:%s@/%s", DBUser, DBPassword, DBName)
-	db, err = sql.Open(DBDriver, dataSourceName)
-	if err != nil {
-		panic(err)
-	}
-
-	if err = db.Ping(); err != nil {
-		panic(err)
-	}
-}
-
 // All retrieves all users from the database
 func All() ([]User, error) {
-	rows, err := db.Query("SELECT * FROM users")
+	rows, err := db.Db.Query("SELECT * FROM users")
 	if err != nil {
-		return nil, err
+		log.Fatal(err)
 	}
 	defer rows.Close()
 
@@ -61,21 +35,20 @@ func All() ([]User, error) {
 	for rows.Next() {
 		var u User
 		if err := rows.Scan(&u.ID, &u.Name, &u.Role,
-			&u.FirstName, &u.Address, &u.Email,
+			&u.FirstName, &u.Address, &u.Email, &u.Password,
 			&u.Phone, &u.Subscribed_ID,
 			&u.Loyality_ID); err != nil {
 			return nil, err
 		}
 		users = append(users, u)
 	}
-
 	return users, nil
 }
 
 // One returns a single user record from the database
 func One(id string) (*User, error) {
 	u := &User{}
-	if err := db.QueryRow("SELECT * FROM users WHERE id = ?", id).Scan(&u.ID, &u.Name, &u.Role, &u.FirstName, &u.Address, &u.Email, &u.Phone, &u.Subscribed_ID, &u.Loyality_ID); err != nil {
+	if err := db.Db.QueryRow("SELECT * FROM users WHERE id = ?", id).Scan(&u.ID, &u.Name, &u.Role, &u.FirstName, &u.Address, &u.Email, &u.Phone, &u.Subscribed_ID, &u.Loyality_ID, &u.Password); err != nil {
 		return nil, err
 	}
 	return u, nil
@@ -83,7 +56,7 @@ func One(id string) (*User, error) {
 
 // Delete removes a given user record from the database
 func Delete(id string) error {
-	_, err := db.Exec("DELETE FROM users WHERE id = ?", id)
+	_, err := db.Db.Exec("DELETE FROM users WHERE id = ?", id)
 	return err
 }
 
@@ -93,8 +66,8 @@ func (u *User) Save() error {
 		return err
 	}
 
-	res, err := db.Exec("INSERT INTO users (FirstName, Name, Email, Role, Address, Phone, Subscribed_ID, Loyality_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-		u.FirstName, u.Name, u.Email, u.Role, u.Address, u.Phone, u.Subscribed_ID, u.Loyality_ID)
+	res, err := db.Db.Exec("INSERT INTO users (FirstName, Name, Email, Password, Role, Address, Phone, Subscribed_ID, Loyality_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+		u.FirstName, u.Name, u.Email, u.Password, u.Role, u.Address, u.Phone, u.Subscribed_ID, u.Loyality_ID)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -112,7 +85,7 @@ func (u *User) Save() error {
 // Validate makes sure that the record contains valid data
 func (u *User) Validate() error {
 	if u.Name == "" {
-		return ErrRecordInvalid
+		return db.ErrRecordInvalid
 	}
 	return nil
 }
