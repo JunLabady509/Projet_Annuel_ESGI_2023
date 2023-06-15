@@ -23,7 +23,8 @@ func main() {
 	}))
 
 	handlers.InitUsersRouter(e)
-	handlers.InitCoursesRouter(e)
+	handlers.InitWorkshopsRouter(e)
+	handlers.InitHomeCoursesRouter(e)
 
 	e.Logger.Fatal(e.Start(":44446"))
 
