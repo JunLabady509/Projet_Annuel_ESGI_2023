@@ -1,26 +1,33 @@
 <?php
-session_start();
 
-// Récupération des données du formulaire
-$nom = $_POST['nom'];
-$email = $_POST['email'];
-$date = $_POST['date'];
-
-//connexion base de donnée
+// Connexion à la base de données
 try{
     $bdd = new PDO('mysql:host=localhost;dbname=projet2023' ,'root', '',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 }catch(Exception $e){
     die('Erreur : ' . $e->getMessage());
 }
+$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-//e
-$bdd = "INSERT INTO reservations (nom, email, date) VALUES ('$nom', '$email', '$date')";
+    // Récupérer les données du formulaire
+    $nom = $_POST['name'];
+    $email = $_POST['email'];
+    $date = $_POST['date'];
+    $heure = $_POST['time'];
+    $nombrePersonnes = $_POST['guests'];
+    // Préparer la requête d'insertion
+    $requete = $bdd->prepare("INSERT INTO RESERVATIONS (nom, email, date, heure, nombre_personnes) VALUES (:nom, :email, :date, :heure, :nombre_personnes)");
 
-if ($bdd->query($bdd) === TRUE) {
-    echo "Réservation effectuée avec succès.";
-} else {
-    echo "Erreur lors de la réservation : " . $bdd->error;
-}
+    // Exécuter la requête avec les valeurs du formulaire
+    $requete->execute(array(
+      'nom' => $nom,
+      'email' => $email,
+      'date' => $date,
+      'heure' => $heure,
+      'nombre_personnes' => $nombrePersonnes,
+    ));
 
-?>
+    // Afficher un message de confirmation
+    echo "Réservation effectuée avec succès !";
+  }
