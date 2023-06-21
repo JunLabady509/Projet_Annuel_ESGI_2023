@@ -1,0 +1,143 @@
+body{
+	overflow-x: hidden; 
+
+	}
+.background{
+   position:fixed;
+   background-image:url('https://www.hotel-la-signoria.com/uploads/media/hotel-signoria-calvi-179704.jpg');
+   background-repeat: no-repeat;
+
+ background-size: cover;
+ height: 100vh;
+ width: 100vw;
+   left:0px;
+   top:0px;
+   filter:blur(4px);
+   -o-filter:blur(4px);
+   -ms-filter:blur(4px);
+   -moz-filter:blur(4px);
+   -webkit-filter:blur(4px);
+	
+}
+
+
+.rec_vert{
+box-sizing: border-box;
+position: absolute;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+border: 10px solid #f5594354
+;
+   background:#ffffff8c;
+   opacity:0.9;
+
+}.fleuris{
+   
+   position: absolute;
+   
+      left: 70%;
+      width: 170px;
+      height:150px;
+      background-color: #f5584359;
+      border-radius: 50%;
+   
+   }
+   .fleuris1{
+      
+   position: absolute;
+   width: 200px;
+   height: 200px;
+   
+   top: 450px;
+      position: absolute;
+   
+      left:2%;
+     width: 170px;
+      height:150px;
+       background-color: #f5584359;
+      border-radius: 50%;
+      border-radius: 50%;
+   
+   
+   }
+
+
+
+
+form {
+   
+	margin-top:120px;
+	margin-left:8px}
+button{
+   margin-left:321px!important;
+   background-color: #dfcfc4!important;
+}
+
+.sign_in {
+   margin-top: 10px;
+   display: flex;
+   justify-content: center;
+}
+
+.sign_in > a {
+   display: flex;
+   justify-content: space-around;
+   margin: 0% 1%;
+
+   color: black;
+}
+
+.sign_in > a:hover {
+   display: flex;
+   justify-content: space-around;
+
+   color: #696969;
+}
+
+
+h2.identifier{
+   position:absolute;
+   margin-top:10%;
+   margin-left:27%;
+      font-family: 'Tienne';
+    font-size: 50px;
+   color: #000000;
+   }
+form {
+   
+	margin-top:120px;
+	margin-left:8px}
+button{
+   margin-left:321px!important;
+   background-color: #dfcfc4!important;
+}
+
+.sign_in {
+
+   display: flex;
+   justify-content: center;
+}
+
+.sign_in > a {
+   display: flex;
+   justify-content: space-around;
+   margin: 0% 1%;
+margin-top:-30px;
+   margin-left:65px;
+   color: black;
+}
+
+.sign_in > a:hover {
+   display: flex;
+   
+   color: #696969;
+}
+.image-input-button{
+   margin-left:27%;
+  }
+p{
+   margin-left:190px;
+   padding-top:10px;
+}

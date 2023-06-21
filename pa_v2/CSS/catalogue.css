@@ -1,0 +1,160 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  
+  .ee{
+    position: relative;
+  display: inline-block;
+    height: 100vh;
+    width: 100vw;
+   background-size: cover;
+    overflow: hidden;
+   background-image: url('https://virtualbackgrounds.site/wp-content/uploads/2020/08/classy-restaurant.jpg');
+ text-align: center;
+   font-style:italic;
+ }
+.ee h1{
+  color:white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-family: Times New Roman;
+font-size: 40px;
+font-style: italic;
+font-weight: 400;
+line-height: 46px;
+letter-spacing: 0em;
+text-align: left;
+
+font-family: Cagliostro;
+font-size: 96px;
+font-weight: 400;
+line-height: 130px;
+letter-spacing: 0em;
+text-align: left;
+
+
+}
+.ee p{
+  color:#ffffff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin:3px
+  
+}
+
+.text h1{
+  color:black;
+
+  bottom: 0;
+  left: 0;
+  font-family: Times New Roman;
+font-size: 40px;
+font-style: italic;
+
+font-family: Cagliostro;
+font-size: 96px;
+font-weight: 400;
+line-height: 130px;
+letter-spacing: 0em;
+text-align:center;
+
+}
+.text p{
+  color:black;
+  
+  font-family: Times New Roman;
+  
+  font-style: italic;
+  
+  font-family: Cagliostro;
+  
+  text-align:center
+   
+  }
+  .ligne {
+    border-bottom: 3px solid #C6AA73; /* Couleur et style de la ligne */
+    margin: 10px 200px; /* Marge supÃ©rieure et infÃ©rieure de la ligne (facultatif) */
+  }
+  
+  .navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .burger-menu {
+    display: none;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* Media query pour rendre le header et le footer responsive */
+  @media screen and (max-width: 768px) {
+    .navbar {
+      display: none;
+    }
+
+    .burger-menu {
+      display: block;
+    }
+
+    .navbar.responsive {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      padding: 10px;
+    }
+
+    .navbar.responsive li {
+      margin-bottom: 10px;
+    }
+  }
+ 
+ 
+  .product {
+ 
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .product img {
+    
+    width: 500px;
+    height: auto;
+margin-left:25%
+  }
+  
+  .product h2 {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left:25%
+  }
+  
+  .product p {
+    margin-top: 5px;
+    margin-left:25%
+  }
+  
+  .product button {
+    display: block;
+    margin-top: 10px;
+    margin-left:25%
+  }
