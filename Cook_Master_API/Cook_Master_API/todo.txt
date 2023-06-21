@@ -1,0 +1,63 @@
+à FAIRE : 
+
+- HASHER LES MOTS DE PASSE AVANT DE LES STOCKER DANS LA BASE DE DONNÉES
+- PEAUFINER LE MIDDLEWARE POUR CERTAINES ROUTE
+- PANEL ADMIN
+- SYSTEME ABONNEMENT ET TOUTES FONCTIONNALITÉS QUI VONT AVEC
+
+Instruction des Entités à implémenter : 
+
+Vente de matériel de cuisine (Products) :
+
+    ID: clé primaire
+    Name: string
+    Description: string
+    Price: float
+    Quantity: int
+    PictureURL: string (lien vers la photo du produit)
+
+Dégustation de produits bio (Tastings) :
+
+    ID: clé primaire
+    Title: string
+    Description: string
+    Location: string
+    Price: float
+    Start_Time: datetime
+    End_Time: datetime
+
+Location d'espaces (Spaces) :
+
+    ID: clé primaire
+    Description: string
+    Capacity: int
+    PricePerHour: float
+    Location: string
+
+Formations professionnelles (ProfessionalCourses) :
+
+    ID: clé primaire
+    Title: string
+    Description: string
+    InstructorID: clé étrangère (référence à la table Instructors)
+    Location: string
+    Price: float
+    Start_Time: datetime
+    End_Time: datetime
+
+Repas livrés à domicile (Meals) :
+
+    ID: clé primaire
+    Name: string
+    Description: string
+    Price: float
+    Delivery_Time: datetime
+    ClientID: clé étrangère (référence à la table Clients)
+
+Messagerie temps réel avec chefs (Messages) :
+
+    ID: clé primaire
+    Content: string
+    Time: datetime
+    SenderID: clé étrangère (référence à la table Users)
+    ReceiverID: clé étrangère (référence à la table Users)

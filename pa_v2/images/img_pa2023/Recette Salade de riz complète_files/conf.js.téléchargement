@@ -1,0 +1,21 @@
+if (window.mics && window.mics._call) {
+const userEventTag = {"site_id":"3157","enable_experimental_features":false,"enable_local_segment_evaluation":false,"enable_installation_id_generation":false,"enable_tcf_v2_for_cookie_matching":false,"enable_goo_matching":true,"enable_apx_matching":true,"enable_id5_id":false,"custom_configuration":{}}
+const fullLegacyConf = {
+...(userEventTag.custom_configuration || {}),
+"enable_local_segment_evaluation": userEventTag.enable_local_segment_evaluation,
+"segment_definition_uri": userEventTag.segment_definition_uri,
+"enable_apx_matching": userEventTag.enable_apx_matching,
+"enable_goo_matching": userEventTag.enable_goo_matching,
+"enable_tcf_v2_for_cookie_matching": userEventTag.enable_tcf_v2_for_cookie_matching,
+"enable_id5": userEventTag.enable_id5_id,
+"namespace": userEventTag.namespace,
+"site_token": "cuisineaz-17"
+}
+mics._call("cuisineaz-17", 'setConfig', [fullLegacyConf])
+
+const mumIdConf = {"channel_id":"3157","active":true}
+if (mumIdConf.active) {
+//Do the work
+}
+mics._call("cuisineaz-17", 'markConfigAsLoaded', [])
+}

@@ -1,0 +1,247 @@
+header{
+   height: 100vh;
+   width: 100vw;
+   background-image: url('https://fnb-p-c6e19b1675f4.imgix.net/110ecfab-2a88-4769-b4db-4535a21a80f4/FR-EN-ARTICLE-FRENCH-GASTRONOMY.jpg');
+   background-size: cover;
+   overflow: hidden;
+    
+}
+
+
+.navbar{
+   position: absolute;
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   box-sizing: border-box;
+}
+.navbar a{
+   color: rgb(48, 20, 20);
+}
+.navbar .logo{
+   font-size: 2em;
+   font-weight: bold;
+
+}
+
+.navbar .nav-links ul{
+   display:flex;
+  
+
+   
+  }
+  .navbar .nav-links ul li.active a{
+   position: absolute;
+   width: 168.12px;
+   height: 96px;
+   left: 55%;
+   top:25%;
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 300;
+   font-size: 32px;
+   line-height: 39px;
+   
+   color: #FFFFFF;
+         text-decoration: none;
+   list-style: none;
+   
+    } 
+     .navbar .nav-links ul li.profile a{
+   position: absolute;
+   width: 168.12px;
+   height: 96px;
+   left: 50%;
+   top:25%;
+   
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 300;
+   font-size: 32px;
+   line-height: 39px;
+   
+   color: #35a455;
+         text-decoration: none;
+   list-style: none;
+   
+    } 
+.navbar .nav-links ul li.camp a{
+       position: absolute;
+  width: 168.12px;
+  height: 96px;
+  left: 15%;
+  top: 177px;
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 39px;
+  
+  color: #FFFFFF;
+      text-decoration: none;
+   list-style: none;
+   } 
+
+.navbar .nav-links ul li.heb a{
+       position: absolute;
+  width: 168.12px;
+  height: 96px;
+  left: 63%;
+  top: 177px;
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 39px;
+  
+  color: #FFFFFF;
+      text-decoration: none;
+   list-style: none;
+  
+   } .navbar .nav-links ul li.profile a{
+       position: absolute;
+  width: 168.12px;
+  height: 96px;
+  left: 76%;
+  top: 177px;
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 39px;
+  
+  color: #FFFFFF;
+      text-decoration: none;
+   list-style: none;
+  
+   } 
+ .navbar .nav-links ul li.log_out a{
+       position: absolute;
+  width: 168.12px;
+  height: 96px;
+  left: 52%;
+  top:25%;
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 39px;
+  
+  color: #FFFFFF;
+      text-decoration: none;
+   list-style: none;
+  
+   } 
+.navbar .nav-links ul li.log a{
+   position: absolute;
+   width: 168.12px;
+   height: 96px;
+   left: 65%;
+   top:25%;
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 300;
+   font-size: 32px;
+   line-height: 39px;
+   
+   color: #FFFFFF;
+         text-decoration: none;
+   list-style: none;
+   
+  
+   } 
+   .navbar .nav-links ul li.sign a{
+      position: absolute;
+      width: 168.12px;
+      height: 96px;
+      left: 80%;
+      top:25%;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 300;
+      font-size: 32px;
+      line-height: 39px;
+      
+      color: #FFFFFF;
+            text-decoration: none;
+      list-style: none;
+      
+  } 
+
+.navbar .menu-hamburger{
+   display: none;
+   position: absolute;
+   top: 50px;
+   right: 50px;
+   width: 35px;
+}
+img.logo{
+ width: 25%;
+   height:25%;
+   margin-top: -5%;;
+   
+    } 
+
+.navbar .menu-hamburger{
+   display: none;
+   position: absolute;
+   top: 50px;
+   right: 50px;
+   width: 35px;
+}
+@media screen and (max-width: 900px){
+   .navbar{
+       padding: 0;
+   }
+  
+   .navbar .logo{
+     position: absolute;
+     top: 40px;
+     left: 30px;
+   
+   }
+   .navbar .menu-hamburger{
+       display: block;
+   }
+   .nav-links{
+       top: 0;
+       left: 0;
+       position: absolute;
+       background-color: rgba(255, 255, 255, 0.075);
+       backdrop-filter: blur(5px);
+       width: 100%;
+       height: 100vh;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       margin-left: -100%;
+       transition: all 0.5s ease;
+   }
+   .nav-links.mobile-menu{
+       margin-left: 0;
+   
+   }
+   
+   .nav-links ul{
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+   }
+ 
+   .navbar .nav-links ul li{
+       margin: 25px 0;
+       font-size: 1.2em;
+        } 
+        .navbar .logo{
+           position: absolute;
+           top: 50px;
+           left: 50px;
+           font-size: 2em;
+           font-weight: bold;
+       
+       }
+}
