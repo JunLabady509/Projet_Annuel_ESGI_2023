@@ -9,12 +9,15 @@ import (
 	"reflect"
 	"testing"
 
+	_ "database/sql"
+
+	_ "github.com/go-sql-driver/mysql"
 	"gopkg.in/mgo.v2/bson"
 )
 
 func TestBodyToUser(t *testing.T) {
 	valid := &user.User{
-		ID:            bson.NewObjectId(),
+		ID:            '5',
 		Name:          "Pierre",
 		Email:         "pierre@gmail.com",
 		Role:          "Admin",
@@ -68,7 +71,7 @@ func TestBodyToUser(t *testing.T) {
 		{
 			txt: "malformed data",
 			r: &http.Request{
-				Body: ioutil.NopCloser(bytes.NewBufferString(`{"id":12}`)),
+				Body: ioutil.NopCloser(bytes.NewBufferString(`{"id":'12'}`)),
 			},
 			u:   &user.User{},
 			err: true,
@@ -92,11 +95,13 @@ func TestBodyToUser(t *testing.T) {
 	}
 
 	for _, tc := range ts {
+
 		t.Log(tc.txt)
 		err := bodyToUser(tc.r, tc.u)
 		if tc.err {
 			if err == nil {
 				t.Error("Expected error, got nil")
+				return
 			}
 			continue
 		}

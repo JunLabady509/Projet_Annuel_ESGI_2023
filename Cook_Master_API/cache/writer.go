@@ -9,7 +9,6 @@ type Writer struct {
 	resource string
 }
 
-// interface implementation check
 var (
 	_ http.ResponseWriter = (*Writer)(nil)
 )
