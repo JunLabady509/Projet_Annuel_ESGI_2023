@@ -1,28 +1,29 @@
 package user
 
 import (
+	"database/sql"
+	"gastroguru/database"
 	"os"
 	"reflect"
 	"strconv"
 	"testing"
 
-	"github.com/asdine/storm"
+	_ "github.com/go-sql-driver/mysql"
 	"gopkg.in/mgo.v2/bson"
 )
 
 func TestMain(m *testing.M) {
 	m.Run()
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 
 }
 
 func cleanDB(b *testing.B) {
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		u := &User{
-			ID:            bson.NewObjectId(),
 			FirstName:     "JJ",
 			Name:          "Abrams",
 			Email:         "abrams@gmail.com",
@@ -42,12 +43,11 @@ func cleanDB(b *testing.B) {
 }
 
 func BenchmarkRead(b *testing.B) {
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		u := &User{
-			ID:            bson.NewObjectId(),
 			FirstName:     "JJ",
 			Name:          "Abrams_" + strconv.Itoa(i),
 			Email:         "abrams@gmail.com",
@@ -63,20 +63,21 @@ func BenchmarkRead(b *testing.B) {
 			b.Fatalf("Error saving user: %s", err)
 		}
 		b.StartTimer()
-		_, err = One(u.ID)
+		_, err = One(strconv.Itoa(u.ID))
 		if err != nil {
 			b.Fatalf("Error retrieving user: %s", err)
 		}
 	}
+
+	cleanDB(b)
 }
 
 func BenchmarkUpdate(b *testing.B) {
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		u := &User{
-			ID:            bson.NewObjectId(),
 			FirstName:     "JJ",
 			Name:          "Abrams_" + strconv.Itoa(i),
 			Email:         "abrams@gmail.com",
@@ -101,12 +102,11 @@ func BenchmarkUpdate(b *testing.B) {
 }
 
 func BenchmarkDelete(b *testing.B) {
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		u := &User{
-			ID:            bson.NewObjectId(),
 			FirstName:     "JJ",
 			Name:          "Abrams_" + strconv.Itoa(i),
 			Email:         "abrams@gmail.com",
@@ -121,7 +121,7 @@ func BenchmarkDelete(b *testing.B) {
 			b.Fatalf("Error saving user: %s", err)
 		}
 		b.StartTimer()
-		err = Delete(u.ID)
+		err = Delete(strconv.Itoa(u.ID))
 		if err != nil {
 			b.Fatalf("Error deleting user: %s", err)
 		}
@@ -130,12 +130,11 @@ func BenchmarkDelete(b *testing.B) {
 
 func BenchmarkCreate(b *testing.B) {
 	cleanDB(b)
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		u := &User{
-			ID:            bson.NewObjectId(),
 			FirstName:     "JJ",
 			Name:          "Abrams_" + strconv.Itoa(i),
 			Email:         "abrams@gmail.com",
@@ -150,7 +149,7 @@ func BenchmarkCreate(b *testing.B) {
 		if err != nil {
 			b.Fatalf("Error saving user: %s", err)
 		}
-		_, err = One(u.ID)
+		_, err = One(strconv.Itoa(u.ID))
 		if err != nil {
 			b.Fatalf("Error retrieving user: %s", err)
 		}
@@ -161,7 +160,7 @@ func BenchmarkCreate(b *testing.B) {
 			b.Fatalf("Error updating user: %s", err)
 		}
 
-		err = Delete(u.ID)
+		err = Delete(strconv.Itoa(u.ID))
 		if err != nil {
 			b.Fatalf("Error deleting user: %s", err)
 		}
@@ -169,11 +168,10 @@ func BenchmarkCreate(b *testing.B) {
 }
 
 func BenchmarkCRUD(b *testing.B) {
-	os.Remove(dbPath)
+	os.Remove(database.UserDbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		u := &User{
-			ID:            bson.NewObjectId(),
 			FirstName:     "JJ",
 			Name:          "Abrams",
 			Email:         "abrams@gmail.com",
@@ -189,7 +187,7 @@ func BenchmarkCRUD(b *testing.B) {
 			b.Fatalf("Error saving user: %s", err)
 		}
 
-		_, err = One(u.ID)
+		_, err = One(strconv.Itoa(u.ID))
 		if err != nil {
 			b.Fatalf("Error retrieving user: %s", err)
 		}
@@ -200,17 +198,25 @@ func BenchmarkCRUD(b *testing.B) {
 			b.Fatalf("Error updating user: %s", err)
 		}
 
-		err = Delete(u.ID)
+		err = Delete(strconv.Itoa(u.ID))
 		if err != nil {
 			b.Fatalf("Error deleting user: %s", err)
 		}
 	}
+
+	cleanDB(b)
 }
 
 func TestCRUD(t *testing.T) {
+	err := cleanDatabase(database.Db)
+	if err != nil {
+		t.Fatalf("Error cleaning the database: %s", err)
+	}
+
+	os.Remove(database.UserDbPath)
 	t.Log("Create")
 	u := &User{
-		ID:            bson.NewObjectId(),
+		// ID:            bson.NewObjectId(),
 		FirstName:     "JJ",
 		Name:          "Abrams",
 		Email:         "abrams@gmail.com",
@@ -221,13 +227,13 @@ func TestCRUD(t *testing.T) {
 		Loyality_ID:   bson.NewObjectId().Time().Day(),
 	}
 
-	err := u.Save()
+	err = u.Save()
 	if err != nil {
 		t.Fatalf("Error saving user: %s", err)
 	}
 
 	t.Log("Read")
-	u2, err := One(u.ID)
+	u2, err := One(strconv.Itoa(u.ID))
 	if err != nil {
 		t.Fatalf("Error retrieving user: %s", err)
 	}
@@ -242,30 +248,29 @@ func TestCRUD(t *testing.T) {
 		t.Fatalf("Error updating user: %s", err)
 	}
 
-	u3, err := One(u.ID)
+	u3, err := One(strconv.Itoa(u.ID))
 	if err != nil {
 		t.Fatalf("Error retrieving user: %s", err)
 	}
 	if !reflect.DeepEqual(u3, u) {
 		t.Errorf("Expected user to be %v, got %v", u, u2)
 	}
+
 	t.Log("Delete")
-	err = Delete(u.ID)
+	err = Delete(strconv.Itoa(u.ID))
 	if err != nil {
 		t.Fatalf("Error deleting user: %s", err)
 	}
 
-	_, err = One(u.ID)
+	_, err = One(strconv.Itoa(u.ID))
 	if err == nil {
 		t.Fatalf("Record was not deleted, but should have been")
 	}
-	if err != storm.ErrNotFound {
+	if err != sql.ErrNoRows {
 		t.Fatalf("Error retrieving non-existing recor: %s", err)
 	}
 
 	t.Log("Read all")
-	u2.ID = bson.NewObjectId()
-	u3.ID = bson.NewObjectId()
 	err = u.Save()
 	if err != nil {
 		t.Fatalf("Error Saving a record: %s", err)
@@ -283,7 +288,17 @@ func TestCRUD(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error reading all the records: %s", err)
 	}
-	if len(users) != 3 {
+	if len(users) != 4 {
 		t.Errorf("Expected 3 records, got %d", len(users))
 	}
+
+	err = cleanDatabase(database.Db)
+	if err != nil {
+		t.Fatalf("Error cleaning the database: %s", err)
+	}
+}
+
+func cleanDatabase(db *sql.DB) error {
+	_, err := db.Exec("TRUNCATE TABLE users")
+	return err
 }

@@ -1,7 +1,0 @@
-Les objectifs du programme de test sont les suivants :
-
-    Vérifier que la connexion à la base de données fonctionne correctement
-    Vérifier que la recherche et la récupération de données depuis la base de données sont correctes
-    Vérifier que l'ajout, la modification et la suppression de données dans la base de données sont corrects
-    Vérifier que les données ajoutées, modifiées ou supprimées sont correctement enregistrées dans la base de données
-    Vérifier que les erreurs d'accès à la base de données sont correctement gérées et affichées à l'utilisateur.

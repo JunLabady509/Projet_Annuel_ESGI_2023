@@ -1,67 +1,30 @@
 package handlers
 
 import (
-	"fmt"
-	"net/http"
-	"strings"
+	"gastroguru/cache"
 
-	"gopkg.in/mgo.v2/bson"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
-func UsersRouter(w http.ResponseWriter, r *http.Request) {
-	path := strings.TrimSuffix(r.URL.Path, "/")
+func InitUsersRouter(e *echo.Echo) {
 
-	if path == "/users" {
-		switch r.Method {
-		case http.MethodGet: // GET
-			//fmt.Println("GET")
-			usersGetAll(w, r)
-			return
-		case http.MethodPost: // POST
-			fmt.Println("POST")
-			usersPostOne(w, r)
-			return
-		case http.MethodHead: // HEAD
-			fmt.Println("HEAD")
-			usersGetAll(w, r)
-		case http.MethodOptions: // OPTIONS
-			fmt.Println("OPTIONS")
-			postOptionsResponse(w, []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}, nil)
-			return
-		default:
-			postError(w, http.StatusMethodNotAllowed)
-			return
-		}
-	}
+	e.GET("/", root)
 
-	path = strings.TrimPrefix(path, "/users/")
-	if !bson.IsObjectIdHex(path) {
-		postError(w, http.StatusNotFound)
-		return
-	}
+	u := e.Group("/users")
 
-	id := bson.ObjectIdHex(path)
+	u.OPTIONS("", usersOptions)
+	u.HEAD("", usersGetAll, cache.ServeCache)
+	u.GET("", usersGetAll, cache.ServeCache, cache.CacheResponse)
+	u.POST("", usersPostOne)
 
-	switch r.Method {
-	case http.MethodGet: // GET
-		usersGetOne(w, r, id)
-		return
-	case http.MethodPut: // PUT
-		usersPutOne(w, r, id)
-		return
-	case http.MethodPatch: // PATCH
-		usersPatchOne(w, r, id)
-		return
-	case http.MethodDelete: // DELETE
-		usersDeleteOne(w, r, id)
-		return
-	case http.MethodHead: // HEAD
-		usersGetOne(w, r, id)
-		return
-	case http.MethodOptions: // OPTIONS
-		postOptionsResponse(w, []string{http.MethodGet, http.MethodPut, http.MethodPatch, http.MethodDelete, http.MethodHead, http.MethodOptions}, nil)
-	default:
-		postError(w, http.StatusMethodNotAllowed)
-		return
-	}
+	uid := u.Group("/:id")
+
+	uid.GET("", usersGetOne, cache.ServeCache, cache.CacheResponse)
+	uid.OPTIONS("", userOptions)
+	uid.HEAD("", usersGetOne, cache.ServeCache)
+	uid.PUT("", usersPutOne, middleware.BasicAuth(auth), cache.CacheResponse)
+	uid.PATCH("", usersPatchOne, middleware.BasicAuth(auth), cache.CacheResponse)
+	uid.DELETE("", usersDeleteOne, middleware.BasicAuth(auth))
+
 }
