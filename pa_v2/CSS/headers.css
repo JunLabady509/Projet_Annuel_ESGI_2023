@@ -1,0 +1,30 @@
+
+header {
+   background-color: #C29774;
+height:60px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+ img.logo{
+   height:85px;
+
+}
+
+.navbar {
+ display: flex;
+}
+.navbar a:hover{
+ color:#844b1d;
+}
+
+.navbar ul {
+ list-style: none;
+ margin: 0;
+ padding: 0;
+ display: flex;
+}
+
+.navbar li {
+ margin-right: 20px;
+}
