@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"strings"
 	"sync"
+
+	"github.com/labstack/echo"
 )
 
 type response struct {
@@ -86,4 +88,20 @@ func Serve(w http.ResponseWriter, r *http.Request) bool {
 		w.Write(response.body)
 	}
 	return true
+}
+
+func ServeCache(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(ctx echo.Context) error {
+		if Serve(ctx.Response(), ctx.Request()) {
+			return nil
+		}
+		return next(ctx)
+	}
+}
+
+func CacheResponse(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(ctx echo.Context) error {
+		ctx.Response().Writer = NewWriter(ctx.Response().Writer, ctx.Request())
+		return next(ctx)
+	}
 }

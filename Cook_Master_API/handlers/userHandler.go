@@ -1,15 +1,20 @@
 package handlers
 
 import (
+	"database/sql"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"gastroguru/cache"
+	"gastroguru/database"
 	"gastroguru/user"
 	"io"
 	"net/http"
+	"strconv"
+	"strings"
 
-	"github.com/asdine/storm"
-	"gopkg.in/mgo.v2/bson"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/labstack/echo"
 )
 
 func bodyToUser(r *http.Request, u *user.User) error {
@@ -32,154 +37,146 @@ func bodyToUser(r *http.Request, u *user.User) error {
 	return json.Unmarshal(bd, u)
 }
 
-func usersPostOne(w http.ResponseWriter, r *http.Request) {
+func usersPostOne(ctx echo.Context) error {
 	u := new(user.User)
-	err := bodyToUser(r, u)
+	err := ctx.Bind(u)
 	if err != nil {
-		postError(w, http.StatusBadRequest)
-		return
+		fmt.Println("Error Binding :", err)
+		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
-	u.ID = bson.NewObjectId()
 	err = u.Save()
 
 	if err != nil {
-		if err == user.ErrRecordInvalid {
-			postError(w, http.StatusBadRequest)
-		} else {
-			postError(w, http.StatusInternalServerError)
+		if err == database.ErrRecordInvalid {
+			return echo.NewHTTPError(http.StatusBadRequest)
 		}
-		return
+		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 
 	cache.Drop("/users")
-	w.Header().Set("Location", "/users/"+u.ID.Hex())
-	w.WriteHeader(http.StatusCreated)
-
+	ctx.Response().Header().Set("Location", "/users/"+strconv.Itoa(u.ID))
+	return ctx.NoContent(http.StatusCreated)
 }
 
-func usersGetAll(w http.ResponseWriter, r *http.Request) {
-
-	if cache.Serve(w, r) {
-		return
-	}
-
+func usersGetAll(ctx echo.Context) error {
 	users, err := user.All()
 
 	if err != nil {
-		postError(w, http.StatusInternalServerError)
-		return
+		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
-	if r.Method == "HEAD" {
-		postBodyResponse(w, http.StatusOK, jsonResponse{})
-		return
+	if ctx.Request().Method == http.MethodHead {
+		return ctx.NoContent(http.StatusOK)
 	}
-	cacheWriter := cache.NewWriter(w, r)
-	postBodyResponse(cacheWriter, http.StatusOK, jsonResponse{"users": users})
+	return ctx.JSON(http.StatusOK, jsonResponse{"users": users})
 
 }
 
-func usersGetOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
+func usersGetOne(ctx echo.Context) error {
 
-	if cache.Serve(w, r) {
-		return
+	if cache.Serve(ctx.Response(), ctx.Request()) {
+		return nil
 	}
+
+	id := ctx.Param("id")
 
 	u, err := user.One(id)
 	if err != nil {
 		switch err {
-		case storm.ErrNotFound:
-			postError(w, http.StatusNotFound)
-			return
+		case sql.ErrNoRows:
+			return echo.NewHTTPError(http.StatusNotFound)
 		default:
-			postError(w, http.StatusInternalServerError)
+			return echo.NewHTTPError(http.StatusInternalServerError)
 		}
-		return
 	}
-	if r.Method == "HEAD" {
-		postBodyResponse(w, http.StatusOK, jsonResponse{})
-		return
+	if ctx.Request().Method == http.MethodHead {
+		return ctx.NoContent(http.StatusOK)
 	}
-	cacheWriter := cache.NewWriter(w, r)
-	postBodyResponse(cacheWriter, http.StatusOK, jsonResponse{"user": u})
+	return ctx.JSON(http.StatusOK, jsonResponse{"user": u})
 }
 
-func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
+func usersPutOne(ctx echo.Context) error {
 	u := new(user.User)
-	err := bodyToUser(r, u)
+	err := ctx.Bind(u)
 	if err != nil {
-		postError(w, http.StatusBadRequest)
-		return
+		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
-	u.ID = id
 	err = u.Save()
 
 	if err != nil {
-		if err == user.ErrRecordInvalid {
-			postError(w, http.StatusBadRequest)
-		} else {
-			postError(w, http.StatusInternalServerError)
+		if err == database.ErrRecordInvalid {
+			return echo.NewHTTPError(http.StatusBadRequest)
 		}
-		return
+		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	cache.Drop("/users")
-	cacheWriter := cache.NewWriter(w, r)
-	postBodyResponse(cacheWriter, http.StatusOK, jsonResponse{"user": u})
+	return ctx.JSON(http.StatusOK, jsonResponse{"user": u})
 
 }
 
-func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
+func usersPatchOne(ctx echo.Context) error {
+
+	id := ctx.Param("id")
+
 	u, err := user.One(id)
 	if err != nil {
 		switch err {
-		case storm.ErrNotFound:
-			postError(w, http.StatusNotFound)
-			return
+		case sql.ErrNoRows:
+			return echo.NewHTTPError(http.StatusNotFound)
 		default:
-			postError(w, http.StatusInternalServerError)
+			return echo.NewHTTPError(http.StatusInternalServerError)
 		}
-		return
 	}
 
-	err = bodyToUser(r, u)
+	err = ctx.Bind(u)
 	if err != nil {
-		postError(w, http.StatusBadRequest)
-		return
+		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
-	u.ID = id
+	u.ID, _ = strconv.Atoi(id)
+
 	err = u.Save()
 
 	if err != nil {
-		if err == user.ErrRecordInvalid {
-			postError(w, http.StatusBadRequest)
-		} else {
-			postError(w, http.StatusInternalServerError)
+		if err == database.ErrRecordInvalid {
+			return echo.NewHTTPError(http.StatusBadRequest)
 		}
-		return
+		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	cache.Drop("/users")
-	cacheWriter := cache.NewWriter(w, r)
-	postBodyResponse(cacheWriter, http.StatusOK, jsonResponse{"user": u})
+	return ctx.JSON(http.StatusOK, jsonResponse{"user": u})
 
 }
 
-func usersDeleteOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
+func usersDeleteOne(ctx echo.Context) error {
+
+	id := ctx.Param("id")
+
 	err := user.Delete(id)
 	if err != nil {
 		switch err {
-		case storm.ErrNotFound:
-			postError(w, http.StatusNotFound)
-			return
+		case sql.ErrNoRows:
+			return echo.NewHTTPError(http.StatusNotFound)
 		default:
-			postError(w, http.StatusInternalServerError)
+			return echo.NewHTTPError(http.StatusInternalServerError)
 		}
-		return
 	}
 
 	cache.Drop("/users")
-	cache.Drop(cache.MakeResource(r))
-	w.WriteHeader(http.StatusOK)
+	cache.Drop(cache.MakeResource(ctx.Request()))
+	return ctx.NoContent(http.StatusOK)
 
+}
+
+func usersOptions(ctx echo.Context) error {
+	methods := []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}
+	ctx.Response().Header().Set("Allow", strings.Join(methods, ","))
+	return ctx.NoContent(http.StatusOK)
+}
+
+func userOptions(ctx echo.Context) error {
+	methods := []string{http.MethodGet, http.MethodPut, http.MethodPatch, http.MethodDelete, http.MethodHead, http.MethodOptions}
+	ctx.Response().Header().Set("Allow", strings.Join(methods, ","))
+	return ctx.NoContent(http.StatusOK)
 }

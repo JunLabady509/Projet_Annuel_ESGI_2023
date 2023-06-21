@@ -1,25 +1,33 @@
 package main
 
 import (
-	"fmt"
+	"gastroguru/database"
 	"gastroguru/handlers"
-	"net/http"
-	"os"
+
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 func main() {
+	database.InitDB()
 
-	// user.TestUserFunctions(nil)
+	database.CreateAllTables(database.Db)
 
-	// handlers.TestPostBodyResponse(nil)
+	e := echo.New()
 
-	http.HandleFunc("/", handlers.RootHandler)
-	http.HandleFunc("/users", handlers.UsersRouter)
-	http.HandleFunc("/users/", handlers.UsersRouter)
-	fmt.Println("Server started on port 44444")
-	err := http.ListenAndServe("localhost:44444", nil)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	e.Pre(middleware.RemoveTrailingSlash())
+
+	e.Use(middleware.Recover())
+	e.Use(middleware.Secure())
+	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+		Format: "${method} ${uri} ${status} ${latency_human} \n",
+	}))
+
+	handlers.InitUsersRouter(e)
+	handlers.InitWorkshopsRouter(e)
+	handlers.InitHomeCoursesRouter(e)
+	handlers.InitOnlineCoursesRouter(e)
+
+	e.Logger.Fatal(e.Start(":44446"))
+
 }

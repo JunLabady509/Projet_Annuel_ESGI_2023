@@ -1,0 +1,7 @@
+Pour résoudre le problème : 
+  /snap/core20/current/lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.29' not found (required by /lib/x86_64-linux-gnu/libproxy.so.1)
+  Failed to load module: /home/junior/snap/code/common/.cache/gio-modules/libgiolibproxy.so
+  ./requeteur: symbol lookup error: /snap/core20/current/lib/x86_64-linux-gnu/libpthread.so.0: undefined symbol: __libc_pthread_init, version GLIBC_PRIVATE
+
+Dès l'ouverture du code lancer un : 
+  unset GTK_PATH
