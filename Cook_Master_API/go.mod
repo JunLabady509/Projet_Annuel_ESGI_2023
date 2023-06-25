@@ -9,6 +9,8 @@ require (
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 )
 
+require github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
+
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/labstack/gommon v0.4.0 // indirect
