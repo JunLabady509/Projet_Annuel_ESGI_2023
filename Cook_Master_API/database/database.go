@@ -70,6 +70,33 @@ func CheckPassword(password string, hashedPassword string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 }
 
+// Vérifie si un utilisateur existe dans la base de données en fonction de son email
+func UserExists(email string) (bool, error) {
+	var count int
+	err := Db.QueryRow("SELECT COUNT(*) FROM users WHERE email = ?", email).Scan(&count)
+	if err != nil {
+		return false, err
+	}
+	if count == 0 {
+		return false, nil
+	}
+	return true, nil
+}
+
+// La base de données est cryptée avec bcrypt, donc on ne peut vérifier si un mot de passe correspond à un email qu'en utilisant la fonction CheckPassword de bcrypt
+func PasswordMatchesEmail(password string, email string) (bool, error) {
+	var hashedPassword string
+	err := Db.QueryRow("SELECT Password FROM users WHERE email = ?", email).Scan(&hashedPassword)
+	if err != nil {
+		return false, err
+	}
+	err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
 func CreateAllTables(db *sql.DB) {
 	// Création de la table User
 	_, err := db.Exec(`CREATE TABLE IF NOT EXISTS users (
