@@ -70,20 +70,48 @@ func CheckPassword(password string, hashedPassword string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 }
 
+// Vérifie si un utilisateur existe dans la base de données en fonction de son email
+func UserExists(email string) (bool, error) {
+	var count int
+	err := Db.QueryRow("SELECT COUNT(*) FROM users WHERE email = ?", email).Scan(&count)
+	if err != nil {
+		return false, err
+	}
+	if count == 0 {
+		return false, nil
+	}
+	return true, nil
+}
+
+// La base de données est cryptée avec bcrypt, donc on ne peut vérifier si un mot de passe correspond à un email qu'en utilisant la fonction CheckPassword de bcrypt
+func PasswordMatchesEmail(password string, email string) (bool, error) {
+	var hashedPassword string
+	err := Db.QueryRow("SELECT Password FROM users WHERE email = ?", email).Scan(&hashedPassword)
+	if err != nil {
+		return false, err
+	}
+	err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
 func CreateAllTables(db *sql.DB) {
 	// Création de la table User
 	_, err := db.Exec(`CREATE TABLE IF NOT EXISTS users (
-		ID INT AUTO_INCREMENT,
-		Name VARCHAR(255) NOT NULL,
-		Role VARCHAR(255) NOT NULL,
-		FirstName VARCHAR(255) NOT NULL,
-		Address VARCHAR(255) NOT NULL,
-		Email VARCHAR(255) NOT NULL,
-		Password VARCHAR(255) NOT NULL,
-		Phone VARCHAR(255) NOT NULL,
-		Subscribed_ID INT NOT NULL,
-		Loyality_ID INT NOT NULL,
-		PRIMARY KEY (ID)
+		id INT AUTO_INCREMENT,
+		first_name VARCHAR(255),
+		last_name VARCHAR(255),
+		email VARCHAR(255),
+		password VARCHAR(255),
+		picture VARCHAR(255),
+		role VARCHAR(255),
+		address VARCHAR(255),
+		phone VARCHAR(255),
+		subscription_id INT,
+		loyalty_points INT,
+		PRIMARY KEY (id)
 	)`)
 	if err != nil {
 		log.Fatal(err)

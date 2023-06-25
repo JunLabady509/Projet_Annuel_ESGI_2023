@@ -4,7 +4,6 @@ import (
 	"gastroguru/cache"
 
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
 )
 
 func InitWorkshopsRouter(e *echo.Echo) {
@@ -20,7 +19,7 @@ func InitWorkshopsRouter(e *echo.Echo) {
 	cid.GET("", workshopsGetOne, cache.ServeCache, cache.CacheResponse)
 	cid.OPTIONS("", workshopOptions)
 	cid.HEAD("", workshopsGetOne, cache.ServeCache)
-	cid.PUT("", workshopsPutOne, middleware.BasicAuth(auth), cache.CacheResponse)
-	cid.PATCH("", workshopsPatchOne, middleware.BasicAuth(auth), cache.CacheResponse)
-	cid.DELETE("", workshopsDeleteOne, middleware.BasicAuth(auth))
+	cid.PUT("", workshopsPutOne /*middleware.BasicAuth(auth),*/, cache.CacheResponse)
+	cid.PATCH("", workshopsPatchOne /*middleware.BasicAuth(auth),*/, cache.CacheResponse)
+	cid.DELETE("", workshopsDeleteOne /*middleware.BasicAuth(auth),*/)
 }

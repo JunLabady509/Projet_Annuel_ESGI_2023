@@ -45,6 +45,16 @@ func usersPostOne(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
+	exists, errdb := database.UserExists(u.Email)
+	if errdb != nil {
+		fmt.Println("Database error:", errdb)
+		return echo.NewHTTPError(http.StatusInternalServerError)
+	}
+
+	if exists {
+		return echo.NewHTTPError(http.StatusConflict)
+	}
+
 	err = u.Save()
 
 	if err != nil {
@@ -179,4 +189,31 @@ func userOptions(ctx echo.Context) error {
 	methods := []string{http.MethodGet, http.MethodPut, http.MethodPatch, http.MethodDelete, http.MethodHead, http.MethodOptions}
 	ctx.Response().Header().Set("Allow", strings.Join(methods, ","))
 	return ctx.NoContent(http.StatusOK)
+}
+
+// Vérification de l'existence d'un utilisateur
+func userCheckEmail(ctx echo.Context) error {
+	u := new(user.User)
+	err := ctx.Bind(u)
+	if err != nil {
+		fmt.Println("Error Binding :", err)
+		return echo.NewHTTPError(http.StatusBadRequest)
+	}
+
+	exists, err := database.UserExists(u.Email)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError)
+	}
+	if exists {
+		return echo.NewHTTPError(http.StatusConflict, "User already exists")
+	}
+	return ctx.NoContent(http.StatusOK)
+}
+
+// Fonction pour gérer l'authentification avec la génération du token d'accès
+func userAuth(ctx echo.Context) error {
+	email := ctx.FormValue("email")
+	password := ctx.FormValue("password")
+
+	return auth(email, password, ctx)
 }
