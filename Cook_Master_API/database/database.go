@@ -100,17 +100,18 @@ func PasswordMatchesEmail(password string, email string) (bool, error) {
 func CreateAllTables(db *sql.DB) {
 	// Création de la table User
 	_, err := db.Exec(`CREATE TABLE IF NOT EXISTS users (
-		ID INT AUTO_INCREMENT,
-		Name VARCHAR(255) NOT NULL,
-		Role VARCHAR(255) NOT NULL,
-		FirstName VARCHAR(255) NOT NULL,
-		Address VARCHAR(255) NOT NULL,
-		Email VARCHAR(255) NOT NULL,
-		Password VARCHAR(255) NOT NULL,
-		Phone VARCHAR(255) NOT NULL,
-		Subscribed_ID INT NOT NULL,
-		Loyality_ID INT NOT NULL,
-		PRIMARY KEY (ID)
+		id INT AUTO_INCREMENT,
+		first_name VARCHAR(255),
+		last_name VARCHAR(255),
+		email VARCHAR(255),
+		password VARCHAR(255),
+		picture VARCHAR(255),
+		role VARCHAR(255),
+		address VARCHAR(255),
+		phone VARCHAR(255),
+		subscription_id INT,
+		loyalty_points INT,
+		PRIMARY KEY (id)
 	)`)
 	if err != nil {
 		log.Fatal(err)
