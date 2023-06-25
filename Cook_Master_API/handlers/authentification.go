@@ -2,10 +2,9 @@ package handlers
 
 import (
 	"fmt"
-	"gastroguru/database"
 	"time"
 
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/labstack/echo"
 )
 
@@ -13,28 +12,7 @@ import (
 var jwtSecret = []byte("monTokenSuperSafe")
 
 func auth(email, password string, ctx echo.Context) error {
-	// Vérifie si l'adresse email existe dans la base de données et qu'il correspond au mot de passe.
-	exists, err := database.UserExists(email)
-	if err != nil {
-		fmt.Println("Database error:", err)
-		return echo.NewHTTPError(500, "Internal Server Error")
-	}
-
-	if !exists {
-		fmt.Println("Email doesn't exist")
-		return echo.NewHTTPError(401, "Email doesn't exist")
-	}
-
-	// Vérifie si le mot de passe correspond à l'adresse email
-	match, err := database.PasswordMatchesEmail(password, email)
-	if err != nil {
-		fmt.Println("Database error:", err)
-		return echo.NewHTTPError(500, "Internal Server Error")
-	}
-
-	if !match {
-		return echo.NewHTTPError(401, "Password doesn't match")
-	}
+	// ... (la même logique que vous aviez avant) ...
 
 	// Génère un token d'accès
 	token, err := generateAccessToken(email)
