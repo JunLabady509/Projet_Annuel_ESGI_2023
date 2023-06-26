@@ -34,9 +34,10 @@ if ($response === false) {
 
         // Stocker le token d'accès dans une session pour maintenir la connexion
         $_SESSION['access_token'] = $accessToken;
-
+        var_dump($_SESSION['access_token']);
+        
         // Rediriger vers la page principale ou une autre page sécurisée
-        header('Location: index.html');
+        header('Location: index.php');
         exit();
     } else {
         // Gérer les erreurs d'authentification

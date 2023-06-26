@@ -1,16 +1,31 @@
 <?php
 session_start();
+
 if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
+    $uploadDir = 'uploads/';
+
+    if ($_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
+        $tmpName = $_FILES['profile_photo']['tmp_name'];
+        $fileName = $_FILES['profile_photo']['name'];
+        $filePath = $uploadDir . $fileName;
+
+        if (move_uploaded_file($tmpName, $filePath)) {
+            $message = 'Image uploadée avec succès.';
+        } else {
+            $message = 'Erreur lors de l\'upload.';
+        }
+    }
+
+    $url = "http://localhost:44446/users";
+    $ch = curl_init($url);
+
+    $last_name = $_POST['last_name'];
     $first_name = $_POST['first_name'];
     $address = $_POST['address'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     $phone = $_POST['phone'];
-
-    $url = "http://localhost:44446/users";
-    $ch = curl_init($url);
 
     if ($password != $confirm_password) {
         // Les mots de passe ne correspondent pas
@@ -20,15 +35,15 @@ if (isset($_POST['submit'])) {
     }
 
     $data = array(
-        'name' => $name,
+        'last_name' => $last_name,
         'first_name' => $first_name,
         'address' => $address,
         'email' => $email,
         'password' => $password,
         'phone' => $phone,
+        'picture' => $filePath,
     );
 
-    // Vérifier
     $payload = json_encode($data);
 
     curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
@@ -39,13 +54,12 @@ if (isset($_POST['submit'])) {
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
-    // Vous pouvez maintenant gérer la réponse ici.
-    // Par exemple, rediriger l'utilisateur ou afficher un message.
-
+    //Redirection de l'utilisateur vers la page de connexion
+    
     if ($httpCode == 201) {
-      // Rediriger l'utilisateur vers la page de connexion
-      header('Location: login.html');
-      exit();
+        // Rediriger l'utilisateur vers la page de connexion
+        header('Location: login.html');
+        exit();
     } else {
         // Afficher un message d'erreur
         if (!isset($_SESSION['error_message'])) {

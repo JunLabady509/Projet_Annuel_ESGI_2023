@@ -78,13 +78,13 @@
 
 <body>
   <div class="login-container">
-    <a href="index.html">
+    <a href="index.php">
       <img src="images/logoG.png" alt="Logo" class="logo">
     </a>
     <div class="login-form">
       <h1>Inscription</h1>
-      <form method="POST" action="register-check.php" id="myForm">
-        <input type="text" class="form-control" name="name" id="name" placeholder="Nom" required>
+      <form method="POST" action="register-check.php" id="myForm" enctype="multipart/form-data">
+        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Nom" required>
         <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Prénom" required>
         <input type="text" class="form-control" name="address" id="address" placeholder="Adresse" required>
         <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
@@ -93,6 +93,8 @@
         <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirmez votre mot de passe" required>
         <small id="passwordError" style="display:none; color:red;">Les mots de passe ne correspondent pas</small>
         <input type="tel" class="form-control" name="phone" id="phone" placeholder="Téléphone" required>
+        <label for="profile_photo">Ajouter une photo de profil</label>      
+        <input type="file" class="form-control" name="profile_photo" id="profile_photo" accept="image/*">
         <button type="submit" name="submit" id="submitButton" class="btn btn-primary" disabled>S'inscrire</button>
       </form>
       <div class="signup-link">

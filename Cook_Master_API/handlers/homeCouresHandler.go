@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"gastroguru/cache"
 	"gastroguru/database"
-	"gastroguru/homecourses"
+	"gastroguru/learning"
 	"net/http"
 	"strconv"
 	"strings"
@@ -14,7 +14,7 @@ import (
 )
 
 func homeCoursePostOne(ctx echo.Context) error {
-	h := new(homecourses.HomeCourse)
+	h := new(learning.HomeCourse)
 	err := ctx.Bind(h)
 	if err != nil {
 		fmt.Println("Error Binding :", err)
@@ -36,9 +36,10 @@ func homeCoursePostOne(ctx echo.Context) error {
 }
 
 func homeCourseGetAll(ctx echo.Context) error {
-	homeCourses, err := homecourses.GetAllHomeCourses()
+	homeCourses, err := learning.GetAllHomeCourses()
 
 	if err != nil {
+		fmt.Println("Error :", err)
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	if ctx.Request().Method == http.MethodHead {
@@ -54,7 +55,7 @@ func homeCourseGetOne(ctx echo.Context) error {
 
 	id := ctx.Param("id")
 
-	h, err := homecourses.GetHomeCourse(id)
+	h, err := learning.GetHomeCourse(id)
 
 	if err != nil {
 		switch err {
@@ -72,7 +73,7 @@ func homeCourseGetOne(ctx echo.Context) error {
 }
 
 func homeCoursePutOne(ctx echo.Context) error {
-	h := new(homecourses.HomeCourse)
+	h := new(learning.HomeCourse)
 	err := ctx.Bind(h)
 	if err != nil {
 		fmt.Println("Error Binding :", err)
@@ -95,7 +96,7 @@ func homeCoursePatchOne(ctx echo.Context) error {
 
 	id := ctx.Param("id")
 
-	h, err := homecourses.GetHomeCourse(id)
+	h, err := learning.GetHomeCourse(id)
 	if err != nil {
 		switch err {
 		case sql.ErrNoRows:
@@ -128,7 +129,7 @@ func homeCoursePatchOne(ctx echo.Context) error {
 func homeCourseDeleteOne(ctx echo.Context) error {
 	id := ctx.Param("id")
 
-	err := homecourses.DeleteHomeCourse(id)
+	err := learning.DeleteHomeCourse(id)
 	if err != nil {
 		switch err {
 		case sql.ErrNoRows:

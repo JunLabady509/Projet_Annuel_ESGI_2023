@@ -36,32 +36,31 @@ func auth(email, password string, ctx echo.Context) error {
 	if !match {
 		return echo.NewHTTPError(401, "Password doesn't match")
 	}
-	// Génère un token d'accès
 
+	// Génère un token d'accès
 	u, err := user.FindUserByEmail(email)
 	if err != nil {
 		return echo.NewHTTPError(500, "Internal Server Error")
 	}
-	var last_name, first_name, picture, role, address, phone string
-	last_name = u.Last_Name
-	first_name = u.First_Name
-	picture = u.Picture
-	role = u.Role
-	address = u.Address
-	phone = u.Phone
-	token, err := generateAccessToken(last_name, first_name, email, picture, role, address, phone)
+
+	last_name := u.Last_Name
+	first_name := u.First_Name
+	picture := u.Picture
+	role := u.Role
+	token, err := generateAccessToken(email, last_name, first_name, picture, role)
 	if err != nil {
 		fmt.Println("Token generation error:", err)
 		return echo.NewHTTPError(500, "Failed to generate token")
 	}
 
+	fmt.Println("Token generated:", token)
 	return ctx.JSON(200, map[string]string{
 		"token": token,
 	})
 }
 
 // Fonction pour générer un token d'accès JWT
-func generateAccessToken(last_name, first_name, email, picture, role, address, phone string) (string, error) {
+func generateAccessToken(last_name, first_name, email, picture, role string) (string, error) {
 	// Création des revendications du token
 	claims := jwt.MapClaims{
 		"last_name":  last_name,
@@ -69,8 +68,6 @@ func generateAccessToken(last_name, first_name, email, picture, role, address, p
 		"email":      email,
 		"picture":    picture,
 		"role":       role,
-		"address":    address,
-		"phone":      phone,
 		"exp":        time.Now().Add(time.Hour * 24).Unix(), // Expiration du token après 24 heures
 	}
 

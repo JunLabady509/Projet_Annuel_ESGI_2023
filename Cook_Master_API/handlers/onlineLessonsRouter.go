@@ -8,13 +8,6 @@ import (
 
 func InitOnlineCoursesRouter(e *echo.Echo) {
 
-	/*
-		Reste à mettre en place:
-			- Le middleware BasicAuth pour certaines routes
-			- Le système d'autorisation pour les routes
-			en fonction du rôle de l'utilisateur
-	*/
-
 	oc := e.Group("/onlinelessons")
 
 	oc.GET("", onlineLessonsGetAll, cache.ServeCache, cache.CacheResponse)

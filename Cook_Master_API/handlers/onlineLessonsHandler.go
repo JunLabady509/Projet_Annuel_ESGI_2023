@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"gastroguru/cache"
 	"gastroguru/database"
-	"gastroguru/onlinelessons"
+	"gastroguru/learning"
 	"net/http"
 	"strconv"
 	"strings"
@@ -14,8 +14,7 @@ import (
 )
 
 func onlineLessonsPostOne(ctx echo.Context) error {
-
-	ol := new(onlinelessons.OnlineLesson)
+	ol := new(learning.OnlineLesson)
 	err := ctx.Bind(ol)
 	if err != nil {
 		fmt.Println("Error Binding")
@@ -23,7 +22,6 @@ func onlineLessonsPostOne(ctx echo.Context) error {
 	}
 
 	err = ol.Save()
-
 	if err != nil {
 		if err == database.ErrRecordInvalid {
 			fmt.Println("Error saving")
@@ -33,12 +31,13 @@ func onlineLessonsPostOne(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 
+	cache.Drop("/onlinelessons")
 	ctx.Response().Header().Set("Location", "/workshops/"+strconv.Itoa(ol.ID))
 	return ctx.NoContent(http.StatusCreated)
 }
 
 func onlineLessonsGetAll(ctx echo.Context) error {
-	onlineLessons, err := onlinelessons.GetAllOnlineLessons()
+	onlineLessons, err := learning.GetAllOnlineLessons()
 	if err != nil {
 		fmt.Println("Error getting all Online Courses")
 		fmt.Println(err)
@@ -59,7 +58,7 @@ func onlineLessonsGetOne(ctx echo.Context) error {
 
 	id := ctx.Param("id")
 
-	ol, err := onlinelessons.GetOnlineLesson(id)
+	ol, err := learning.GetOnlineLesson(id)
 	if err != nil {
 		switch err {
 		case sql.ErrNoRows:
@@ -78,30 +77,28 @@ func onlineLessonsGetOne(ctx echo.Context) error {
 }
 
 func onlineLessonsPutOne(ctx echo.Context) error {
-	ol := new(onlinelessons.OnlineLesson)
+	ol := new(learning.OnlineLesson)
 	err := ctx.Bind(ol)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
 	err = ol.Save()
-
 	if err != nil {
 		if err == database.ErrRecordInvalid {
 			return echo.NewHTTPError(http.StatusBadRequest)
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
+
 	cache.Drop("/onlinelessons/" + strconv.Itoa(ol.ID))
 	return ctx.JSON(http.StatusOK, jsonResponse{"online_lesson": ol})
-
 }
 
 func onlineLessonsPatchOne(ctx echo.Context) error {
-
 	id := ctx.Param("id")
 
-	ol, err := onlinelessons.GetOnlineLesson(id)
+	ol, err := learning.GetOnlineLesson(id)
 	if err != nil {
 		switch err {
 		case sql.ErrNoRows:
@@ -119,22 +116,21 @@ func onlineLessonsPatchOne(ctx echo.Context) error {
 	ol.ID, _ = strconv.Atoi(id)
 
 	err = ol.Save()
-
 	if err != nil {
 		if err == database.ErrRecordInvalid {
 			return echo.NewHTTPError(http.StatusBadRequest)
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
+
 	cache.Drop("/users")
 	return ctx.JSON(http.StatusOK, jsonResponse{"online_lesson": ol})
-
 }
 
 func onlineLessonsDeleteOne(ctx echo.Context) error {
 	id := ctx.Param("id")
 
-	err := onlinelessons.DeleteOnlineLesson(id)
+	err := learning.DeleteOnlineLesson(id)
 	if err != nil {
 		switch err {
 		case sql.ErrNoRows:

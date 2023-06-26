@@ -24,12 +24,6 @@ type User struct {
 	Loyalty_Points  int    `json:"loyalty_id"`
 }
 
-// Partie à implémenter pour les permissions
-// Il n'y a pas de table permissions dans la base de données
-// Peut être qu'on sera amené à modifier la table users et la structure User
-// pour implémenter les permissions
-// à méditer
-
 // All retrieves all users from the database
 func All() ([]User, error) {
 	rows, err := database.Db.Query("SELECT * FROM users")
