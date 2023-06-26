@@ -99,7 +99,10 @@ session_start();
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-2">
-							<div id="fh5co-logo"><a href="index.php"><i class="icon-food"></i>Gastroguru<span>.</span></a></div>
+							<div id="fh5co-logo">
+								<a href="index.php">
+									<i class="icon-food"></i>Gastroguru<span>.</span></a>
+							</div>
 						</div>
 						<div class="col-xs-10 text-right menu-1">
 							<ul>
@@ -155,7 +158,7 @@ session_start();
 								<?php } else { ?>
 									<!-- Utilisateur non connecté -->
 									<li class="btn-cta"><a href="login.html"><span>Connexion</span></a></li>
-									<li class="btn-cta"><a href="learning/add-workshop.php"><span>Créer une Formation</span></a></li>
+									<li class="btn-cta"><a href="learning/workshop/add-workshop.php"><span>Créer une Formation</span></a></li>
 								<?php } ?>
 
 							</ul>

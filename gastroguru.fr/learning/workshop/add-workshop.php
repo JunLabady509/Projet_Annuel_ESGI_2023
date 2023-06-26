@@ -9,7 +9,8 @@ $data = [
     'end_time' => '2023-07-01 12:00:00',
     'instructor_id' => 1234,
     'capacity' => 20,
-    'place' => 'Cuisine Academy'
+    'place' => 'Cuisine Academy',
+    'insight' => '../uploads/WhatsApp Image 2021-06-02 at 11.34.00.jpeg',
 ];
 
 $curl = curl_init();

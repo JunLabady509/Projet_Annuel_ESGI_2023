@@ -141,7 +141,8 @@
 									<?php } else { ?>
 										<!-- Utilisateur non connecté -->
 										<li class="btn-cta"><a href="login.html"><span>Connexion</span></a></li>
-										<li class="btn-cta"><a href="learning/add-workshop.php"><span>Créer une Formation</span></a></li>
+										<li class="btn-cta"><a href="learning/online_lessons/add-online-lesson.php"><span>Créer une
+													Formation</span></a></li>
 									<?php } ?>
 
 								</ul>
@@ -172,6 +173,9 @@
 
 			<div id="fh5co-course">
 
+				<!-- ............................................................................................................................-->
+				<!-- ...................................................APERÇU DES ATELIERS............................................................-->
+
 				<div class="container">
 					<div class="row animate-box">
 						<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
@@ -180,7 +184,6 @@
 								de nos ateliers sur site. Nos professionnels passionnés vous guideront tout au long de l'expérience.</p>
 						</div>
 					</div>
-
 					<div class="row">
 						<?php
 						// Effectuer la requête GET vers l'API des ateliers
@@ -196,19 +199,18 @@
 								$workshopHTML = '
 										<div class="col-md-6 animate-box">
 												<div class="course">
-														<!-- L\'image n\'est pas disponible dans les données renvoyées -->
-														<!-- <a href="#" class="course-img" style="background-image: url(' . $workshop['image'] . ');"></a> -->
+														<a href="#" class="course-img" style="background-image: url(' . "profile_photos/logoG.png" . ');"></a>
 														<div class="desc">
 																<h3><a href="#">' . $workshop['title'] . '</a></h3>
 																<p>' . $workshop['start_time'] . '</p>
 																<p>' . $workshop['end_time'] . '</p>
 																<p>' . $workshop['instructor_id'] . '</p>
-																<span><a href="#" class="btn btn-primary btn-sm btn-course">Rejoindre l\'atelier</a></span>
+																<span><a href="#" class="btn btn-primary btn-sm btn-course">Rejoindre cet atelier</a></span>
 														</div>
 												</div>
 										</div>
 								';
-						
+
 								// Afficher l'atelier
 								echo $workshopHTML;
 							}
@@ -218,7 +220,60 @@
 						?>
 					</div>
 				</div>
-				/* ..........................................................................................................*/
+				<!-- ............................................................................................................................-->
+				<!-- ............................................................................................................................-->
+				<!-- ...................................................APERÇU DES COURS EN LIGNE............................................................-->
+
+				<!-- ...................................................APERÇU DES COURS EN LIGNE............................................................-->
+
+				<div class="container">
+					<div class="row animate-box">
+						<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+							<h2>Nos formations sur Web</h2>
+							<p>Participez à nos leçons de cuisine en ligne. Apprenez à votre propre rythme et découvrez une multitude
+								de recettes, de conseils et de démonstrations culinaires.</p>
+						</div>
+					</div>
+					<div class="row">
+						<?php
+						// Effectuer la requête GET vers l'API des cours en ligne
+						$onlineLessons = file_get_contents('http://localhost:44446/onlinelessons');
+
+						// Vérifier si la requête a réussi
+						if ($onlineLessons !== false) {
+							// Convertir les données JSON en tableau associatif
+							$onlineLessonsData = json_decode($onlineLessons, true);
+							// Parcourir les données des cours en ligne
+							foreach ($onlineLessonsData['online_lessons'] as $onlineLesson) {
+								// Construire le HTML pour un cours en ligne
+								$onlineLessonHTML = '
+					<div class="col-md-6 animate-box">
+						<div class="course">
+							<a href="#" class="course-img" style="background-image: url(' . "profile_photos/logoG.png" . ');"></a>
+							<div class="desc">
+								<h3><a href="#">' . $onlineLesson['title'] . '</a></h3>
+								<p>' . $onlineLesson['start_time'] . '</p>
+								<p>' . $onlineLesson['end_time'] . '</p>
+								<p>' . $onlineLesson['instructor_id'] . '</p>
+								<span><a href="#" class="btn btn-primary btn-sm btn-course">Rejoindre ce cours</a></span>
+							</div>
+						</div>
+					</div>
+				';
+
+								// Afficher le cours en ligne
+								echo $onlineLessonHTML;
+							}
+						} else {
+							echo 'Erreur lors de la récupération des cours en ligne.';
+						}
+						?>
+					</div>
+				</div>
+
+				<!-- ............................................................................................................................-->
+
+
 
 
 				<div id="fh5co-register" style="background-image: url(images/img_bg_2.jpg);">
