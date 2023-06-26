@@ -33,6 +33,7 @@ func workshopsPostOne(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 
+	cache.Drop("/workshops")
 	ctx.Response().Header().Set("Location", "/workshops/"+strconv.Itoa(c.ID))
 	return ctx.NoContent(http.StatusCreated)
 }
@@ -124,7 +125,7 @@ func workshopsPatchOne(ctx echo.Context) error {
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
-	cache.Drop("/users")
+	cache.Drop("/workshops")
 	return ctx.JSON(http.StatusOK, jsonResponse{"workshop": c})
 
 }

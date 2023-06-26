@@ -127,6 +127,7 @@ func CreateAllTables(db *sql.DB) {
 		start_time DATETIME,
 		end_time DATETIME,
 		place VARCHAR(255),
+		insight VARCHAR(255),
 		PRIMARY KEY (id)
 	);
 	`)
@@ -148,15 +149,18 @@ func CreateAllTables(db *sql.DB) {
 		log.Fatal(err)
 	}
 	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS online_lessons (
-		id INT AUTO_INCREMENT,
-		title VARCHAR(255),
-		description TEXT,
-		instructor_id INT,
-		price DECIMAL(5,2),
-		video_link VARCHAR(255),
-		uploaded_time DATETIME,
-		PRIMARY KEY (id)
-	);`)
+			id INT PRIMARY KEY AUTO_INCREMENT,
+			title VARCHAR(255),
+			description TEXT,
+			price DECIMAL(5, 2),
+			start_Time DATETIME,
+			end_Time DATETIME,
+			instructor_ID INT,
+			video_Link JSON,
+			uploaded_Time DATETIME,
+			insight TEXT
+	);
+	`)
 
 	if err != nil {
 		fmt.Println(err)

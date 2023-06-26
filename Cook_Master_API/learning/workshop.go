@@ -12,6 +12,7 @@ type Workshop struct {
 	Learning
 	Capacity int    `json:"capacity"`
 	Place    string `json:"place"`
+	Insight  string `json:"insight"`
 }
 
 func GetAllWorkshops() ([]Workshop, error) {
@@ -25,7 +26,7 @@ func GetAllWorkshops() ([]Workshop, error) {
 
 	for rows.Next() {
 		var w Workshop
-		if err := rows.Scan(&w.ID, &w.Title, &w.Description, &w.Instructor_ID, &w.Capacity, &w.Price, &w.Start_Time, &w.End_Time, &w.Place); err != nil {
+		if err := rows.Scan(&w.ID, &w.Title, &w.Description, &w.Instructor_ID, &w.Capacity, &w.Price, &w.Start_Time, &w.End_Time, &w.Place, &w.Insight); err != nil {
 			return nil, err
 		}
 		workshops = append(workshops, w)
@@ -36,7 +37,7 @@ func GetAllWorkshops() ([]Workshop, error) {
 
 func GetWorkshop(id string) (*Workshop, error) {
 	w := &Workshop{}
-	if err := database.Db.QueryRow("SELECT * FROM workshops WHERE id = ?", id).Scan(&w.ID, &w.Title, &w.Description, &w.Instructor_ID, &w.Capacity, &w.Price, &w.Start_Time, &w.End_Time, &w.Place); err != nil {
+	if err := database.Db.QueryRow("SELECT * FROM workshops WHERE id = ?", id).Scan(&w.ID, &w.Title, &w.Description, &w.Instructor_ID, &w.Capacity, &w.Price, &w.Start_Time, &w.End_Time, &w.Place, &w.Insight); err != nil {
 		return nil, err
 	}
 	return w, nil
@@ -52,8 +53,8 @@ func (w *Workshop) Save() error {
 		return err
 	}
 
-	res, err := database.Db.Exec("INSERT INTO workshops (Title, Description, Instructor_ID, Capacity, Price, Start_Time, End_Time, Place) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-		w.Title, w.Description, w.Instructor_ID, w.Capacity, w.Price, w.Start_Time, w.End_Time, w.Place)
+	res, err := database.Db.Exec("INSERT INTO workshops (Title, Description, Instructor_ID, Capacity, Price, Start_Time, End_Time, Place, Insight) VALUES (?, ?,?, ?, ?, ?, ?, ?, ?)",
+		w.Title, w.Description, w.Instructor_ID, w.Capacity, w.Price, w.Start_Time, w.End_Time, w.Place, w.Insight)
 	if err != nil {
 		fmt.Println("Error:", err)
 		log.Fatal(err)

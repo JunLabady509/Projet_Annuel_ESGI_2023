@@ -1,43 +1,64 @@
 package learning
 
 import (
+	"bytes"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"gastroguru/database"
 	"log"
 )
 
-
 type OnlineLesson struct {
 	Learning
-	Video_Link    string `json:"video_link"`
-	Uploaded_Time string `json:"uploaded_time"`
+	Video_Link    []string `json:"video_link"`
+	Uploaded_Time string   `json:"uploaded_time"`
+	Insight       string   `json:"insight"`
 }
 
 func GetAllOnlineLessons() ([]OnlineLesson, error) {
 	rows, err := database.Db.Query("SELECT * FROM online_lessons")
 	if err != nil {
-		return nil, err
+		log.Fatal(err)
 	}
 	defer rows.Close()
 
-	online_lessons := []OnlineLesson{}
+	onlineLessons := []OnlineLesson{}
 
 	for rows.Next() {
 		var o OnlineLesson
-		if err := rows.Scan(&o.ID, &o.Title, &o.Description,
-			&o.Instructor_ID, &o.Price, &o.Video_Link, &o.Uploaded_Time); err != nil {
+
+		var tempVideoLink []byte
+
+		if err := rows.Scan(&o.ID, &o.Title, &o.Description, &o.Price, &o.Start_Time, &o.End_Time, &o.Instructor_ID, &tempVideoLink, &o.Uploaded_Time, &o.Insight); err != nil {
 			return nil, err
 		}
-		online_lessons = append(online_lessons, o)
+
+		// Convertir tempVideoLink en []string en utilisant un délimiteur
+		Video_Link := bytes.Split(tempVideoLink, []byte{'|'})
+		Video_LinkStrings := make([]string, len(Video_Link))
+		for i, link := range Video_Link {
+			Video_LinkStrings[i] = string(link)
+		}
+		o.Video_Link = Video_LinkStrings
+		onlineLessons = append(onlineLessons, o)
 	}
-	return online_lessons, nil
+
+	return onlineLessons, nil
 }
 
 func GetOnlineLesson(id string) (*OnlineLesson, error) {
 	o := &OnlineLesson{}
-	if err := database.Db.QueryRow("SELECT * FROM online_lessons WHERE id = ?", id).Scan(&o.ID, &o.Title, &o.Description, &o.Instructor_ID, &o.Price, &o.Video_Link, &o.Uploaded_Time); err != nil {
+	var videoLinkJSON string
+	if err := database.Db.QueryRow("SELECT * FROM online_lessons WHERE id = ?", id).Scan(&o.ID, &o.Title, &o.Description, &o.Instructor_ID, &o.Price, &o.Start_Time, &o.End_Time, &videoLinkJSON, &o.Uploaded_Time, &o.Insight); err != nil {
 		return nil, err
 	}
+
+	err := json.Unmarshal([]byte(videoLinkJSON), &o.Video_Link)
+	if err != nil {
+		return nil, err
+	}
+
 	return o, nil
 }
 
@@ -50,40 +71,50 @@ func (o *OnlineLesson) Save() error {
 	if err := o.Validate(); err != nil {
 		return err
 	}
-	res, err := database.Db.Exec("INSERT INTO online_lessons (title, description, instructor_id, price, video_link, uploaded_time) VALUES (?, ?, ?, ?, ?, ?)", o.Title, o.Description, o.Instructor_ID, o.Price, o.Video_Link, o.Uploaded_Time)
+
+	tempVideoLink, err := json.Marshal(o.Video_Link)
 	if err != nil {
-		fmt.Println(err)
+		return err
+	}
+
+	res, err := database.Db.Exec("INSERT INTO online_lessons (title, description, instructor_id, price, start_time, end_time, video_link, uploaded_time, insight) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+		o.Title, o.Description, o.Instructor_ID, o.Price, o.Start_Time, o.End_Time, tempVideoLink, o.Uploaded_Time, o.Insight)
+	if err != nil {
+		fmt.Println("Error:", err)
 		log.Fatal(err)
 	}
 
 	id, err := res.LastInsertId()
 	if err != nil {
 		log.Fatal(err)
-		return err
 	}
-	o.ID = int(id)
 
+	o.ID = int(id)
 	return nil
 }
 
 func (o *OnlineLesson) Validate() error {
 	if o.Title == "" {
-		return fmt.Errorf("title cannot be empty")
+		return errors.New("title cannot be empty")
 	}
 	if o.Description == "" {
-		return fmt.Errorf("description cannot be empty")
+		return errors.New("description cannot be empty")
 	}
 	if o.Instructor_ID == 0 {
-		return fmt.Errorf("instructor ID cannot be empty")
+		return errors.New("instructor_id must be greater than 0")
 	}
-	if o.Price == 0 {
-		return fmt.Errorf("price cannot be empty")
+	if o.Price <= 0 {
+		return errors.New("price must be greater than 0")
 	}
-	if o.Video_Link == "" {
-		return fmt.Errorf("video Link cannot be empty")
+	if o.Start_Time == "" || o.End_Time == "" {
+		return errors.New("start_time and end_time must be valid dates")
 	}
 	if o.Uploaded_Time == "" {
-		return fmt.Errorf("uploaded Time cannot be empty")
+		return errors.New("uploaded_time cannot be empty")
 	}
+	if len(o.Video_Link) == 0 {
+		return errors.New("video_link cannot be empty")
+	}
+
 	return nil
 }
