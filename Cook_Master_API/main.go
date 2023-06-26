@@ -27,6 +27,7 @@ func main() {
 	handlers.InitWorkshopsRouter(e)
 	handlers.InitHomeCoursesRouter(e)
 	handlers.InitOnlineCoursesRouter(e)
+	handlers.InitProfessionalTrainingsRouter(e)
 
 	e.Logger.Fatal(e.Start(":44446"))
 

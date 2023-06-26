@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"gastroguru/cache"
 	"gastroguru/database"
-	"gastroguru/workshop"
+	"gastroguru/learning"
+
 	"net/http"
 	"strconv"
 	"strings"
@@ -14,10 +15,10 @@ import (
 )
 
 func workshopsPostOne(ctx echo.Context) error {
-	c := new(workshop.Workshop)
+	c := new(learning.Workshop)
 	err := ctx.Bind(c)
 	if err != nil {
-		fmt.Println("Error Binding")
+		fmt.Println("Error:", err)
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
@@ -37,7 +38,7 @@ func workshopsPostOne(ctx echo.Context) error {
 }
 
 func workshopsGetAll(ctx echo.Context) error {
-	workshops, err := workshop.GetAllworkshops()
+	workshops, err := learning.GetAllWorkshops()
 	if err != nil {
 		fmt.Println("Error getting all workshops")
 		fmt.Println(err)
@@ -58,7 +59,7 @@ func workshopsGetOne(ctx echo.Context) error {
 
 	id := ctx.Param("id")
 
-	c, err := workshop.Getworkshop(id)
+	c, err := learning.GetWorkshop(id)
 	if err != nil {
 		switch err {
 		case sql.ErrNoRows:
@@ -75,7 +76,7 @@ func workshopsGetOne(ctx echo.Context) error {
 }
 
 func workshopsPutOne(ctx echo.Context) error {
-	c := new(workshop.Workshop)
+	c := new(learning.Workshop)
 	err := ctx.Bind(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
@@ -98,7 +99,7 @@ func workshopsPatchOne(ctx echo.Context) error {
 
 	id := ctx.Param("id")
 
-	c, err := workshop.Getworkshop(id)
+	c, err := learning.GetWorkshop(id)
 	if err != nil {
 		switch err {
 		case sql.ErrNoRows:
@@ -132,7 +133,7 @@ func workshopsDeleteOne(ctx echo.Context) error {
 
 	id := ctx.Param("id")
 
-	err := workshop.Deleteworkshop(id)
+	err := learning.DeleteWorkshop(id)
 	if err != nil {
 		switch err {
 		case sql.ErrNoRows:

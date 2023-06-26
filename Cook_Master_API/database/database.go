@@ -122,11 +122,11 @@ func CreateAllTables(db *sql.DB) {
 		title VARCHAR(255),
 		description TEXT, 
 		instructor_id INT,
-		location VARCHAR(100),
 		capacity INT,
 		price DECIMAL(5,2),
 		start_time DATETIME,
 		end_time DATETIME,
+		place VARCHAR(255),
 		PRIMARY KEY (id)
 	);
 	`)
@@ -138,8 +138,6 @@ func CreateAllTables(db *sql.DB) {
 		title VARCHAR(255),
 		description TEXT, 
 		instructor_id INT,
-		client_id INT,
-		location VARCHAR(100),
 		price DECIMAL(5,2),
 		start_time DATETIME,
 		end_time DATETIME,
@@ -164,4 +162,21 @@ func CreateAllTables(db *sql.DB) {
 		fmt.Println(err)
 		log.Fatal(err)
 	}
+
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS professional_trainings (
+			ID INT AUTO_INCREMENT PRIMARY KEY,
+			Title VARCHAR(255) NOT NULL,
+			Description TEXT NOT NULL,
+			Instructor_ID INT NOT NULL,
+			Duration INT NOT NULL,
+			Capacity INT NOT NULL,
+			Schedule VARCHAR(255) NOT NULL,
+			Certificate BOOL NOT NULL,
+			Place VARCHAR(255) NOT NULL
+		)
+	`)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
