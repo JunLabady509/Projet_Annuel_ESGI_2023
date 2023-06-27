@@ -55,12 +55,16 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
 </head>
 
 <body>
 
 	<div class="fh5co-loader"></div>
-
 	<div id="page">
 		<div id="page">
 			<nav class="fh5co-nav" role="navigation">
@@ -141,7 +145,7 @@
 									<?php } else { ?>
 										<!-- Utilisateur non connecté -->
 										<li class="btn-cta"><a href="login.html"><span>Connexion</span></a></li>
-										<li class="btn-cta"><a href="learning/online_lessons/add-online-lesson.php"><span>Créer une
+										<li class="btn-cta"><a href="learning/home_courses/create-home-course.php"><span>Créer une
 													Formation</span></a></li>
 									<?php } ?>
 
@@ -171,12 +175,12 @@
 				</div>
 			</aside>
 
+					
+
+			<!-- ............................................................................................................................-->
+			<!-- ...................................................APERÇU DES ATELIERS............................................................-->
 			<div id="fh5co-course">
-
-				<!-- ............................................................................................................................-->
-				<!-- ...................................................APERÇU DES ATELIERS............................................................-->
-
-				<div class="container">
+				<div class="container" style="border-bottom: 1px solid #ccc;">
 					<div class="row animate-box">
 						<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
 							<h2>Nos Ateliers</h2>
@@ -185,48 +189,58 @@
 						</div>
 					</div>
 					<div class="row">
-						<?php
-						// Effectuer la requête GET vers l'API des ateliers
-						$workshops = file_get_contents('http://localhost:44446/workshops');
+						<div class="col-md-12">
+							<div class="owl-carousel owl-theme">
+								<?php
+								// Effectuer la requête GET vers l'API des ateliers
+								$workshops = file_get_contents('http://localhost:44446/workshops');
 
-						// Vérifier si la requête a réussi
-						if ($workshops !== false) {
-							// Convertir les données JSON en tableau associatif
-							$workshopsData = json_decode($workshops, true);
-							// Parcourir les données des ateliers
-							foreach ($workshopsData['workshops'] as $workshop) {
-								// Construire le HTML pour un atelier
-								$workshopHTML = '
-										<div class="col-md-6 animate-box">
-												<div class="course">
-														<a href="#" class="course-img" style="background-image: url(' . "profile_photos/logoG.png" . ');"></a>
-														<div class="desc">
+								// Vérifier si la requête a réussi
+								if ($workshops !== false) {
+									// Convertir les données JSON en tableau associatif
+									$workshopsData = json_decode($workshops, true);
+									// Parcourir les données des ateliers
+								
+									$count = 0;
+									foreach ($workshopsData['workshops'] as $workshop) {
+										// Construire le HTML pour un atelier
+										$workshopHTML = '
+										<div class="item">
+								<div class="course">
+									<a href="#" class="course-img" style="background-image: url(' . "profile_photos/logoG.png" . ');"></a>
+									<div class="desc">
 																<h3><a href="#">' . $workshop['title'] . '</a></h3>
 																<p>' . $workshop['start_time'] . '</p>
 																<p>' . $workshop['end_time'] . '</p>
 																<p>' . $workshop['instructor_id'] . '</p>
-																<span><a href="#" class="btn btn-primary btn-sm btn-course">Rejoindre cet atelier</a></span>
-														</div>
-												</div>
-										</div>
-								';
+																<span><a href="#" class="btn btn-primary btn-sm btn-course">Participer à cet atelier</a></span>
+																</div>
+																</div>
+															</div>
+														';
 
-								// Afficher l'atelier
-								echo $workshopHTML;
-							}
-						} else {
-							echo 'Erreur lors de la récupération des ateliers.';
-						}
-						?>
+										// Afficher l'atelier
+										echo $workshopHTML;
+										$count++;
+										// Si le nombre de cours affichés atteint 2, arrêter la boucle
+										if ($count == 2) {
+											break;
+										}
+									}
+								} else {
+									echo 'Erreur lors de la récupération des ateliers.';
+								}
+								?>
+							</div>
+						</div>
 					</div>
 				</div>
-				<!-- ............................................................................................................................-->
-				<!-- ............................................................................................................................-->
-				<!-- ...................................................APERÇU DES COURS EN LIGNE............................................................-->
+			
+			<!-- ............................................................................................................................-->
 
-				<!-- ...................................................APERÇU DES COURS EN LIGNE............................................................-->
-
-				<div class="container">
+			<!-- ...................................................APERÇU DES COURS EN LIGNE............................................................-->
+			<div id="fh5co-course">
+				<div class="container" style="border-bottom: 1px solid #ccc;">
 					<div class="row animate-box">
 						<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
 							<h2>Nos formations sur Web</h2>
@@ -235,175 +249,263 @@
 						</div>
 					</div>
 					<div class="row">
-						<?php
-						// Effectuer la requête GET vers l'API des cours en ligne
-						$onlineLessons = file_get_contents('http://localhost:44446/onlinelessons');
+						<div class="col-md-12">
+							<div class="owl-carousel owl-theme">
+								<?php
+								// Effectuer la requête GET vers l'API des cours en ligne
+								$onlineLessons = file_get_contents('http://localhost:44446/onlinelessons');
+								// Vérifier si la requête a réussi
+								if ($onlineLessons !== false) {
+									// Convertir les données JSON en tableau associatif
+									$onlineLessonsData = json_decode($onlineLessons, true);
+									// Parcourir les données des cours en ligne
+									$count = 0; // Compteur pour suivre le nombre de cours affichés
+									foreach ($onlineLessonsData['online_lessons'] as $onlineLesson) {
+										// Construire le HTML pour un cours en ligne
+										$onlineLessonHTML = '
+							<div class="item">
+								<div class="course">
+									<a href="#" class="course-img" style="background-image: url(' . "profile_photos/logoG.png" . ');"></a>
+									<div class="desc">
+										<h3><a href="#">' . $onlineLesson['title'] . '</a></h3>
+										<p>' . $onlineLesson['start_time'] . '</p>
+										<p>' . $onlineLesson['end_time'] . '</p>
+										<p>' . $onlineLesson['instructor_id'] . '</p>
+										<span><a href="#" class="btn btn-primary btn-sm btn-course">Rejoindre ce cours</a></span>
+									</div>
+								</div>
+							</div>
+						';
+										// Afficher le cours en ligne
+										echo $onlineLessonHTML;
 
-						// Vérifier si la requête a réussi
-						if ($onlineLessons !== false) {
-							// Convertir les données JSON en tableau associatif
-							$onlineLessonsData = json_decode($onlineLessons, true);
-							// Parcourir les données des cours en ligne
-							foreach ($onlineLessonsData['online_lessons'] as $onlineLesson) {
-								// Construire le HTML pour un cours en ligne
-								$onlineLessonHTML = '
-					<div class="col-md-6 animate-box">
-						<div class="course">
-							<a href="#" class="course-img" style="background-image: url(' . "profile_photos/logoG.png" . ');"></a>
-							<div class="desc">
-								<h3><a href="#">' . $onlineLesson['title'] . '</a></h3>
-								<p>' . $onlineLesson['start_time'] . '</p>
-								<p>' . $onlineLesson['end_time'] . '</p>
-								<p>' . $onlineLesson['instructor_id'] . '</p>
-								<span><a href="#" class="btn btn-primary btn-sm btn-course">Rejoindre ce cours</a></span>
+										$count++;
+										// Si le nombre de cours affichés atteint 2, arrêter la boucle
+										if ($count == 2) {
+											break;
+										}
+									}
+								} else {
+									echo 'Erreur lors de la récupération des cours en ligne.';
+								}
+								?>
 							</div>
 						</div>
 					</div>
-				';
-
-								// Afficher le cours en ligne
-								echo $onlineLessonHTML;
-							}
-						} else {
-							echo 'Erreur lors de la récupération des cours en ligne.';
-						}
-						?>
-					</div>
-				</div>
-
-				<!-- ............................................................................................................................-->
-
-
-
-
-				<div id="fh5co-register" style="background-image: url(images/img_bg_2.jpg);">
-					<div class="overlay"></div>
 					<div class="row">
-						<div class="col-md-8 col-md-offset-2 animate-box">
-							<div class="date-counter text-center">
-								<h2>Get 400 of Online Courses for Free</h2>
-								<h3>By Mike Smith</h3>
-								<div class="simply-countdown simply-countdown-one"></div>
-								<p><strong>Limited Offer, Hurry Up!</strong></p>
-								<p><a href="#" class="btn btn-primary btn-lg btn-reg">Register Now!</a></p>
-							</div>
+					</div>
+				</div>
+			</div>
+			<!-- ............................................................................................................................-->
+
+			<!-- ...................................................APERÇU DES COURS À DOMICILE............................................................-->
+			<div class="container" style="border-bottom: 1px solid #ccc;">
+				<div class="row animate-box">
+					<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+						<h2>Nos cours à domicile</h2>
+						<p>Participez à nos cours de cuisine à domicile. Apprenez de nouvelles recettes et techniques culinaires
+							chez vous, encadrés par nos chefs expérimentés.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="owl-carousel owl-theme">
+							<?php
+							// Effectuer la requête GET vers l'API des cours à domicile prévus
+							$homeCourses = file_get_contents('http://localhost:44446/homecourses');
+
+							// Vérifier si la requête a réussi
+							if ($homeCourses !== false) {
+								// Convertir les données JSON en tableau associatif
+								$homeCoursesData = json_decode($homeCourses, true);
+								// Parcourir les données des cours en ligne
+								$count = 0; // Compteur pour suivre le nombre de cours affichés
+								foreach ($homeCoursesData['homecourses'] as $homeCourse) {
+									// Construire le HTML pour un cours à domicile prévu
+									$homeCourseHTML = '
+										<div class="item">
+										<div class="course">
+											<a href="#" class="course-img" style="background-image: url(' . "profile_photos/logoG.png" . ');"></a>
+											<div class="desc">
+            <h3><a href="#">' . $homeCourse['title'] . '</a></h3>
+            <p>' . $homeCourse['start_time'] . '</p>
+            <p>' . $homeCourse['end_time'] . '</p>
+            <p>' . $homeCourse['instructor_id'] . '</p>
+						<span><a href="#" class="btn btn-primary btn-sm btn-course">Rejoindre ce cours</a></span>
 						</div>
 					</div>
 				</div>
+			';
 
-				<footer id="fh5co-footer" role="contentinfo" style="background-image: url(images/img_bg_4.jpg);">
-					<div class="overlay"></div>
-					<div class="container">
-						<div class="row row-pb-md">
-							<div class="col-md-3 fh5co-widget">
-								<h3>About Education</h3>
-								<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci
-									architecto culpa amet.</p>
-							</div>
-							<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
-								<h3>Learning</h3>
-								<ul class="fh5co-footer-links">
-									<li><a href="#">Course</a></li>
-									<li><a href="#">Blog</a></li>
-									<li><a href="#">Contact</a></li>
-									<li><a href="#">Terms</a></li>
-									<li><a href="#">Meetups</a></li>
-								</ul>
-							</div>
-
-							<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
-								<h3>Learn &amp; Grow</h3>
-								<ul class="fh5co-footer-links">
-									<li><a href="#">Blog</a></li>
-									<li><a href="#">Privacy</a></li>
-									<li><a href="#">Testimonials</a></li>
-									<li><a href="#">Handbook</a></li>
-									<li><a href="#">Held Desk</a></li>
-								</ul>
-							</div>
-
-							<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
-								<h3>Engage us</h3>
-								<ul class="fh5co-footer-links">
-									<li><a href="#">Marketing</a></li>
-									<li><a href="#">Visual Assistant</a></li>
-									<li><a href="#">System Analysis</a></li>
-									<li><a href="#">Advertise</a></li>
-								</ul>
-							</div>
-
-							<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
-								<h3>Legal</h3>
-								<ul class="fh5co-footer-links">
-									<li><a href="#">Find Designers</a></li>
-									<li><a href="#">Find Developers</a></li>
-									<li><a href="#">Teams</a></li>
-									<li><a href="#">Advertise</a></li>
-									<li><a href="#">API</a></li>
-								</ul>
-							</div>
+									// Afficher le cours à domicile prévu
+									echo $homeCourseHTML;
+									$count++;
+									// Si le nombre de cours affichés atteint 2, arrêter la boucle
+									if ($count == 2) {
+										break;
+									}
+								}
+							} else {
+								echo 'Erreur lors de la récupération des cours à domicile prévus.';
+							}
+							?>
 						</div>
-
-						<div class="row copyright">
-							<div class="col-md-12 text-center">
-								<p>
-									<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
-									<small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo
-										Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> &amp; <a
-											href="https://www.pexels.com/" target="_blank">Pexels</a></small>
-								</p>
-							</div>
-						</div>
-
 					</div>
-				</footer>
+				</div>
 			</div>
 
-			<div class="gototop js-top">
-				<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+			<!-- ............................................................................................................................-->
+
+
+			</div>
+			<div id="fh5co-register" style="background-image: url(images/img_bg_2.jpg);">
+				<div class="overlay"></div>
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 animate-box">
+						<div class="date-counter text-center">
+							<h2>Get 400 of Online Courses for Free</h2>
+							<h3>By Mike Smith</h3>
+							<div class="simply-countdown simply-countdown-one"></div>
+							<p><strong>Limited Offer, Hurry Up!</strong></p>
+							<p><a href="#" class="btn btn-primary btn-lg btn-reg">Register Now!</a></p>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<!-- jQuery -->
-			<script src="js/jquery.min.js"></script>
-			<!-- jQuery Easing -->
-			<script src="js/jquery.easing.1.3.js"></script>
-			<!-- Bootstrap -->
-			<script src="js/bootstrap.min.js"></script>
-			<!-- Waypoints -->
-			<script src="js/jquery.waypoints.min.js"></script>
-			<!-- Stellar Parallax -->
-			<script src="js/jquery.stellar.min.js"></script>
-			<!-- Carousel -->
-			<script src="js/owl.carousel.min.js"></script>
-			<!-- Flexslider -->
-			<script src="js/jquery.flexslider-min.js"></script>
-			<!-- countTo -->
-			<script src="js/jquery.countTo.js"></script>
-			<!-- Magnific Popup -->
-			<script src="js/jquery.magnific-popup.min.js"></script>
-			<script src="js/magnific-popup-options.js"></script>
-			<!-- Count Down -->
-			<script src="js/simplyCountdown.js"></script>
-			<!-- Main -->
-			<script src="js/main.js"></script>
-			<script>
-				var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
+			<footer id="fh5co-footer" role="contentinfo" style="background-image: url(images/img_bg_4.jpg);">
+				<div class="overlay"></div>
+				<div class="container">
+					<div class="row row-pb-md">
+						<div class="col-md-3 fh5co-widget">
+							<h3>About Education</h3>
+							<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci
+								architecto culpa amet.</p>
+						</div>
+						<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
+							<h3>Learning</h3>
+							<ul class="fh5co-footer-links">
+								<li><a href="#">Course</a></li>
+								<li><a href="#">Blog</a></li>
+								<li><a href="#">Contact</a></li>
+								<li><a href="#">Terms</a></li>
+								<li><a href="#">Meetups</a></li>
+							</ul>
+						</div>
 
-				// default example
-				simplyCountdown('.simply-countdown-one', {
-					year: d.getFullYear(),
-					month: d.getMonth() + 1,
-					day: d.getDate()
-				});
+						<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
+							<h3>Learn &amp; Grow</h3>
+							<ul class="fh5co-footer-links">
+								<li><a href="#">Blog</a></li>
+								<li><a href="#">Privacy</a></li>
+								<li><a href="#">Testimonials</a></li>
+								<li><a href="#">Handbook</a></li>
+								<li><a href="#">Held Desk</a></li>
+							</ul>
+						</div>
 
-				//jQuery example
-				$('#simply-countdown-losange').simplyCountdown({
-					year: d.getFullYear(),
-					month: d.getMonth() + 1,
-					day: d.getDate(),
-					enableUtc: false
+						<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
+							<h3>Engage us</h3>
+							<ul class="fh5co-footer-links">
+								<li><a href="#">Marketing</a></li>
+								<li><a href="#">Visual Assistant</a></li>
+								<li><a href="#">System Analysis</a></li>
+								<li><a href="#">Advertise</a></li>
+							</ul>
+						</div>
+
+						<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
+							<h3>Legal</h3>
+							<ul class="fh5co-footer-links">
+								<li><a href="#">Find Designers</a></li>
+								<li><a href="#">Find Developers</a></li>
+								<li><a href="#">Teams</a></li>
+								<li><a href="#">Advertise</a></li>
+								<li><a href="#">API</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="row copyright">
+						<div class="col-md-12 text-center">
+							<p>
+								<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
+								<small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo
+									Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> &amp; <a
+										href="https://www.pexels.com/" target="_blank">Pexels</a></small>
+							</p>
+						</div>
+					</div>
+
+				</div>
+			</footer>
+		</div>
+
+		<div class="gototop js-top">
+			<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+		</div>
+
+		<!-- jQuery -->
+		<script src="js/jquery.min.js"></script>
+		<!-- jQuery Easing -->
+		<script src="js/jquery.easing.1.3.js"></script>
+		<!-- Bootstrap -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- Waypoints -->
+		<script src="js/jquery.waypoints.min.js"></script>
+		<!-- Stellar Parallax -->
+		<script src="js/jquery.stellar.min.js"></script>
+		<!-- Carousel -->
+		<script src="js/owl.carousel.min.js"></script>
+		<!-- Flexslider -->
+		<script src="js/jquery.flexslider-min.js"></script>
+		<!-- countTo -->
+		<script src="js/jquery.countTo.js"></script>
+		<!-- Magnific Popup -->
+		<script src="js/jquery.magnific-popup.min.js"></script>
+		<script src="js/magnific-popup-options.js"></script>
+		<!-- Count Down -->
+		<script src="js/simplyCountdown.js"></script>
+		<!-- Main -->
+		<script src="js/main.js"></script>
+		<script>
+			var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
+
+			// default example
+			simplyCountdown('.simply-countdown-one', {
+				year: d.getFullYear(),
+				month: d.getMonth() + 1,
+				day: d.getDate()
+			});
+
+			//jQuery example
+			$('#simply-countdown-losange').simplyCountdown({
+				year: d.getFullYear(),
+				month: d.getMonth() + 1,
+				day: d.getDate(),
+				enableUtc: false
+			});
+		</script>
+
+		<script>
+			$(document).ready(function () {
+				$(".owl-carousel").owlCarousel({
+					loop: true,
+					nav: true,
+					dots: false,
+					responsive: {
+						0: {
+							items: 1
+						},
+						768: {
+							items: 2
+						}
+					}
 				});
-			</script>
+			});
+		</script>
+
+
 </body>
 
 </html>

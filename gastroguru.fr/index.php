@@ -146,8 +146,8 @@ session_start();
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 											aria-expanded="false">
 											<span class="user-name">
-												<?php echo $userLastName ; ?>
-								</span>
+												<?php echo $userLastName; ?>
+											</span>
 										</a>
 										<ul class="dropdown-menu">
 											<li><a href="my_profile.php">Mon Profil</a></li>
@@ -158,7 +158,8 @@ session_start();
 								<?php } else { ?>
 									<!-- Utilisateur non connecté -->
 									<li class="btn-cta"><a href="login.html"><span>Connexion</span></a></li>
-									<li class="btn-cta"><a href="learning/workshop/add-workshop.php"><span>Créer une Formation</span></a></li>
+									<li class="btn-cta"><a href="events/create-event.php"><span>Créer une
+												Formation</span></a></li>
 								<?php } ?>
 
 							</ul>
@@ -297,90 +298,28 @@ session_start();
 					<div class="col-md-10 col-md-offset-1">
 						<div class="row">
 							<div class="col-md-3 col-sm-6 text-center animate-box">
-								<span class="icon"><i class="icon-world"></i></span>
-								<span class="fh5co-counter js-counter" data-from="0" data-to="3297" data-speed="5000"
-									data-refresh-interval="50"></span>
-								<span class="fh5co-counter-label">Foreign Followers</span>
-							</div>
-							<div class="col-md-3 col-sm-6 text-center animate-box">
 								<span class="icon"><i class="icon-study"></i></span>
 								<span class="fh5co-counter js-counter" data-from="0" data-to="3700" data-speed="5000"
 									data-refresh-interval="50"></span>
-								<span class="fh5co-counter-label">Students Enrolled</span>
+								<span class="fh5co-counter-label">Membres</span>
 							</div>
 							<div class="col-md-3 col-sm-6 text-center animate-box">
 								<span class="icon"><i class="icon-bulb"></i></span>
 								<span class="fh5co-counter js-counter" data-from="0" data-to="5034" data-speed="5000"
 									data-refresh-interval="50"></span>
-								<span class="fh5co-counter-label">Classes Complete</span>
+								<span class="fh5co-counter-label">Formations Disponible</span>
 							</div>
 							<div class="col-md-3 col-sm-6 text-center animate-box">
 								<span class="icon"><i class="icon-head"></i></span>
 								<span class="fh5co-counter js-counter" data-from="0" data-to="1080" data-speed="5000"
 									data-refresh-interval="50"></span>
-								<span class="fh5co-counter-label">Certified Teachers</span>
+								<span class="fh5co-counter-label">Professeurs Certifiés</span>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="fh5co-course">
-			<div class="container">
-				<div class="row animate-box">
-					<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-						<h2>Our Course</h2>
-						<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab
-							aliquam dolor eius.</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 animate-box">
-						<div class="course">
-							<a href="#" class="course-img" style="background-image: url(images/project-1.jpg);">
-							</a>
-							<div class="desc">
-								<h3><a href="#">Web Master</a></h3>
-								<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit
-									ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-								<span><a href="#" class="btn btn-primary btn-sm btn-course">Take A Course</a></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 animate-box">
-						<div class="course">
-							<a href="#" class="course-img" style="background-image: url(images/project-2.jpg);">
-							</a>
-							<div class="desc">
-								<h3><a href="#">Business &amp; Accounting</a></h3>
-								<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit
-									ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-								<span><a href="#" class="btn btn-primary btn-sm btn-course">Take A Course</a></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 animate-box">
-						<div class="course">
-							<a href="#" class="course-img" style="background-image: url(images/project-3.jpg);">
-							</a>
-							<div class="desc">
-								<h3><a href="#">Science &amp; Technology</a></h3>
-								<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit
-									ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-								<span><a href="#" class="btn btn-primary btn-sm btn-course">Take A Course</a></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 animate-box">
-						<div class="course">
-							<a href="#" class="course-img" style="background-image: url(images/project-4.jpg);">
-							</a>
-							<div class="desc">
-								<h3><a href="#">Health &amp; Psychology</a></h3>
-								<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit
-									ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-								<span><a href="#" class="btn btn-primary btn-sm btn-course">Take A Course</a></span>
+							<div class="col-md-3 col-sm-6 text-center animate-box">
+								<span class="icon"><i class="icon-world"></i></span>
+								<span class="fh5co-counter js-counter" data-from="0" data-to="3297" data-speed="5000"
+									data-refresh-interval="50"></span>
+								<span class="fh5co-counter-label">Recettes Partagées</span>
 							</div>
 						</div>
 					</div>
@@ -449,15 +388,50 @@ session_start();
 					</div>
 				</div>
 				<div class="row row-padded-mb">
-					<div class="col-md-4 animate-box">
-						<div class="fh5co-event">
-							<div class="date text-center"><span>15<br>Mar.</span></div>
-							<h3><a href="#">USA, International Triathlon Event</a></h3>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-								blind texts.</p>
-							<p><a href="#">Read More</a></p>
-						</div>
-					</div>
+					<?php
+					$response = file_get_contents('http://localhost:44446/events');
+					if ($response === false) {
+						echo "Erreur lors de la récupération des événements";
+						return;
+					}
+
+					$data = json_decode($response, true);
+					if ($data === null || !isset($data['events'])) {
+						echo "Erreur lors du décodage de la réponse JSON ou données manquantes";
+						return;
+					}
+
+					$events = $data['events'];
+
+					$eventHTML = ''; // Initialise la variable
+					
+					foreach ($events as $event) {
+						$dateString = $event['date'];
+
+						// Convertir la chaîne de date en objet DateTime
+						$date = new DateTime($dateString);
+						// Récupérer le jour
+						$day = $date->format('d');
+						// Récupérer le mois (en texte complet, en anglais)
+						$monthName = $date->format('F');
+
+						// Accédez aux données de chaque événement en utilisant $event['property_name']
+						// Par exemple, $event['title'], $event['description'], $event['date'], etc.
+						$eventHTML .= '
+    <div class="col-md-4 animate-box">
+        <div class="fh5co-event">
+            <div class="date text-center"><span>' . $day . '<br>' . $monthName . '</span></div>
+            <h3><a href="#">' . $event['title'] . '</a></h3>
+            <p>'.$event['description'].'</p>
+            <p><a href="#">Read More</a></p>
+        </div>
+    </div>';
+					}
+
+					echo $eventHTML;
+					// Assurez-vous d'adapter le code en fonction de votre structure de données JSON spécifique
+					?>
+
 					<div class="col-md-4 animate-box">
 						<div class="fh5co-event">
 							<div class="date text-center"><span>15<br>Mar.</span></div>
