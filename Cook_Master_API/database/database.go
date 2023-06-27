@@ -138,10 +138,12 @@ func CreateAllTables(db *sql.DB) {
 		id INT AUTO_INCREMENT,
 		title VARCHAR(255),
 		description TEXT, 
-		instructor_id INT,
 		price DECIMAL(5,2),
 		start_time DATETIME,
 		end_time DATETIME,
+		instructor_id INT,
+		Duration INT,
+		Address VARCHAR(255),
 		PRIMARY KEY (id)
 	);
 	`)
@@ -179,6 +181,23 @@ func CreateAllTables(db *sql.DB) {
 			Place VARCHAR(255) NOT NULL
 		)
 	`)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS events (
+    id VARCHAR(36) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    date DATETIME NOT NULL,
+    duration INT NOT NULL,
+    location VARCHAR(255),
+    capacity INT,
+    price DECIMAL(10, 2),
+    image VARCHAR(255),
+    type VARCHAR(255)
+);`)
+
 	if err != nil {
 		log.Fatal(err)
 	}

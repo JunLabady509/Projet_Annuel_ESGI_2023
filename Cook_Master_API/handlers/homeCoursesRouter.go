@@ -6,15 +6,6 @@ import (
 	"github.com/labstack/echo"
 )
 
-/*
-Il reste à faire:
-Configurer le middleware BasicAuth pour certaines routes
-Comme pour : PUT, PATCH, DELETE
-Mettre en place le système d'Autorisation pour les routes
-en fonction du rôle de l'utilisateur
-
-*/
-
 func InitHomeCoursesRouter(e *echo.Echo) {
 	h := e.Group("/homecourses")
 

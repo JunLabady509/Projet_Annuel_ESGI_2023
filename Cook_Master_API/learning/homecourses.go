@@ -2,7 +2,6 @@ package learning
 
 import (
 	"errors"
-	"fmt"
 	"gastroguru/database"
 	"log"
 	"time"
@@ -11,34 +10,35 @@ import (
 type HomeCourse struct {
 	Learning
 	Duration time.Duration `json:"duration"`
-	Capacity int           `json:"capacity"`
+	Address  string        `json:"address"`
 }
 
 func GetAllHomeCourses() ([]HomeCourse, error) {
 	rows, err := database.Db.Query("SELECT * FROM home_courses")
 	if err != nil {
-		return nil, err
+		log.Fatal(err)
 	}
 	defer rows.Close()
 
 	homeCourses := []HomeCourse{}
 
 	for rows.Next() {
-		var h HomeCourse
-		if err := rows.Scan(&h.ID, &h.Title, &h.Description, &h.Instructor_ID, &h.Price, &h.Start_Time, &h.End_Time, &h.Duration, &h.Capacity); err != nil {
+		var hc HomeCourse
+		if err := rows.Scan(&hc.ID, &hc.Title, &hc.Description, &hc.Price, &hc.Start_Time, &hc.End_Time, &hc.Instructor_ID, &hc.Duration, &hc.Address); err != nil {
 			return nil, err
 		}
-		homeCourses = append(homeCourses, h)
+		homeCourses = append(homeCourses, hc)
 	}
+
 	return homeCourses, nil
 }
 
 func GetHomeCourse(id string) (*HomeCourse, error) {
-	h := &HomeCourse{}
-	if err := database.Db.QueryRow("SELECT * FROM home_courses WHERE id = ?", id).Scan(&h.ID, &h.Title, &h.Description, &h.Instructor_ID, &h.Price, &h.Start_Time, &h.End_Time, &h.Duration, &h.Capacity); err != nil {
+	hc := &HomeCourse{}
+	if err := database.Db.QueryRow("SELECT * FROM home_courses WHERE id = ?", id).Scan(&hc.ID, &hc.Title, &hc.Description, &hc.Price, &hc.Start_Time, &hc.End_Time, &hc.Instructor_ID, &hc.Duration, &hc.Address); err != nil {
 		return nil, err
 	}
-	return h, nil
+	return hc, nil
 }
 
 func DeleteHomeCourse(id string) error {
@@ -46,14 +46,14 @@ func DeleteHomeCourse(id string) error {
 	return err
 }
 
-func (h *HomeCourse) Save() error {
-	if err := h.Validate(); err != nil {
+func (hc *HomeCourse) Save() error {
+	if err := hc.Validate(); err != nil {
 		return err
 	}
 
-	res, err := database.Db.Exec("INSERT INTO home_courses (title, description, instructor_id, price, start_time, end_time, duration, capacity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", h.Title, h.Description, h.Instructor_ID, h.Price, h.Start_Time, h.End_Time, h.Duration, h.Capacity)
+	res, err := database.Db.Exec("INSERT INTO home_courses (Title, Description, Price, Start_Time, End_Time, Instructor_ID, Duration, Address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+		hc.Title, hc.Description, hc.Price, hc.Start_Time, hc.End_Time, hc.Instructor_ID, hc.Duration, hc.Address)
 	if err != nil {
-		fmt.Println("Error:", err)
 		log.Fatal(err)
 	}
 
@@ -62,36 +62,36 @@ func (h *HomeCourse) Save() error {
 		log.Fatal(err)
 	}
 
-	h.ID = int(id)
-
+	hc.ID = int(id)
 	return nil
 }
 
-func (h *HomeCourse) Validate() error {
-	if h.Title == "" {
+func (hc *HomeCourse) Validate() error {
+	if hc.Title == "" {
 		return errors.New("title cannot be empty")
 	}
-	if h.Description == "" {
+	if hc.Description == "" {
 		return errors.New("description cannot be empty")
 	}
-	if h.Instructor_ID == 0 {
-		return errors.New("instructor_ID cannot be empty")
+	if hc.Instructor_ID == 0 {
+		return errors.New("instructor_id must be greater than 0")
 	}
-	if h.Price == 0 {
-		return errors.New("price cannot be empty")
+	if hc.Address == "" {
+		return errors.New("address cannot be empty")
 	}
-	if h.Start_Time == "" || h.End_Time == "" {
+	if hc.Duration <= 0 {
+		return errors.New("duration must be greater than 0")
+	}
+	if hc.Price <= 0 {
+		return errors.New("price must be greater than 0")
+	}
+	if hc.Start_Time == "" || hc.End_Time == "" {
 		return errors.New("start_time and end_time must be valid dates")
-	}
-	if h.Duration == 0 {
-		return errors.New("duration cannot be empty")
-	}
-	if h.Capacity == 0 {
-		return errors.New("capacity cannot be empty")
 	}
 	return nil
 }
 
-func (h *HomeCourse) GetStringTimeAsTime(strTime string) (time.Time, error) {
-	return time.Parse(time.RFC3339, strTime)
+func ConvertIntToDuration(hours int) time.Duration {
+	duration := time.Duration(hours) * time.Hour
+	return duration
 }

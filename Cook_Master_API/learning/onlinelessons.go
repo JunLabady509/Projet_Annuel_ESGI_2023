@@ -62,6 +62,21 @@ func GetOnlineLesson(id string) (*OnlineLesson, error) {
 	return o, nil
 }
 
+func GetRandomOnlineLesson() (*OnlineLesson, error) {
+	o := &OnlineLesson{}
+	videoLinkJSON := ""
+	if err := database.Db.QueryRow("SELECT * FROM online_lessons ORDER BY RAND() LIMIT 1").Scan(&o.ID, &o.Title, &o.Description, &o.Instructor_ID, &o.Price, &o.Start_Time, &o.End_Time, &videoLinkJSON, &o.Uploaded_Time, &o.Insight); err != nil {
+		return nil, err
+	}
+
+	err := json.Unmarshal([]byte(videoLinkJSON), &o.Video_Link)
+	if err != nil {
+		return nil, err
+	}
+
+	return o, nil
+}
+
 func DeleteOnlineLesson(id string) error {
 	_, err := database.Db.Exec("DELETE FROM online_lessons WHERE id = ?", id)
 	return err

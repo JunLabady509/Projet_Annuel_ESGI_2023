@@ -57,20 +57,31 @@ func onlineLessonsGetOne(ctx echo.Context) error {
 	}
 
 	id := ctx.Param("id")
+	var ol *learning.OnlineLesson // Déclaration de la variable en dehors du bloc conditionnel
 
-	ol, err := learning.GetOnlineLesson(id)
-	if err != nil {
-		switch err {
-		case sql.ErrNoRows:
-			return echo.NewHTTPError(http.StatusNotFound)
-		default:
+	if id == "random" {
+		var err error
+		ol, err = learning.GetRandomOnlineLesson() // Appeler la fonction pour obtenir un cours en ligne aléatoire
+		if err != nil {
 			fmt.Println(err)
 			return echo.NewHTTPError(http.StatusInternalServerError)
 		}
-	}
+	} else {
+		var err error
+		ol, err = learning.GetOnlineLesson(id)
+		if err != nil {
+			switch err {
+			case sql.ErrNoRows:
+				return echo.NewHTTPError(http.StatusNotFound)
+			default:
+				fmt.Println(err)
+				return echo.NewHTTPError(http.StatusInternalServerError)
+			}
+		}
 
-	if ctx.Request().Method == http.MethodHead {
-		return ctx.NoContent(http.StatusOK)
+		if ctx.Request().Method == http.MethodHead {
+			return ctx.NoContent(http.StatusOK)
+		}
 	}
 
 	return ctx.JSON(http.StatusOK, jsonResponse{"online_lesson": ol})
