@@ -47,7 +47,7 @@ func auth(email, password string, ctx echo.Context) error {
 	first_name := u.First_Name
 	picture := u.Picture
 	role := u.Role
-	token, err := generateAccessToken(email, last_name, first_name, picture, role)
+	token, err := generateAccessToken(last_name, first_name, email, picture, role)
 	if err != nil {
 		fmt.Println("Token generation error:", err)
 		return echo.NewHTTPError(500, "Failed to generate token")

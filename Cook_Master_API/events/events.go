@@ -2,7 +2,9 @@ package events
 
 import (
 	"errors"
+	"fmt"
 	"gastroguru/database"
+	"log"
 	"os/user"
 	"time"
 )
@@ -95,9 +97,10 @@ func GetStringAsTime(strTime string) (time.Time, error) {
 
 func convertDateFromDBtoStruct(date []uint8) time.Time {
 	dateString := string(date)
-	t, err := time.Parse("2006-01-02 15:04:05", dateString)
+	t, err := time.Parse("2006-01-02T15:04", dateString)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		log.Fatal(err)
 	}
 	return t
 }
