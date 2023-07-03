@@ -103,8 +103,9 @@ func (u *User) Validate() error {
 
 func FindUserByEmail(email string) (*User, error) {
 	u := &User{}
-	if err := database.Db.QueryRow("SELECT * FROM users WHERE email = ?", email).Scan(&u.ID, &u.Last_Name, &u.First_Name, &u.Picture, &u.Role, &u.Address, &u.Email, &u.Phone, &u.Subscription_ID, &u.Loyalty_Points, &u.Password); err != nil {
+	if err := database.Db.QueryRow("SELECT * FROM users WHERE email = ?", email).Scan(&u.ID, &u.Last_Name, &u.First_Name, &u.Email, &u.Password, &u.Picture, &u.Role, &u.Address, &u.Phone, &u.Subscription_ID, &u.Loyalty_Points); err != nil {
 		return nil, err
 	}
+
 	return u, nil
 }
