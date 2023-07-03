@@ -65,161 +65,61 @@ session_start();
 </head>
 
 <body>
-	<!-- <style>
-		nav .user-photo img {
-			width: 30px;
-			height: 30px;
-			border-radius: 50%;
-			margin-right: 5px;
-		}
-	</style> -->
 
 	<div class="fh5co-loader"></div>
-
 	<div id="page">
-		<nav class="fh5co-nav" role="navigation">
-			<div class="top">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-12 text-right">
-							<p class="site">gastroguru.fr</p>
-							<p class="num">Appelez au: +33 7 49 84 49 90</p>
-							<ul class="fh5co-social">
-								<li><a href="#"><i class="icon-facebook2"></i></a></li>
-								<li><a href="#"><i class="icon-twitter2"></i></a></li>
-								<li><a href="#"><i class="icon-dribbble2"></i></a></li>
-								<li><a href="#"><i class="icon-github"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="top-menu">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-2">
-							<div id="fh5co-logo">
-								<a href="index.php">
-									<i class="icon-food"></i>Gastroguru<span>.</span></a>
-							</div>
-						</div>
-						<div class="col-xs-10 text-right menu-1">
-							<ul>
-								<li class="active"><a href="index.php">Accueil</a></li>
-								<li class="has-dropdown">
-									<a href="courses.php">Formations</a>
-									<ul class="dropdown">
-										<li><a href="#">Cours en Ligne</a></li>
-										<li><a href="#">Cours à domicile</a></li>
-										<li><a href="#">Ateliers sur site</a></li>
-										<li><a href="#">Se reconvertir dans la restauration</a></li>
-									</ul>
-								</li>
-								<li><a href="teacher.html">Enseignants</a></li>
-								<li><a href="about.html">À propos</a></li>
-								<li><a href="pricing.html">Abonnement</a></li>
-								<li class="has-dropdown">
-									<a href="blog.html">Blog</a>
-									<ul class="dropdown">
-										<li><a href="#">Web Design</a></li>
-										<li><a href="#">eCommerce</a></li>
-										<li><a href="#">Branding</a></li>
-										<li><a href="#">API</a></li>
-									</ul>
-								</li>
-								<li><a href="contact.html">Contact</a></li>
-
-								<?php if (isset($_SESSION['access_token'])) {
-									$token = $_SESSION['access_token'];
-
-									// Décoder le token d'accès JWT
-									$jwtParts = explode('.', $token);
-									$jwtClaims = base64_decode($jwtParts[1]);
-									$claims = json_decode($jwtClaims, true);
-									// Récupérer le nom de l'utilisateur
-									$userFirstName = $claims['first_name'];
-									$userLastName = $claims['last_name'];
-									?>
-									<!-- Utilisateur connecté -->
-									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-											aria-expanded="false">
-											<span class="user-name">
-												<?php echo $userLastName; ?>
-											</span>
-										</a>
-										<ul class="dropdown-menu">
-											<li><a href="my_profile.php">Mon Profil</a></li>
-											<li><a href="#">Paramètres</a></li>
-											<li><a href="logout.php">Déconnexion</a></li>
-										</ul>
-									</li>
-								<?php } else { ?>
-									<!-- Utilisateur non connecté -->
-									<li class="btn-cta"><a href="login.html"><span>Connexion</span></a></li>
-									<li class="btn-cta"><a href="events/create-event.php"><span>Créer une
-												Formation</span></a></li>
-								<?php } ?>
-
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
-
+		<?php include 'includes/navbar.php'; ?>
 
 		<aside id="fh5co-hero">
 			<div class="flexslider">
 				<ul class="slides">
-					<li style="background-image: url(images/slider-image3.jpg);">
-						<div class="overlay-gradient"></div>
-						<div class="container">
-							<div class="row">
-								<div class="col-md-8 col-md-offset-2 text-center slider-text">
-									<div class="slider-text-inner">
-										<h1>Révélez votre chef intérieur, libérez votre génie culinaire</h1>
-										<h2>Présenté par <a href="http://gastroguru.fr/" target="_blank">Gastroguru</a></h2>
-										<p><a class="btn btn-primary btn-lg" href="#">Commencez votre apprentissage dès Maintenant!</a></p>
+
+					<?php
+					$slides = [
+						[
+							'image' => 'images/slider-image3.jpg',
+							'title' => 'Révélez votre chef intérieur, libérez votre génie culinaire',
+							'subtitle' => 'Présenté par <a href="http://gastroguru.fr/" target="_blank">Gastroguru</a>',
+						],
+						[
+							'image' => 'images/slider-image2.jpg',
+							'title' => 'L\'excellence culinaire à son apogée',
+							'subtitle' => 'Présenté par <a href="http://gastroguru.fr/" target="_blank">Gastroguru</a>',
+						],
+						[
+							'image' => 'images/slide-accueil.jpg',
+							'title' => 'Les racines de l\'éducation sont amères, mais les fruits en sont doux.',
+							'subtitle' => 'Présenté par <a href="http://gastroguru.fr/" target="_blank">Gastroguru</a>',
+						],
+					];
+
+					foreach ($slides as $slide) {
+						?>
+						<li style="background-image: url(<?php echo $slide['image']; ?>);">
+							<div class="overlay-gradient"></div>
+							<div class="container">
+								<div class="row">
+									<div class="col-md-8 col-md-offset-2 text-center slider-text">
+										<div class="slider-text-inner">
+											<h1>
+												<?php echo $slide['title']; ?>
+											</h1>
+											<h2>
+												<?php echo $slide['subtitle']; ?>
+											</h2>
+											<p><a class="btn btn-primary btn-lg" href="register.php">Commencez votre apprentissage dès Maintenant!</a></p>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</li>
-					<li style="background-image: url(images/slider-image2.jpg );">
-						<div class="overlay-gradient"></div>
-						<div class="container">
-							<div class="row">
-								<div class="col-md-8 col-md-offset-2 text-center slider-text">
-									<div class="slider-text-inner">
-										<h1>L'excellence culinaire à son apogée</h1>
-										<h2>Présenté par <a href="http://gastroguru.fr/" target="_blank">Gastroguru</a></h2>
-										<p><a class="btn btn-primary btn-lg btn-learn" href="#">Commencez votre apprentissage dès
-												Maintenant!</a></p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li style="background-image: url(images/slide-accueil.jpg);">
-						<div class="overlay-gradient"></div>
-						<div class="container">
-							<div class="row">
-								<div class="col-md-8 col-md-offset-2 text-center slider-text">
-									<div class="slider-text-inner">
-										<h1>Les racines de l'éducation sont amères, mais les fruits en sont doux.</h1>
-										<h2>Présenté par <a href="http://gastroguru.fr/" target="_blank">Gastroguru</a></h2>
-										<p><a class="btn btn-primary btn-lg btn-learn" href="#">Commencez votre apprentissage dès
-												Maintenant!</a></p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
+						</li>
+						<?php
+					}
+					?>
 				</ul>
 			</div>
 		</aside>
+
 
 		<div id="fh5co-course-categories">
 			<div class="container">
@@ -238,10 +138,10 @@ session_start();
 					<div class="col-md-3 col-sm-6 text-center animate-box">
 						<div class="services">
 							<span class="icon">
-								<i class="icon-group"></i>
+								<i class="icon-group" ></i>
 							</span>
 							<div class="desc">
-								<h3><a href="#">Ateliers variés sur site</a></h3>
+								<h3><a href="learning/workshop/get-workshops.php">Ateliers variés sur site</a></h3>
 								<p>Apprenez à cuisiner de délicieux plats et découvrez de nouvelles recettes salées ou de pâtisserie
 									lors de nos ateliers sur site. Nos professionnels passionnés vous guideront tout au long de
 									l'expérience.</p>
@@ -388,110 +288,57 @@ session_start();
 					</div>
 				</div>
 				<div class="row row-padded-mb">
-					<?php
-					$response = file_get_contents('http://localhost:44446/events');
-					if ($response === false) {
-						echo "Erreur lors de la récupération des événements";
-						return;
-					}
 
-					$data = json_decode($response, true);
-					if ($data === null || !isset($data['events'])) {
-						echo "Erreur lors du décodage de la réponse JSON ou données manquantes";
-						return;
-					}
+					<?php include('events/get-events.php'); ?> 
 
-					$events = $data['events'];
-
-					$eventHTML = ''; // Initialise la variable
-					
-					foreach ($events as $event) {
-						$dateString = $event['date'];
-
-						// Convertir la chaîne de date en objet DateTime
-						$date = new DateTime($dateString);
-						// Récupérer le jour
-						$day = $date->format('d');
-						// Récupérer le mois (en texte complet, en anglais)
-						$monthName = $date->format('F');
-
-						// Accédez aux données de chaque événement en utilisant $event['property_name']
-						// Par exemple, $event['title'], $event['description'], $event['date'], etc.
-						$eventHTML .= '
-    <div class="col-md-4 animate-box">
-        <div class="fh5co-event">
-            <div class="date text-center"><span>' . $day . '<br>' . $monthName . '</span></div>
-            <h3><a href="#">' . $event['title'] . '</a></h3>
-            <p>'.$event['description'].'</p>
-            <p><a href="#">Read More</a></p>
-        </div>
-    </div>';
-					}
-
-					echo $eventHTML;
-					// Assurez-vous d'adapter le code en fonction de votre structure de données JSON spécifique
-					?>
-
-					<div class="col-md-4 animate-box">
-						<div class="fh5co-event">
-							<div class="date text-center"><span>15<br>Mar.</span></div>
-							<h3><a href="#">USA, International Triathlon Event</a></h3>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-								blind texts.</p>
-							<p><a href="#">Read More</a></p>
-						</div>
-					</div>
-					<div class="col-md-4 animate-box">
-						<div class="fh5co-event">
-							<div class="date text-center"><span>15<br>Mar.</span></div>
-							<h3><a href="#">New Device Develope by Microsoft</a></h3>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-								blind texts.</p>
-							<p><a href="#">Read More</a></p>
-						</div>
-					</div>
-				</div>
 				<div class="row">
-					<div class="col-lg-4 col-md-4">
-						<div class="fh5co-blog animate-box">
-							<a href="#" class="blog-img-holder" style="background-image: url(images/project-1.jpg);"></a>
-							<div class="blog-text">
-								<h3><a href="#">Healty Lifestyle &amp; Living</a></h3>
-								<span class="posted_on">March. 15th</span>
-								<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-									the blind texts.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4">
-						<div class="fh5co-blog animate-box">
-							<a href="#" class="blog-img-holder" style="background-image: url(images/project-2.jpg);"></a>
-							<div class="blog-text">
-								<h3><a href="#">Healty Lifestyle &amp; Living</a></h3>
-								<span class="posted_on">March. 15th</span>
-								<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-									the blind texts.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4">
-						<div class="fh5co-blog animate-box">
-							<a href="#" class="blog-img-holder" style="background-image: url(images/project-3.jpg);"></a>
-							<div class="blog-text">
-								<h3><a href="#">Healty Lifestyle &amp; Living</a></h3>
-								<span class="posted_on">March. 15th</span>
-								<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-									the blind texts.</p>
-							</div>
-						</div>
-					</div>
+					<?php
+					// Exemples supplémentaires d'éléments de blog
+					$blogItems = [
+						[
+							'image' => 'project-1.jpg',
+							'title' => 'Healty Lifestyle &amp; Living',
+							'date' => 'March. 15th',
+							'comments' => 21,
+							'description' => 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.'
+						],
+						[
+							'image' => 'project-2.jpg',
+							'title' => 'Healty Lifestyle &amp; Living',
+							'date' => 'March. 15th',
+							'comments' => 21,
+							'description' => 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.'
+						],
+						[
+							'image' => 'project-3.jpg',
+							'title' => 'Healty Lifestyle &amp; Living',
+							'date' => 'March. 15th',
+							'comments' => 21,
+							'description' => 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.'
+						],
+					];
+
+					foreach ($blogItems as $item) {
+						echo '
+                    <div class="col-lg-4 col-md-4">
+                        <div class="fh5co-blog animate-box">
+                            <a href="#" class="blog-img-holder" style="background-image: url(images/' . $item['image'] . ');"></a>
+                            <div class="blog-text">
+                                <h3><a href="#">' . $item['title'] . '</a></h3>
+                                <span class="posted_on">' . $item['date'] . '</span>
+                                <span class="comment"><a href="">' . $item['comments'] . '<i class="icon-speech-bubble"></i></a></span>
+                                <p>' . $item['description'] . '</p>
+                            </div>
+                        </div>
+                    </div>';
+					}
+					?>
 				</div>
 			</div>
 		</div>
-
+ 
+		
+	<!-- Partie Abonnement ou Pricing -->
 		<div id="fh5co-pricing" class="fh5co-bg-section">
 			<div class="container">
 				<div class="row animate-box">
@@ -503,98 +350,91 @@ session_start();
 				</div>
 				<div class="row">
 					<div class="pricing pricing--rabten">
-						<div class="col-md-4 animate-box">
-							<div class="pricing__item">
-								<div class="wrap-price">
-									<!-- <div class="icon icon-user2"></div> -->
-									<h3 class="pricing__title">Trial</h3>
-									<!-- <p class="pricing__sentence">Single user license</p> -->
-								</div>
-								<div class="pricing__price">
-									<span class="pricing__anim pricing__anim--1">
-										<span class="pricing__currency">$</span>0
-									</span>
-									<span class="pricing__anim pricing__anim--2">
-										<span class="pricing__period">per year</span>
-									</span>
-								</div>
-								<div class="wrap-price">
-									<ul class="pricing__feature-list">
-										<li class="pricing__feature">One Day Trial</li>
-										<li class="pricing__feature">Limited Courses</li>
-										<li class="pricing__feature">Free 3 Lessons</li>
-										<li class="pricing__feature">No Supporter</li>
-										<li class="pricing__feature">No Tutorial</li>
-										<li class="pricing__feature">No Ebook</li>
-										<li class="pricing__feature">Limited Registered User</li>
-									</ul>
-									<button class="pricing__action">Choose plan</button>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 animate-box">
-							<div class="pricing__item">
-								<div class="wrap-price">
-									<!-- <div class="icon icon-store"></div> -->
-									<h3 class="pricing__title">Silver</h3>
-									<!-- <p class="pricing__sentence">Up to 5 users</p> -->
-								</div>
-								<div class="pricing__price">
-									<span class="pricing__anim pricing__anim--1">
-										<span class="pricing__currency">$</span>79
-									</span>
-									<span class="pricing__anim pricing__anim--2">
-										<span class="pricing__period">per year</span>
-									</span>
-								</div>
-								<div class="wrap-price">
-									<ul class="pricing__feature-list">
-										<li class="pricing__feature">One Year Standard Access</li>
-										<li class="pricing__feature">Limited Courses</li>
-										<li class="pricing__feature">300+ Lessons</li>
-										<li class="pricing__feature">Random Supporter</li>
-										<li class="pricing__feature">View Only Ebook</li>
-										<li class="pricing__feature">Standard Tutorials</li>
-										<li class="pricing__feature">Unlimited Registered User</li>
-									</ul>
-									<button class="pricing__action">Choose plan</button>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 animate-box">
-							<div class="pricing__item">
-								<div class="wrap-price">
-									<!-- <div class="icon icon-home2"></div> -->
-									<h3 class="pricing__title">Gold</h3>
-									<!-- <p class="pricing__sentence">Unlimited users</p> -->
-								</div>
-								<div class="pricing__price">
-									<span class="pricing__anim pricing__anim--1">
-										<span class="pricing__currency">$</span>499
-									</span>
-									<span class="pricing__anim pricing__anim--2">
-										<span class="pricing__period">per year</span>
-									</span>
-								</div>
-								<div class="wrap-price">
-									<ul class="pricing__feature-list">
-										<li class="pricing__feature">Life Time Access</li>
-										<li class="pricing__feature">Unlimited All Courses</li>
-										<li class="pricing__feature">7000+ Lessons &amp; Growing</li>
-										<li class="pricing__feature">Free Supporter</li>
-										<li class="pricing__feature">Free Ebook Downloads</li>
-										<li class="pricing__feature">Premium Tutorials</li>
-										<li class="pricing__feature">Unlimited Registered User</li>
-									</ul>
-									<button class="pricing__action">Choose plan</button>
+						<?php
+						$plans = [
+							[
+								'title' => 'Trial',
+								'price' => '0',
+								'period' => 'per year',
+								'features' => [
+									'One Day Trial',
+									'Limited Courses',
+									'Free 3 Lessons',
+									'No Supporter',
+									'No Tutorial',
+									'No Ebook',
+									'Limited Registered User'
+								],
+							],
+							[
+								'title' => 'Silver',
+								'price' => '79',
+								'period' => 'per year',
+								'features' => [
+									'One Year Standard Access',
+									'Limited Courses',
+									'300+ Lessons',
+									'Random Supporter',
+									'View Only Ebook',
+									'Standard Tutorials',
+									'Unlimited Registered User'
+								],
+							],
+							[
+								'title' => 'Gold',
+								'price' => '499',
+								'period' => 'per year',
+								'features' => [
+									'Life Time Access',
+									'Unlimited All Courses',
+									'7000+ Lessons & Growing',
+									'Free Supporter',
+									'Free Ebook Downloads',
+									'Premium Tutorials',
+									'Unlimited Registered User'
+								],
+							]
+						];
+
+						foreach ($plans as $plan) {
+							?>
+							<div class="col-md-4 animate-box">
+								<div class="pricing__item">
+									<div class="wrap-price">
+										<h3 class="pricing__title">
+											<?php echo $plan['title']; ?>
+										</h3>
+									</div>
+									<div class="pricing__price">
+										<span class="pricing__anim pricing__anim--1">
+											<span class="pricing__currency">$</span>
+											<?php echo $plan['price']; ?>
+										</span>
+										<span class="pricing__anim pricing__anim--2">
+											<span class="pricing__period">
+												<?php echo $plan['period']; ?>
+											</span>
+										</span>
+									</div>
+									<div class="wrap-price">
+										<ul class="pricing__feature-list">
+											<?php foreach ($plan['features'] as $feature) { ?>
+												<li class="pricing__feature">
+													<?php echo $feature; ?>
+												</li>
+											<?php } ?>
+										</ul>
+										<button class="pricing__action">Choose plan</button>
+									</div>
 								</div>
 							</div>
-						</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>
 		</div>
 
+<!-- Partie Promo disponible -->
 		<div id="fh5co-register" style="background-image: url(images/img_bg_2.jpg);">
 			<div class="overlay"></div>
 			<div class="row">
