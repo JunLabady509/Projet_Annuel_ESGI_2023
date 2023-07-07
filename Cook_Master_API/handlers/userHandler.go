@@ -202,6 +202,7 @@ func userCheckEmail(ctx echo.Context) error {
 
 	exists, err := database.UserExists(u.Email)
 	if err != nil {
+		fmt.Println("Database error:", err)
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	if exists {
