@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Création d'un événement</title>
+</head>
+<body>
+    <h1>Création d'un événement</h1>
+    <form action="http://localhost:44446/events" method="POST">
+        <label for="title">Titre :</label>
+        <input type="text" name="title" id="title" required><br><br>
+
+        <label for="description">Description :</label>
+        <textarea name="description" id="description" required></textarea><br><br>
+
+        <label for="date">Date :</label>
+        <input type="datetime-local" name="date" id="date" required><br><br>
+
+        <label for="duration">Durée (en minutes) :</label>
+        <input type="number" name="duration" id="duration" required><br><br>
+
+        <label for="location">Lieu :</label>
+        <input type="text" name="location" id="location" required><br><br>
+
+        <label for="capacity">Capacité :</label>
+        <input type="number" name="capacity" id="capacity" required><br><br>
+
+        <label for="price">Prix :</label>
+        <input type="number" step="0.01" name="price" id="price" required><br><br>
+
+        <label for="image">Image :</label>
+        <input type="text" name="image" id="image"><br><br>
+
+        <label for="type">Type d'événement :</label>
+        <select name="type" id="type" required>
+            <option value="event">evenement</option>
+            <option value="workshop">Atelier</option>
+            <option value="homework">Cours à domicile</option>
+        </select><br><br>
+
+        <input type="submit" value="Créer l'événement">
+    </form>
+</body>
+</html>
